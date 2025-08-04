@@ -1,11 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://oxhk4thu3nkq"]
+[gd_scene load_steps=4 format=4 uid="uid://oxhk4thu3nkq"]
 
+[ext_resource type="TileSet" uid="uid://cjcoix1sqxt7d" path="res://tile_set.tres" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://7dodnb2gkjdc" path="res://fish.tscn" id="1_ig7tw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7dm0k"]
-size = Vector2(304, 8)
+size = Vector2(612, 8)
 
 [node name="Main" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD8/wQAAQAJAAcAAAD9/wQAAQAJAAcAAAD+/wQAAQAJAAcAAAD//wQAAQAJAAcAAAAAAAQAAQAJAAcAAAABAAQAAQAJAAcAAAACAAQAAQAJAAcAAAADAAQAAQAJAAcAAAADAAMAAQAJAAcAAAACAAMAAQAJAAcAAAABAAMAAQAJAAcAAAAAAAMAAQAJAAcAAAD//wMAAQAJAAcAAAD+/wMAAQAJAAcAAAD9/wMAAQAJAAcAAAD8/wMAAQAJAAcAAAD8/wIAAQAJAAcAAAD9/wIAAQAJAAcAAAD+/wIAAQAJAAcAAAD//wIAAQAJAAcAAAAAAAIAAQAJAAcAAAABAAIAAQAJAAcAAAACAAIAAQAJAAcAAAADAAIAAQAJAAcAAAADAAEAAQAJAAcAAAADAAAAAQAJAAcAAAACAAAAAQAJAAcAAAACAP//AQAJAAcAAAACAP7/AQAJAAcAAAACAP3/AQAJAAcAAAADAP3/AQAJAAcAAAADAP7/AQAJAAcAAAADAP//AQAJAAcAAAABAP3/AQAJAAcAAAACAAEAAQAJAAcAAAABAP//AQAJAAcAAAABAP7/AQAJAAcAAAABAAAAAQAJAAcAAAABAAEAAQAJAAcAAAAAAAEAAQAJAAcAAAAAAAAAAQAJAAcAAAAAAP//AQAJAAcAAAAAAP7/AQAJAAcAAAAAAP3/AQAJAAcAAAD///3/AQAJAAcAAAD///7/AQAJAAcAAAD/////AQAJAAcAAAD//wAAAQAJAAcAAAD//wEAAQAJAAcAAAD+/wAAAQAJAAcAAAD+////AQAJAAcAAAD+//7/AQAJAAcAAAD+//3/AQAJAAcAAAD+/wEAAQAJAAcAAAD9/wEAAQAJAAcAAAD9/wAAAQAJAAcAAAD9////AQAJAAcAAAD9//7/AQAJAAcAAAD9//3/AQAJAAcAAAD8//3/AQAJAAcAAAD8//7/AQAJAAcAAAD8////AQAJAAcAAAD8/wAAAQAJAAcAAAD8/wEAAQAJAAcAAAD8//z/AQAJAAYAAAD9//z/AQAJAAYAAAD+//z/AQAJAAYAAAD///z/AQAJAAYAAAAAAPz/AQAJAAYAAAABAPz/AQAJAAYAAAACAPz/AQAJAAYAAAADAPz/AQAJAAYAAAA=")
+tile_set = ExtResource("1_0xm2m")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD8/wQAAQAAAAUAAAD9/wQAAQAAAAYAAAD+/wQAAQAAAAgAAAD//wQAAQAAAAcAAAAAAAQAAQAAAAgAAAABAAQAAQAAAAkAAAACAAQAAQAAAAoAAAADAAQAAQAAAAsAAAA=")
+tile_set = ExtResource("1_0xm2m")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -13,11 +22,11 @@ size = Vector2(304, 8)
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 320)
+position = Vector2(0, 267)
 shape = SubResource("RectangleShape2D_7dm0k")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -320)
+position = Vector2(0, -252)
 shape = SubResource("RectangleShape2D_7dm0k")
 
 [node name="Fish" parent="." instance=ExtResource("1_ig7tw")]
