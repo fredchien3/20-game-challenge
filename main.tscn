@@ -3,13 +3,18 @@
 [ext_resource type="TileSet" uid="uid://cjcoix1sqxt7d" path="res://tile_set.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://dcratuiiiaspn" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://7dodnb2gkjdc" path="res://fish.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://dlqm2s4cng5qk" path="res://pillar.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dlqm2s4cng5qk" path="res://obstacle.tscn" id="3_h2yge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7dm0k"]
 size = Vector2(612, 57)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_1bvp3")
+obstacle_scene = ExtResource("3_h2yge")
+
+[node name="ObstacleSpawnTimer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD8/wQAAQAJAAcAAAD9/wQAAQAJAAcAAAD+/wQAAQAJAAcAAAD//wQAAQAJAAcAAAAAAAQAAQAJAAcAAAABAAQAAQAJAAcAAAACAAQAAQAJAAcAAAADAAQAAQAJAAcAAAADAAMAAQAJAAcAAAACAAMAAQAJAAcAAAABAAMAAQAJAAcAAAAAAAMAAQAJAAcAAAD//wMAAQAJAAcAAAD+/wMAAQAJAAcAAAD9/wMAAQAJAAcAAAD8/wMAAQAJAAcAAAD8/wIAAQAJAAcAAAD9/wIAAQAJAAcAAAD+/wIAAQAJAAcAAAD//wIAAQAJAAcAAAAAAAIAAQAJAAcAAAABAAIAAQAJAAcAAAACAAIAAQAJAAcAAAADAAIAAQAJAAcAAAADAAEAAQAJAAcAAAADAAAAAQAJAAcAAAACAAAAAQAJAAcAAAACAP//AQAJAAcAAAACAP7/AQAJAAcAAAACAP3/AQAJAAcAAAADAP3/AQAJAAcAAAADAP7/AQAJAAcAAAADAP//AQAJAAcAAAABAP3/AQAJAAcAAAACAAEAAQAJAAcAAAABAP//AQAJAAcAAAABAP7/AQAJAAcAAAABAAAAAQAJAAcAAAABAAEAAQAJAAcAAAAAAAEAAQAJAAcAAAAAAAAAAQAJAAcAAAAAAP//AQAJAAcAAAAAAP7/AQAJAAcAAAAAAP3/AQAJAAcAAAD///3/AQAJAAcAAAD///7/AQAJAAcAAAD/////AQAJAAcAAAD//wAAAQAJAAcAAAD//wEAAQAJAAcAAAD+/wAAAQAJAAcAAAD+////AQAJAAcAAAD+//7/AQAJAAcAAAD+//3/AQAJAAcAAAD+/wEAAQAJAAcAAAD9/wEAAQAJAAcAAAD9/wAAAQAJAAcAAAD9////AQAJAAcAAAD9//7/AQAJAAcAAAD9//3/AQAJAAcAAAD8//3/AQAJAAcAAAD8//7/AQAJAAcAAAD8////AQAJAAcAAAD8/wAAAQAJAAcAAAD8/wEAAQAJAAcAAAD8//z/AQAJAAYAAAD9//z/AQAJAAYAAAD+//z/AQAJAAYAAAD///z/AQAJAAYAAAAAAPz/AQAJAAYAAAABAPz/AQAJAAYAAAACAPz/AQAJAAYAAAADAPz/AQAJAAYAAAA=")
@@ -33,9 +38,7 @@ position = Vector2(0, -252)
 shape = SubResource("RectangleShape2D_7dm0k")
 
 [node name="Fish" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(0, -104)
+position = Vector2(-103, -36)
 
-[node name="Pillar" parent="." instance=ExtResource("3_h2yge")]
-position = Vector2(-2, 152)
-
+[connection signal="timeout" from="ObstacleSpawnTimer" to="." method="_on_obstacle_spawn_timer_timeout"]
 [connection signal="death" from="Fish" to="." method="_on_fish_death"]

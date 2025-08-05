@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dlqm2s4cng5qk"]
 
 [ext_resource type="Texture2D" uid="uid://blg0oastfdcoc" path="res://spritesheet.png" id="1_rjv88"]
-[ext_resource type="Script" uid="uid://b7cycs5arq0xu" path="res://pillar.gd" id="1_tcmdu"]
+[ext_resource type="Script" uid="uid://b7cycs5arq0xu" path="res://obstacle.gd" id="1_tcmdu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4roa"]
 size = Vector2(64, 64)
@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 atlas = ExtResource("1_rjv88")
 region = Rect2(192, 192, 64, 64)
 
-[node name="Pillar" type="Area2D"]
+[node name="Obstacle" type="Area2D"]
 collision_layer = 0
 script = ExtResource("1_tcmdu")
 
