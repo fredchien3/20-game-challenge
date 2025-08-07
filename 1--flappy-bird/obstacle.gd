@@ -1,5 +1,7 @@
 extends Node2D
 
+signal add_point
+
 const SPEED = 1.5    
 
 # Called when the node enters the scene tree for the first time.
@@ -14,4 +16,4 @@ func _on_pillar_area_body_entered(body: Node2D) -> void:
 	body.on_collision()
 
 func _on_safe_area_body_entered(body: Node2D) -> void:
-	body.gain_point()
+	add_point.emit()

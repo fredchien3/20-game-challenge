@@ -4,8 +4,11 @@ extends Node2D
 
 const OBSTACLE_GAP_RADIUS = 50
 
+var current_score = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$ScoreLabel.text = str(current_score)
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -14,6 +17,8 @@ func _process(delta: float) -> void:
 
 func _on_obstacle_spawn_timer_timeout() -> void:
 	var obstacle = obstacle_scene.instantiate()
+
+	obstacle.add_point.connect(_add_point)
 	
 	var viewport_width = get_viewport().size[0]
 	var viewport_height = get_viewport().size[1]
@@ -26,6 +31,9 @@ func _on_obstacle_spawn_timer_timeout() -> void:
 	
 	add_child(obstacle)
 
+func _add_point():
+	current_score += 1
+	$ScoreLabel.text = str(current_score)
+
 func _on_fish_death() -> void:
-	print("game over!")
 	$ObstacleSpawnTimer.stop()
