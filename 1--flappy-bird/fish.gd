@@ -19,3 +19,6 @@ func on_collision():
 	print("ouch!")
 	death.emit()
 	queue_free()
+
+func gain_point():
+	print("point get")
