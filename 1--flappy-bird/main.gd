@@ -18,6 +18,8 @@ func _process(delta: float) -> void:
 func _on_obstacle_spawn_timer_timeout() -> void:
 	var obstacle = obstacle_scene.instantiate()
 
+	obstacle.increase_score.connect(_add_point)
+
 	var viewport_width = get_viewport().size[0]
 	var viewport_height = get_viewport().size[1]
 
@@ -35,3 +37,17 @@ func _add_point():
 
 func _on_fish_death() -> void:
 	$ObstacleSpawnTimer.stop()
+
+	var obstacles = get_tree().get_nodes_in_group("obstacles")
+
+	for node in obstacles:
+		node.set_process(false)
+
+	await get_tree().create_timer(3).timeout
+
+	get_tree().reload_current_scene()
+
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	$Fish.on_collision()

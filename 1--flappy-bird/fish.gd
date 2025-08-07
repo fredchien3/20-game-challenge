@@ -15,9 +15,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func on_collision():
-	print("ouch!")
 	death.emit()
-	queue_free()
+	$Sprite2D.texture = load("res://fish_dead.tres")
+	set_physics_process(false)
 
 func gain_point():
 	print("point get")

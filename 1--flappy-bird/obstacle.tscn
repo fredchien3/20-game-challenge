@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 a = Vector2(0, -104)
 b = Vector2(0, 104)
 
-[node name="Obstacle" type="Node2D"]
+[node name="Obstacle" type="Node2D" groups=["obstacles"]]
 script = ExtResource("1_tcmdu")
 
 [node name="PillarArea" type="Area2D" parent="."]
@@ -420,5 +420,10 @@ script = SubResource("GDScript_r8rte")
 position = Vector2(0, 1)
 shape = SubResource("SegmentShape2D_aubd6")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(126, 2)
+scale = Vector2(1, 8.05)
+
 [connection signal="body_entered" from="PillarArea" to="." method="_on_pillar_area_body_entered"]
 [connection signal="body_entered" from="SafeArea" to="." method="_on_safe_area_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

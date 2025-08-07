@@ -17,3 +17,6 @@ func _on_pillar_area_body_entered(body: Node2D) -> void:
 
 func _on_safe_area_body_entered(body: Node2D) -> void:
 	increase_score.emit()
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	queue_free()
