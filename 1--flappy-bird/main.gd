@@ -2,6 +2,8 @@ extends Node2D
 
 @export var obstacle_scene: PackedScene
 
+const OBSTACLE_GAP_RADIUS = 50
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
@@ -10,7 +12,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-# Spawns an obstacle at a random location to the right of the screen
 func _on_obstacle_spawn_timer_timeout() -> void:
 	var obstacle = obstacle_scene.instantiate()
 	

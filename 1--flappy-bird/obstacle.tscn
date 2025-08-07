@@ -1,0 +1,419 @@
+[gd_scene load_steps=7 format=3 uid="uid://dlqm2s4cng5qk"]
+
+[ext_resource type="Texture2D" uid="uid://blg0oastfdcoc" path="res://spritesheet.png" id="1_rjv88"]
+[ext_resource type="Script" uid="uid://b7cycs5arq0xu" path="res://obstacle.gd" id="1_tcmdu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4roa"]
+size = Vector2(68, 1024)
+
+[sub_resource type="GDScript" id="GDScript_r8rte"]
+script/source = "extends CollisionShape2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tcmdu"]
+atlas = ExtResource("1_rjv88")
+region = Rect2(448, 128, 64, 64)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_aubd6"]
+a = Vector2(0, -104)
+b = Vector2(0, 104)
+
+[node name="Obstacle" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_tcmdu")
+
+[node name="UpperPillarCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -616)
+shape = SubResource("RectangleShape2D_s4roa")
+script = SubResource("GDScript_r8rte")
+
+[node name="LowerPillarCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 616)
+shape = SubResource("RectangleShape2D_s4roa")
+script = SubResource("GDScript_r8rte")
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprites"]
+position = Vector2(0, -248)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprites"]
+position = Vector2(-16, -192)
+scale = Vector2(0.875, 0.875)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="Sprites"]
+position = Vector2(8, -128)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D5" type="Sprite2D" parent="Sprites"]
+position = Vector2(8, -224)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D6" type="Sprite2D" parent="Sprites"]
+position = Vector2(-8, -160)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D11" type="Sprite2D" parent="Sprites"]
+position = Vector2(4, -400)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D12" type="Sprite2D" parent="Sprites"]
+position = Vector2(-12, -344)
+scale = Vector2(0.875, 0.875)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D13" type="Sprite2D" parent="Sprites"]
+position = Vector2(12, -280)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D14" type="Sprite2D" parent="Sprites"]
+position = Vector2(12, -376)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D15" type="Sprite2D" parent="Sprites"]
+position = Vector2(-4, -312)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D16" type="Sprite2D" parent="Sprites"]
+position = Vector2(4, -544)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D17" type="Sprite2D" parent="Sprites"]
+position = Vector2(-12, -488)
+scale = Vector2(0.875, 0.875)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D18" type="Sprite2D" parent="Sprites"]
+position = Vector2(12, -424)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D19" type="Sprite2D" parent="Sprites"]
+position = Vector2(12, -520)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D20" type="Sprite2D" parent="Sprites"]
+position = Vector2(-4, -456)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D21" type="Sprite2D" parent="Sprites"]
+position = Vector2(4, -688)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D22" type="Sprite2D" parent="Sprites"]
+position = Vector2(-12, -632)
+scale = Vector2(0.875, 0.875)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D23" type="Sprite2D" parent="Sprites"]
+position = Vector2(12, -568)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D24" type="Sprite2D" parent="Sprites"]
+position = Vector2(12, -664)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D25" type="Sprite2D" parent="Sprites"]
+position = Vector2(-4, -600)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D26" type="Sprite2D" parent="Sprites"]
+position = Vector2(4, -832)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D27" type="Sprite2D" parent="Sprites"]
+position = Vector2(-12, -776)
+scale = Vector2(0.875, 0.875)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D28" type="Sprite2D" parent="Sprites"]
+position = Vector2(12, -712)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D29" type="Sprite2D" parent="Sprites"]
+position = Vector2(12, -808)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D30" type="Sprite2D" parent="Sprites"]
+position = Vector2(-4, -744)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D31" type="Sprite2D" parent="Sprites"]
+position = Vector2(4, -984)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D32" type="Sprite2D" parent="Sprites"]
+position = Vector2(-12, -928)
+scale = Vector2(0.875, 0.875)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D33" type="Sprite2D" parent="Sprites"]
+position = Vector2(12, -864)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D34" type="Sprite2D" parent="Sprites"]
+position = Vector2(12, -960)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D35" type="Sprite2D" parent="Sprites"]
+position = Vector2(-4, -896)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D36" type="Sprite2D" parent="Sprites"]
+position = Vector2(-4, -1136)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D37" type="Sprite2D" parent="Sprites"]
+position = Vector2(-20, -1080)
+scale = Vector2(0.875, 0.875)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D38" type="Sprite2D" parent="Sprites"]
+position = Vector2(4, -1016)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D39" type="Sprite2D" parent="Sprites"]
+position = Vector2(4, -1112)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D40" type="Sprite2D" parent="Sprites"]
+position = Vector2(-12, -1048)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D41" type="Sprite2D" parent="Sprites"]
+position = Vector2(-4, 264)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D42" type="Sprite2D" parent="Sprites"]
+position = Vector2(-20, 320)
+scale = Vector2(0.875, 0.875)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D43" type="Sprite2D" parent="Sprites"]
+position = Vector2(4, 384)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D44" type="Sprite2D" parent="Sprites"]
+position = Vector2(4, 288)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D45" type="Sprite2D" parent="Sprites"]
+position = Vector2(-12, 352)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D4" type="Sprite2D" parent="Sprites"]
+position = Vector2(8, 160)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D7" type="Sprite2D" parent="Sprites"]
+position = Vector2(-4, 132)
+scale = Vector2(0.875, 0.875)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D8" type="Sprite2D" parent="Sprites"]
+position = Vector2(-8, 224)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D9" type="Sprite2D" parent="Sprites"]
+position = Vector2(16, 200)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D10" type="Sprite2D" parent="Sprites"]
+position = Vector2(-8, 176)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D46" type="Sprite2D" parent="Sprites"]
+position = Vector2(-4, 544)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D47" type="Sprite2D" parent="Sprites"]
+position = Vector2(-20, 600)
+scale = Vector2(0.875, 0.875)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D48" type="Sprite2D" parent="Sprites"]
+position = Vector2(4, 664)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D49" type="Sprite2D" parent="Sprites"]
+position = Vector2(4, 568)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D50" type="Sprite2D" parent="Sprites"]
+position = Vector2(-12, 632)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D51" type="Sprite2D" parent="Sprites"]
+position = Vector2(8, 440)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D52" type="Sprite2D" parent="Sprites"]
+position = Vector2(-4, 412)
+scale = Vector2(0.875, 0.875)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D53" type="Sprite2D" parent="Sprites"]
+position = Vector2(-8, 504)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D54" type="Sprite2D" parent="Sprites"]
+position = Vector2(16, 480)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D55" type="Sprite2D" parent="Sprites"]
+position = Vector2(-8, 456)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D56" type="Sprite2D" parent="Sprites"]
+position = Vector2(-4, 824)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D57" type="Sprite2D" parent="Sprites"]
+position = Vector2(-20, 880)
+scale = Vector2(0.875, 0.875)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D58" type="Sprite2D" parent="Sprites"]
+position = Vector2(4, 944)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D59" type="Sprite2D" parent="Sprites"]
+position = Vector2(4, 848)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D60" type="Sprite2D" parent="Sprites"]
+position = Vector2(-12, 912)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D61" type="Sprite2D" parent="Sprites"]
+position = Vector2(8, 720)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D62" type="Sprite2D" parent="Sprites"]
+position = Vector2(-4, 692)
+scale = Vector2(0.875, 0.875)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D63" type="Sprite2D" parent="Sprites"]
+position = Vector2(-8, 784)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D64" type="Sprite2D" parent="Sprites"]
+position = Vector2(16, 760)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D65" type="Sprite2D" parent="Sprites"]
+position = Vector2(-8, 736)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D66" type="Sprite2D" parent="Sprites"]
+position = Vector2(4, 1120)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D71" type="Sprite2D" parent="Sprites"]
+position = Vector2(16, 1016)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D72" type="Sprite2D" parent="Sprites"]
+position = Vector2(4, 988)
+scale = Vector2(0.875, 0.875)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D73" type="Sprite2D" parent="Sprites"]
+position = Vector2(0, 1080)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D74" type="Sprite2D" parent="Sprites"]
+position = Vector2(24, 1056)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Sprite2D75" type="Sprite2D" parent="Sprites"]
+position = Vector2(0, 1032)
+texture = SubResource("AtlasTexture_tcmdu")
+flip_h = true
+
+[node name="Safezone" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_aubd6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
