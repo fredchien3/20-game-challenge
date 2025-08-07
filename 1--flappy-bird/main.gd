@@ -18,17 +18,15 @@ func _process(delta: float) -> void:
 func _on_obstacle_spawn_timer_timeout() -> void:
 	var obstacle = obstacle_scene.instantiate()
 
-	obstacle.add_point.connect(_add_point)
-	
 	var viewport_width = get_viewport().size[0]
 	var viewport_height = get_viewport().size[1]
- 
+
 	var spawn_x = (viewport_width / 2) + 60
 	var y_bound = (viewport_height / 2)
 	var spawn_y = randf_range(y_bound, -y_bound)
-	
+
 	obstacle.position = Vector2(spawn_x, spawn_y)
-	
+
 	add_child(obstacle)
 
 func _add_point():
