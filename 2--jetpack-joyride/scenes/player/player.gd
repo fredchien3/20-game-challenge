@@ -1,10 +1,19 @@
 extends CharacterBody2D
 
+signal laser_on
+signal laser_off
 
 const SPEED = 300.0
 const THRUST = -100.0
 const GRAVITY_MULTIPLIER = 2.5
 
+func _process(delta: float) -> void:
+	if Input.is_action_pressed("ui_accept"):
+		laser_on.emit()
+		$Beam.visible = true	
+	else:
+		laser_off.emit()
+		$Beam.visible = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://sdrbxsrh1o7t"]
+[gd_scene load_steps=5 format=3 uid="uid://sdrbxsrh1o7t"]
 
 [ext_resource type="Texture2D" uid="uid://c1n7obkm01r1t" path="res://scenes/player/shipPink_manned.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://bxdhpw35amhoh" path="res://scenes/player/player.gd" id="1_dovo2"]
+[ext_resource type="Texture2D" uid="uid://chxh4obys83ff" path="res://scenes/player/laserPink1.png" id="2_gmlin"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dovo2"]
 radius = 64.0
@@ -9,8 +10,13 @@ radius = 64.0
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_dovo2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Beam" type="Sprite2D" parent="."]
+position = Vector2(0, 808)
+scale = Vector2(1, 15.835)
+texture = ExtResource("2_gmlin")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_8afob")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_dovo2")

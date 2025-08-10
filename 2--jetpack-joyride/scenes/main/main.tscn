@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://c7pm61wgtavoq"]
+[gd_scene load_steps=8 format=4 uid="uid://c7pm61wgtavoq"]
 
 [ext_resource type="PackedScene" uid="uid://sdrbxsrh1o7t" path="res://scenes/player/player.tscn" id="1_hyk8p"]
 [ext_resource type="Script" uid="uid://bocrw4s41q2jt" path="res://scenes/main/main.gd" id="1_k2fmo"]
 [ext_resource type="Texture2D" uid="uid://b870dvxn2wpo" path="res://platformerPack_industrial_tilesheet.png" id="2_iuonh"]
+[ext_resource type="Texture2D" uid="uid://txfbnj8xfhw4" path="res://scenes/player/laserPink_groundBurst.png" id="4_l3cfh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k2fmo"]
 texture = ExtResource("2_iuonh")
@@ -130,6 +131,16 @@ size = Vector2(1958, 72)
 [node name="Main" type="Node2D"]
 script = ExtResource("1_k2fmo")
 
+[node name="Player" parent="." instance=ExtResource("1_hyk8p")]
+position = Vector2(-562, -4)
+scale = Vector2(0.75, 0.75)
+collision_layer = 0
+
+[node name="LaserBurst" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-548, 452)
+texture = ExtResource("4_l3cfh")
+
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD//wcAAgACAAAAAAAAAAcAAgACAAAAAAABAAcAAgACAAAAAAACAAcAAgACAAAAAAADAAcAAgACAAAAAAAEAAcAAgACAAAAAAAFAAcAAgACAAAAAAAGAAcAAgACAAAAAAAHAAcAAgACAAAAAAAIAAcAAgACAAAAAAAJAAcAAgACAAAAAAAKAAcAAgACAAAAAAALAAcAAgACAAAAAAAMAAcAAgACAAAAAAANAAcAAgACAAAAAADy/wcAAgACAAAAAADz/wcAAgACAAAAAAD0/wcAAgACAAAAAAD1/wcAAgACAAAAAAD2/wcAAgACAAAAAAD3/wcAAgACAAAAAAD4/wcAAgACAAAAAAD9/wcAAgACAAAAAAD+/wcAAgACAAAAAAD8/wcAAgACAAAAAAD7/wcAAgACAAAAAAD6/wcAAgACAAAAAAD5/wcAAgACAAAAAADy//j/AgADAAQAAAANAPj/AgADAAQAAAAMAPj/AgADAAQAAAALAPj/AgADAAQAAAAKAPj/AgADAAQAAAAJAPj/AgADAAQAAAAIAPj/AgADAAQAAAAHAPj/AgADAAQAAAAGAPj/AgADAAQAAAAFAPj/AgADAAQAAAAEAPj/AgADAAQAAAADAPj/AgADAAQAAAACAPj/AgADAAQAAAABAPj/AgADAAQAAAAAAPj/AgADAAQAAAD///j/AgADAAQAAAD+//j/AgADAAQAAAD9//j/AgADAAQAAAD8//j/AgADAAQAAAD7//j/AgADAAQAAAD6//j/AgADAAQAAAD5//j/AgADAAQAAAD4//j/AgADAAQAAAD3//j/AgADAAQAAAD2//j/AgADAAQAAAD1//j/AgADAAQAAAD0//j/AgADAAQAAADz//j/AgADAAQAAAA=")
 tile_set = SubResource("TileSet_l3cfh")
@@ -145,8 +156,7 @@ shape = SubResource("RectangleShape2D_iuonh")
 position = Vector2(0, -528)
 shape = SubResource("RectangleShape2D_iuonh")
 
-[node name="Player" parent="." instance=ExtResource("1_hyk8p")]
-scale = Vector2(0.75, 0.75)
-collision_layer = 0
-
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="laser_off" from="Player" to="." method="_on_player_laser_off"]
+[connection signal="laser_on" from="Player" to="." method="_on_player_laser_on"]

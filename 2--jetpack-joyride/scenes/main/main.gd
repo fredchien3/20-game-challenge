@@ -9,3 +9,10 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+func _on_player_laser_on() -> void:
+	$LaserBurst.visible = true
+
+func _on_player_laser_off() -> void:
+	$LaserBurst.visible = false
