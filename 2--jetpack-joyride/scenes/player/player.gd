@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 300.0
-const FLY_VELOCITY = -100.0
+const THRUST = -100.0
 const GRAVITY_MULTIPLIER = 2.5
 
 
@@ -13,6 +13,6 @@ func _physics_process(delta: float) -> void:
 
 	# Handle fly.
 	if Input.is_action_pressed("ui_accept"):
-		velocity.y += FLY_VELOCITY
+		velocity.y += THRUST
 
 	move_and_slide()
