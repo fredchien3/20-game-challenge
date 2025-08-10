@@ -10,7 +10,7 @@ const GRAVITY_MULTIPLIER = 2.5
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_accept"):
 		laser_on.emit()
-		$Beam.visible = true	
+		$Beam.visible = true
 	else:
 		laser_off.emit()
 		$Beam.visible = false
@@ -23,5 +23,11 @@ func _physics_process(delta: float) -> void:
 	# Handle fly.
 	if Input.is_action_pressed("ui_accept"):
 		velocity.y += THRUST
+		
+	#if Input.is_action_pressed("ui_right"):
+		#velocity.x += 50
+		#
+	#if Input.is_action_pressed("ui_left"):
+		#velocity.x -= 50
 
 	move_and_slide()
