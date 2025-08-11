@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bs3e6tvpjjn25"]
+
+[ext_resource type="Script" uid="uid://bdbthrhvmrnwp" path="res://scenes/obstacle/obstacle.gd" id="1_1ys07"]
+[ext_resource type="Texture2D" uid="uid://b870dvxn2wpo" path="res://platformerPack_industrial_tilesheet.png" id="1_f7iuw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ys07"]
+atlas = ExtResource("1_f7iuw")
+region = Rect2(700, 280, 70, 70)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_osovj"]
+radius = 32.0
+
+[node name="Obstacle" type="Area2D"]
+collision_mask = 0
+script = ExtResource("1_1ys07")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_1ys07")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_osovj")

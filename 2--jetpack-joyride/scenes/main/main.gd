@@ -14,6 +14,9 @@ func _process(delta: float) -> void:
 	
 	distance_traveled += SCROLL_SPEED
 	$Camera2D/DistanceLabel.text = str(int(distance_traveled / 100.0))
+	
+	var spawn_y = randf_range(-(1920/2), 1920/2)
+	
 
 func _on_player_laser_on() -> void:
 	$Camera2D/LaserBurst.visible = true
