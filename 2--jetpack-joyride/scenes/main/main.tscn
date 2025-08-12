@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://sdrbxsrh1o7t" path="res://scenes/player/player.tscn" id="1_hyk8p"]
 [ext_resource type="Script" uid="uid://bocrw4s41q2jt" path="res://scenes/main/main.gd" id="1_k2fmo"]
 [ext_resource type="PackedScene" uid="uid://bs3e6tvpjjn25" path="res://scenes/obstacle/obstacle.tscn" id="2_6q06x"]
-[ext_resource type="PackedScene" uid="uid://cliaf4q6mfujn" path="res://scenes/main/floor_ceiling_parallax.tscn" id="3_l3cfh"]
+[ext_resource type="PackedScene" uid="uid://cliaf4q6mfujn" path="res://scenes/main/parallax.tscn" id="3_l3cfh"]
 [ext_resource type="Texture2D" uid="uid://txfbnj8xfhw4" path="res://scenes/player/laserPink_groundBurst.png" id="4_l3cfh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_l3cfh"]
@@ -23,7 +23,11 @@ script = ExtResource("1_k2fmo")
 obstacle_scene = ExtResource("2_6q06x")
 metadata/_edit_lock_ = true
 
+[node name="Parallax" parent="." instance=ExtResource("3_l3cfh")]
+metadata/_edit_lock_ = true
+
 [node name="SlidingNode" type="Node2D" parent="."]
+position = Vector2(980, 559)
 
 [node name="Player" parent="SlidingNode" instance=ExtResource("1_hyk8p")]
 position = Vector2(-617, -12)
@@ -71,11 +75,6 @@ curve = SubResource("Curve2D_l3cfh")
 [node name="ObstacleSpawnLocation" type="PathFollow2D" parent="SlidingNode/ObstacleSpawnPath"]
 position = Vector2(1061, -397)
 rotation = 1.5708
-
-[node name="FloorCeilingParallax" parent="." instance=ExtResource("3_l3cfh")]
-scroll_offset = Vector2(-981, -559)
-repeat_size = Vector2(1960, 0)
-metadata/_edit_lock_ = true
 
 [node name="ObstacleSpawnTimer" type="Timer" parent="."]
 autostart = true
