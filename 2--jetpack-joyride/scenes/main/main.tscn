@@ -1,50 +1,40 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7pm61wgtavoq"]
+[gd_scene load_steps=9 format=3 uid="uid://c7pm61wgtavoq"]
 
 [ext_resource type="PackedScene" uid="uid://sdrbxsrh1o7t" path="res://scenes/player/player.tscn" id="1_hyk8p"]
 [ext_resource type="Script" uid="uid://bocrw4s41q2jt" path="res://scenes/main/main.gd" id="1_k2fmo"]
+[ext_resource type="PackedScene" uid="uid://bs3e6tvpjjn25" path="res://scenes/obstacle/obstacle.tscn" id="2_6q06x"]
 [ext_resource type="PackedScene" uid="uid://cliaf4q6mfujn" path="res://scenes/main/floor_ceiling_parallax.tscn" id="3_l3cfh"]
 [ext_resource type="Texture2D" uid="uid://txfbnj8xfhw4" path="res://scenes/player/laserPink_groundBurst.png" id="4_l3cfh"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iuonh"]
-size = Vector2(1940, 70)
 
 [sub_resource type="LabelSettings" id="LabelSettings_l3cfh"]
 font_size = 48
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iuonh"]
+size = Vector2(1940, 70)
+
+[sub_resource type="Curve2D" id="Curve2D_l3cfh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1061, -397, 0, 0, 0, 0, 1061, 386)
+}
+point_count = 2
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_k2fmo")
+obstacle_scene = ExtResource("2_6q06x")
+metadata/_edit_lock_ = true
 
-[node name="Player" parent="." instance=ExtResource("1_hyk8p")]
+[node name="SlidingNode" type="Node2D" parent="."]
+
+[node name="Player" parent="SlidingNode" instance=ExtResource("1_hyk8p")]
 position = Vector2(-617, -12)
 scale = Vector2(0.75, 0.75)
-
-[node name="FloorCeilingParallax" parent="." instance=ExtResource("3_l3cfh")]
-scroll_offset = Vector2(-981, -559)
-repeat_size = Vector2(1960, 0)
+collision_mask = 2
 metadata/_edit_lock_ = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="FloorAndCeilingCollision" type="StaticBody2D" parent="Camera2D"]
-position = Vector2(0, 1)
-collision_mask = 0
+[node name="Camera2D" type="Camera2D" parent="SlidingNode"]
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/FloorAndCeilingCollision"]
-position = Vector2(-10, 525)
-shape = SubResource("RectangleShape2D_iuonh")
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Camera2D/FloorAndCeilingCollision"]
-position = Vector2(-10, -525)
-shape = SubResource("RectangleShape2D_iuonh")
-metadata/_edit_lock_ = true
-
-[node name="LaserBurst" type="Sprite2D" parent="Camera2D"]
-position = Vector2(-605, 452)
-texture = ExtResource("4_l3cfh")
-
-[node name="DistanceLabel" type="Label" parent="Camera2D"]
+[node name="DistanceLabel" type="Label" parent="SlidingNode/Camera2D"]
 offset_left = -47.0
 offset_top = -472.0
 offset_right = 50.0
@@ -52,6 +42,44 @@ offset_bottom = -405.0
 text = "0 kp"
 label_settings = SubResource("LabelSettings_l3cfh")
 horizontal_alignment = 2
+metadata/_edit_lock_ = true
 
-[connection signal="laser_off" from="Player" to="." method="_on_player_laser_off"]
-[connection signal="laser_on" from="Player" to="." method="_on_player_laser_on"]
+[node name="FloorAndCeilingCollision" type="StaticBody2D" parent="SlidingNode"]
+position = Vector2(0, 1)
+collision_layer = 2
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlidingNode/FloorAndCeilingCollision"]
+position = Vector2(-10, 525)
+shape = SubResource("RectangleShape2D_iuonh")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="SlidingNode/FloorAndCeilingCollision"]
+position = Vector2(-10, -525)
+shape = SubResource("RectangleShape2D_iuonh")
+metadata/_edit_lock_ = true
+
+[node name="LaserBurst" type="Sprite2D" parent="SlidingNode"]
+position = Vector2(-605, 452)
+texture = ExtResource("4_l3cfh")
+metadata/_edit_lock_ = true
+
+[node name="ObstacleSpawnPath" type="Path2D" parent="SlidingNode"]
+curve = SubResource("Curve2D_l3cfh")
+
+[node name="ObstacleSpawnLocation" type="PathFollow2D" parent="SlidingNode/ObstacleSpawnPath"]
+position = Vector2(1061, -397)
+rotation = 1.5708
+
+[node name="FloorCeilingParallax" parent="." instance=ExtResource("3_l3cfh")]
+scroll_offset = Vector2(-981, -559)
+repeat_size = Vector2(1960, 0)
+metadata/_edit_lock_ = true
+
+[node name="ObstacleSpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="laser_off" from="SlidingNode/Player" to="." method="_on_player_laser_off"]
+[connection signal="laser_on" from="SlidingNode/Player" to="." method="_on_player_laser_on"]
+[connection signal="timeout" from="ObstacleSpawnTimer" to="." method="_on_obstacle_spawn_timer_timeout"]
