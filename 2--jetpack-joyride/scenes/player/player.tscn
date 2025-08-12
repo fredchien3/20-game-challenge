@@ -11,7 +11,7 @@ radius = 64.0
 script = ExtResource("1_dovo2")
 
 [node name="Beam" type="Sprite2D" parent="."]
-z_index = -1
+z_index = -2
 position = Vector2(0, 808)
 scale = Vector2(1, 15.835)
 texture = ExtResource("2_gmlin")

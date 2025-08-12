@@ -2,8 +2,14 @@ extends Node2D
 
 @export var obstacle_scene: PackedScene
 
+var high_score = 0
 var distance_traveled = 0.00
-const SCROLL_SPEED = 5.00
+
+var player_alive = true
+
+const DEFAULT_SCROLL_SPEED = 5.00
+var scroll_speed = DEFAULT_SCROLL_SPEED
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,9 +17,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	$SlidingNode.position.x += SCROLL_SPEED
+	if !player_alive and scroll_speed >= 0.01:
+		scroll_speed -= 0.01
 
-	distance_traveled += SCROLL_SPEED
+	$SlidingNode.position.x += scroll_speed
+	distance_traveled += scroll_speed
 	$SlidingNode/Camera2D/DistanceLabel.text = str(int(distance_traveled / 100.0))
 	
 	var spawn_y = randf_range(-(1920/2), 1920/2)
@@ -38,3 +46,8 @@ func spawn_obstacle() -> void:
 	obstacle.position = obstacle_spawn_location.global_position
 	
 	add_child(obstacle)
+
+
+func _on_player_death() -> void:
+	player_alive = false
+	$ObstacleSpawnTimer.stop()
