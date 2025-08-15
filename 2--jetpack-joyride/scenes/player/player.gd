@@ -30,3 +30,7 @@ func die() -> void:
 	alive = false
 	death.emit()
 	$PlayerSprite.texture = load("res://scenes/player/shipPink_damage1.png")
+
+func respawn() -> void:
+	alive = true
+	$PlayerSprite.texture = load("res://scenes/player/shipPink_manned.png")

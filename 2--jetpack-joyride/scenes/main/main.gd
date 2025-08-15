@@ -2,10 +2,12 @@ extends Node2D
 
 @export var obstacle_scene: PackedScene
 
-var high_score = 0
+var high_score = 0.00
 var distance_traveled = 0.00
 
-var player_alive = true
+# 0: running
+# 1: dying
+var game_state = 0
 
 const DEFAULT_SCROLL_SPEED = 5.00
 var scroll_speed = DEFAULT_SCROLL_SPEED
@@ -17,15 +19,17 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if !player_alive and scroll_speed >= 0.01:
-		scroll_speed -= 0.01
-
+	if game_state == 1:
+		if scroll_speed >= 0.00:
+			scroll_speed -= 0.02
+		else:
+			scroll_speed = 0
+			game_state = 2
+			display_game_over()
 	$SlidingNode.position.x += scroll_speed
 	distance_traveled += scroll_speed
-	$SlidingNode/Camera2D/DistanceLabel.text = str(int(distance_traveled / 100.0))
-	
-	var spawn_y = randf_range(-(1920/2), 1920/2)
-	
+	$GUI/DistanceLabel.text = display_distance(distance_traveled)
+
 func _on_player_laser_on() -> void:
 	$SlidingNode/LaserBurst.visible = true
 
@@ -47,7 +51,36 @@ func spawn_obstacle() -> void:
 	
 	add_child(obstacle)
 
-
 func _on_player_death() -> void:
-	player_alive = false
+	game_state = 1
 	$ObstacleSpawnTimer.stop()
+	
+func display_game_over() -> void:
+	if distance_traveled > high_score:
+		high_score = distance_traveled
+
+	$GUI/GameOverControl/Label.text = "You died!\n" \
+		+ "Your score was: " \
+		+ display_distance(distance_traveled)
+		
+	$GUI/GameOverControl.visible = true
+
+func display_distance(distance: float) -> String:
+	return str(int(distance / 100.0)) + " kp"
+
+func _on_button_pressed() -> void:
+	# Clear the screen
+	$GUI/GameOverControl.visible = false
+	get_tree().call_group("obstacles", "queue_free")
+
+	# Update the high score
+	$GUI/HighScoreLabel.text = "High score: " + display_distance(high_score)
+	$GUI/HighScoreLabel.visible = true
+	
+	# Get things going again
+	distance_traveled = 0.00
+	game_state = 0
+	scroll_speed = DEFAULT_SCROLL_SPEED
+	$SlidingNode/Player.respawn()
+	$SlidingNode/Player.position.y = 0
+	$ObstacleSpawnTimer.start()
