@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ivpxyjlfyggg"]
+
+[ext_resource type="Script" uid="uid://cb0yieqh70h0a" path="res://scenes/frog.gd" id="1_mqod6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u8gyo"]
+size = Vector2(64, 64)
+
+[node name="Frog" type="CharacterBody2D"]
+script = ExtResource("1_mqod6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 64.0
+offset_bottom = 64.0
+color = Color(0.0172149, 0.478145, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_u8gyo")
