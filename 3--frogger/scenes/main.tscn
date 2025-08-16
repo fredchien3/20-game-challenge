@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2xckpw4qhijp"]
+[gd_scene load_steps=6 format=3 uid="uid://d2xckpw4qhijp"]
 
 [ext_resource type="PackedScene" uid="uid://ca5tbgiharyx6" path="res://scenes/lane.tscn" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://ivpxyjlfyggg" path="res://scenes/frog.tscn" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://curn18o3prvno" path="res://scenes/main.gd" id="1_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bh40k1lvhdkpr" path="res://scenes/car.tscn" id="2_sugp2"]
 [ext_resource type="Script" uid="uid://d1eltcw8mc5jy" path="res://scenes/camera.gd" id="4_jyhfs"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_tbgi4")
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -23,5 +25,5 @@ position = Vector2(448, 1728)
 
 [node name="Camera" type="Camera2D" parent="Map/Background/Frog"]
 position = Vector2(32, 32)
-zoom = Vector2(0.51, 0.51)
+zoom = Vector2(0.8, 0.8)
 script = ExtResource("4_jyhfs")
