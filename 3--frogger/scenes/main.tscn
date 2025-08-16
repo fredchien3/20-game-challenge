@@ -15,7 +15,7 @@ offset_bottom = 1792.0
 color = Color(0.214103, 0.214103, 0.214103, 1)
 
 [node name="Lane" parent="Map/Background" instance=ExtResource("1_0wfyh")]
-position = Vector2(-64, 1536)
+position = Vector2(0, 1536)
 car_scene = ExtResource("2_sugp2")
 
 [node name="Frog" parent="Map/Background" instance=ExtResource("1_o5qli")]
@@ -23,4 +23,5 @@ position = Vector2(448, 1728)
 
 [node name="Camera" type="Camera2D" parent="Map/Background/Frog"]
 position = Vector2(32, 32)
+zoom = Vector2(0.51, 0.51)
 script = ExtResource("4_jyhfs")
