@@ -1,12 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2xckpw4qhijp"]
+[gd_scene load_steps=3 format=3 uid="uid://d2xckpw4qhijp"]
 
 [ext_resource type="PackedScene" uid="uid://ivpxyjlfyggg" path="res://scenes/frog.tscn" id="1_o5qli"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5qli"]
+size = Vector2(640, 1152)
+
 [node name="Main" type="Node2D"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Background" type="ColorRect" parent="Map"]
 offset_right = 640.0
 offset_bottom = 1152.0
 color = Color(0.214103, 0.214103, 0.214103, 1)
 
-[node name="Frog" parent="." instance=ExtResource("1_o5qli")]
+[node name="Area2D" type="Area2D" parent="Map"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Area2D"]
+position = Vector2(320, 576)
+shape = SubResource("RectangleShape2D_o5qli")
+
+[node name="Frog" parent="Map" instance=ExtResource("1_o5qli")]
+position = Vector2(256, 1088)
