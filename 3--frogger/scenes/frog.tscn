@@ -3,15 +3,18 @@
 [ext_resource type="Script" uid="uid://cb0yieqh70h0a" path="res://scenes/frog.gd" id="1_mqod6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u8gyo"]
-size = Vector2(64, 64)
+size = Vector2(48, 48)
 
 [node name="Frog" type="CharacterBody2D"]
 script = ExtResource("1_mqod6")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 64.0
-offset_bottom = 64.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 56.0
+offset_bottom = 56.0
 color = Color(0.0172149, 0.478145, 0, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 offset_left = 16.0
@@ -19,6 +22,7 @@ offset_top = 24.0
 offset_right = 48.0
 offset_bottom = 56.0
 color = Color(0.499838, 0.705425, 0.282951, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(32, 32)
