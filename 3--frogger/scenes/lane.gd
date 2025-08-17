@@ -1,15 +1,14 @@
 extends Node2D
 
-# Todo: each lane instance should have a speed, a direction, and a number of objects.
-
 @export var car_scene: PackedScene
 
-var num_cars = 4
+var num_cars = randi_range(5,8)
 
-# Spawn a bunch of cars
 func _ready() -> void:
 	for i in range(num_cars):
-		$SpawnPath/SpawnPoint.progress_ratio = randf()
+		# Pick a random point to spawn, rounded to the nearest tenth
+		# so cars don't spawn inside each other
+		$SpawnPath/SpawnPoint.progress_ratio = floor(randf() * 10) / 10
 		var car = car_scene.instantiate()
 		car.position = $SpawnPath/SpawnPoint.position
 		add_child(car)

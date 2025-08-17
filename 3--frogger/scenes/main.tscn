@@ -8,16 +8,37 @@
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tbgi4")
+metadata/_edit_lock_ = true
 
 [node name="Map" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="Background" type="ColorRect" parent="Map" groups=["background"]]
 offset_right = 1024.0
 offset_bottom = 1792.0
 color = Color(0.214103, 0.214103, 0.214103, 1)
+metadata/_edit_lock_ = true
 
 [node name="Lane" parent="Map/Background" instance=ExtResource("1_0wfyh")]
 position = Vector2(0, 1536)
+car_scene = ExtResource("2_sugp2")
+
+[node name="Lane2" parent="Map/Background" instance=ExtResource("1_0wfyh")]
+position = Vector2(1024, 1536)
+rotation = 3.14159
+car_scene = ExtResource("2_sugp2")
+
+[node name="Lane5" parent="Map/Background" instance=ExtResource("1_0wfyh")]
+position = Vector2(1024, 1344)
+rotation = 3.14159
+car_scene = ExtResource("2_sugp2")
+
+[node name="Lane3" parent="Map/Background" instance=ExtResource("1_0wfyh")]
+position = Vector2(0, 1408)
+car_scene = ExtResource("2_sugp2")
+
+[node name="Lane4" parent="Map/Background" instance=ExtResource("1_0wfyh")]
+position = Vector2(0, 1344)
 car_scene = ExtResource("2_sugp2")
 
 [node name="Frog" parent="Map/Background" instance=ExtResource("1_o5qli")]
