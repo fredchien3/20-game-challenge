@@ -21,6 +21,9 @@ func _process(_delta: float) -> void:
 		position = new_pos
 
 func die() -> void:
+	if !alive:
+		return
+
 	print("Ribbit... I'm dead")
 	alive = false
 	$ColorRect.color = "red"

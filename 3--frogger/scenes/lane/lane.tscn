@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ca5tbgiharyx6"]
 
-[ext_resource type="Script" uid="uid://r5dx4wdj7s07" path="res://scenes/lane.gd" id="1_i20lb"]
+[ext_resource type="Script" uid="uid://r5dx4wdj7s07" path="res://scenes/lane/lane.gd" id="1_i20lb"]
 
 [sub_resource type="Curve2D" id="Curve2D_i20lb"]
 _data = {
