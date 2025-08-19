@@ -1,5 +1,5 @@
 class_name LaneObject
-extends Area2D
+extends CollisionObject2D
 
 func update_position(adjusted_speed, buffer_px) -> void:
 	position.x += adjusted_speed

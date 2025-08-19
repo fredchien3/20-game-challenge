@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 var alive = true
+var following_log = null
 
 func _process(_delta: float) -> void:
 	if alive == false:
@@ -15,6 +16,9 @@ func _process(_delta: float) -> void:
 		new_pos.y -= 64
 	elif Input.is_action_just_pressed("move_down"):
 		new_pos.y += 64
+	
+	if following_log:
+		new_pos.x += following_log.velocity
 
 	var background = get_tree().get_first_node_in_group("background")
 	if Utils.in_bounds(new_pos, background.get_rect().size):
@@ -28,3 +32,10 @@ func die() -> void:
 	alive = false
 	$ColorRect.color = "red"
 	$ColorRect/ColorRect2.color = "pink"
+
+func follow_log(log: Node2D):
+	following_log = log
+
+func unfollow_log(log: Node2D):
+	if log == following_log:
+		following_log = null
