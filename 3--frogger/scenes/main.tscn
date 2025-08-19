@@ -26,8 +26,8 @@ position = Vector2(0, 1536)
 lane_type = "Road"
 
 [node name="Lane2" parent="Map/Highway" instance=ExtResource("1_0wfyh")]
-position = Vector2(1024, 1536)
-rotation = 3.14159
+position = Vector2(0, 1472)
+rotation = 6.28318
 lane_type = "Road"
 
 [node name="Lane3" parent="Map/Highway" instance=ExtResource("1_0wfyh")]
@@ -39,8 +39,8 @@ position = Vector2(0, 1344)
 lane_type = "Road"
 
 [node name="Lane5" parent="Map/Highway" instance=ExtResource("1_0wfyh")]
-position = Vector2(1024, 1344)
-rotation = 3.14159
+position = Vector2(0, 1280)
+rotation = 6.28318
 lane_type = "Road"
 
 [node name="River" type="Node2D" parent="Map"]

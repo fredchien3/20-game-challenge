@@ -3,7 +3,7 @@ extends CharacterBody2D
 var alive = true
 var following_log = null
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if alive == false:
 		return
 
@@ -18,7 +18,7 @@ func _process(_delta: float) -> void:
 		new_pos.y += 64
 	
 	if following_log:
-		new_pos.x += following_log.velocity
+		new_pos.x += following_log.normalized_velocity
 
 	var background = get_tree().get_first_node_in_group("background")
 	if Utils.in_bounds(new_pos, background.get_rect().size):
