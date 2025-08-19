@@ -33,9 +33,18 @@ func die() -> void:
 	$ColorRect.color = "red"
 	$ColorRect/ColorRect2.color = "pink"
 
-func follow_log(log: Node2D):
-	following_log = log
+func drown():
+	if !alive:
+		return
+		
+	print("Glug glug glug")
+	alive = false
+	$ColorRect.color = "dark_blue"
+	$ColorRect/ColorRect2.color = "light_blue"
 
-func unfollow_log(log: Node2D):
-	if log == following_log:
+func follow_log(entered_log: Node2D):
+	following_log = entered_log
+
+func unfollow_log(exited_log: Node2D):
+	if exited_log == following_log:
 		following_log = null

@@ -1,5 +1,7 @@
 extends Node2D
 
+signal frog_above_water
+
 @export_enum("Road", "River") var lane_type: String
 
 var type_to_object_path_map = {
@@ -13,6 +15,7 @@ var spawn_path_fraction = 10
 
 func _ready() -> void:
 	if lane_type == "River":
+		add_to_group("rivers")
 		$ColorRect.color = "blue"
 		num_objects = randi_range(2, 4)
 		spawn_path_fraction = 5
@@ -32,3 +35,6 @@ func _ready() -> void:
 	
 func _process(_delta: float) -> void:
 	pass
+
+func _on_body_entered(frog: Node2D) -> void:
+	frog_above_water.emit(frog)

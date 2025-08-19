@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://ca5tbgiharyx6"]
+[gd_scene load_steps=4 format=3 uid="uid://ca5tbgiharyx6"]
 
 [ext_resource type="Script" uid="uid://r5dx4wdj7s07" path="res://scenes/lane/lane.gd" id="1_i20lb"]
 
@@ -8,7 +8,11 @@ _data = {
 }
 point_count = 2
 
-[node name="Lane" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2kvu"]
+size = Vector2(1024, 64)
+
+[node name="Lane" type="Area2D"]
+collision_layer = 0
 script = ExtResource("1_i20lb")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -21,3 +25,9 @@ curve = SubResource("Curve2D_i20lb")
 
 [node name="SpawnPoint" type="PathFollow2D" parent="SpawnPath"]
 position = Vector2(-32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(512, 32)
+shape = SubResource("RectangleShape2D_q2kvu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
