@@ -1,5 +1,8 @@
 extends LaneObject
 
+func _ready() -> void:
+	super._ready()
+
 func _on_body_entered(frog: Node2D):
 	frog.follow_log(self)
 

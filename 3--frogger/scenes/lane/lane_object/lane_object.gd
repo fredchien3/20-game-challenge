@@ -4,6 +4,9 @@ extends CollisionObject2D
 var velocity
 var normalized_velocity
 
+func _ready() -> void:
+	z_index = 1
+
 func _process(delta: float) -> void:
 	normalized_velocity = velocity * delta
 	update_position(normalized_velocity, $CollisionShape2D.shape.size.x)

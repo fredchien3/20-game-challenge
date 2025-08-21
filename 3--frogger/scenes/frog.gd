@@ -32,6 +32,7 @@ func die() -> void:
 	alive = false
 	$ColorRect.color = "red"
 	$ColorRect/ColorRect2.color = "pink"
+	z_index = 0
 
 func drown():
 	if !alive:
@@ -41,6 +42,7 @@ func drown():
 	alive = false
 	$ColorRect.color = "dark_blue"
 	$ColorRect/ColorRect2.color = "light_blue"
+	z_index = 0
 
 func follow_log(entered_log: Node2D):
 	following_log = entered_log

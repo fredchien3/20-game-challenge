@@ -9,18 +9,21 @@ const TYPE_TO_OBJECT_PATH_MAP = {
 	"River": "res://scenes/lane/lane_object/log.tscn",
 }
 const DIRECTIONS = [-1, 1]
-const MIN_OBJECT_SPEED = 150
-const MAX_OBJECT_SPEED = 300
 
-var num_objects = randi_range(4, 8)
+var num_objects = randi_range(4, 6)
 var spawn_path_fraction = 10
+
+var min_speed = 125
+var max_speed = 200
 
 func establish_lane_type_variables():
 	if lane_type == "River":
 		add_to_group("rivers")
 		$ColorRect.color = "blue"
-		num_objects = randi_range(2, 5)
+		num_objects = randi_range(3, 5)
 		spawn_path_fraction = 5
+		min_speed = 100
+		max_speed = 150
 
 func _ready() -> void:
 	establish_lane_type_variables()
@@ -28,7 +31,7 @@ func _ready() -> void:
 	var object_scene = load(path)
 
 	var direction = DIRECTIONS[randi_range(0, 1)]
-	var speed = randi_range(MIN_OBJECT_SPEED, MAX_OBJECT_SPEED)
+	var speed = randi_range(min_speed, max_speed)
 	var velocity = direction * speed
 
 	for i in range(num_objects):
