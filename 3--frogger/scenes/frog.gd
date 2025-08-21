@@ -50,3 +50,7 @@ func follow_log(entered_log: Node2D):
 func unfollow_log(exited_log: Node2D):
 	if exited_log == following_log:
 		following_log = null
+	var rivers = get_tree().get_nodes_in_group("rivers")
+	for river in rivers:
+		if river.overlaps_body(self):
+			drown()
