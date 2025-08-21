@@ -67,7 +67,7 @@ position = Vector2(0, 768)
 lane_type = "River"
 
 [node name="Frog" parent="." instance=ExtResource("1_o5qli")]
-position = Vector2(448, 1728)
+position = Vector2(448, 1088)
 
 [node name="Camera" type="Camera2D" parent="Frog"]
 position = Vector2(32, 32)

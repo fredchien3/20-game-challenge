@@ -7,6 +7,7 @@ func _ready() -> void:
 		
 	for river in get_tree().get_nodes_in_group("rivers"):
 		river.frog_above_water.connect(_on_frog_above_water)
+		river.frog_oob.connect(_on_frog_oob)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -19,3 +20,6 @@ func _on_frog_above_water(frog):
 	await get_tree().process_frame
 	if !frog.following_log:
 		frog.drown()
+		
+func _on_frog_oob(frog):
+	frog.die()

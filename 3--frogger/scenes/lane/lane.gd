@@ -4,6 +4,8 @@ signal frog_above_water
 
 @export_enum("Road", "River") var lane_type: String
 
+signal frog_oob(frog)
+
 const TYPE_TO_OBJECT_PATH_MAP = {
 	"Road": "res://scenes/lane/lane_object/car.tscn",
 	"River": "res://scenes/lane/lane_object/log.tscn",
@@ -48,3 +50,6 @@ func _ready() -> void:
 func _on_body_entered(frog: Node2D) -> void:
 	if lane_type == "River":
 		frog_above_water.emit(frog)
+
+func _on_death_zone_body_entered(frog: Node2D) -> void:
+	frog_oob.emit(frog)
