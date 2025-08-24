@@ -51,3 +51,5 @@ move_down={
 [layer_names]
 
 2d_physics/layer_1="frog"
+2d_physics/layer_2="lane_object"
+2d_physics/layer_3="lane"

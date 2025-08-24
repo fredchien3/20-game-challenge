@@ -1,10 +1,10 @@
 extends Node2D
 
-signal frog_above_water
+#signal frog_above_water
+#signal frog_oob(frog)
 
 @export_enum("Road", "River") var lane_type: String
 
-signal frog_oob(frog)
 
 const TYPE_TO_OBJECT_PATH_MAP = {
 	"Road": "res://scenes/lane/lane_object/car.tscn",
@@ -47,9 +47,6 @@ func _ready() -> void:
 		object.velocity = velocity
 		add_child(object)
 
-func _on_body_entered(frog: Node2D) -> void:
-	if lane_type == "River":
-		frog_above_water.emit(frog)
-
-func _on_death_zone_body_entered(frog: Node2D) -> void:
-	frog_oob.emit(frog)
+func _on_death_zone_area_entered(area: Area2D) -> void:
+	if area.has_method("drown"):
+		area.drown()

@@ -8,7 +8,8 @@
 size = Vector2(112, 32)
 
 [node name="Log" type="Area2D"]
-collision_layer = 0
+collision_layer = 2
+collision_mask = 0
 collision_priority = 2.0
 script = ExtResource("1_n23x3")
 
@@ -19,5 +20,6 @@ texture = SubResource("PlaceholderTexture2D_c35m8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6c0se")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+update_rotation = false
+update_scale = false

@@ -8,10 +8,11 @@
 size = Vector2(12.378, 12.378)
 
 [node name="Lilypad" type="Area2D"]
+collision_layer = 0
 script = ExtResource("1_eatds")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(64, 64)
+scale = Vector2(48, 48)
 texture = SubResource("PlaceholderTexture2D_gpon4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

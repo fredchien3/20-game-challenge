@@ -1,7 +1,6 @@
-extends CharacterBody2D
+extends Area2D
 
 var alive = true
-var following_log = null
 
 func _process(delta: float) -> void:
 	if alive == false:
@@ -17,9 +16,19 @@ func _process(delta: float) -> void:
 		new_pos.y -= 64
 	elif Input.is_action_just_pressed("move_down"):
 		new_pos.y += 64
+	
+	var following_log
+	var in_river = false
+	for area in get_overlapping_areas():
+		if area.is_in_group("logs"):
+			following_log = area
+		if area.is_in_group("rivers"):
+			in_river = true
 
 	if following_log:
 		new_pos.x += following_log.normalized_velocity
+	elif in_river:
+		drown()
 
 	var background = get_tree().get_first_node_in_group("background")
 	if Utils.in_bounds(new_pos, background.get_rect().size):
@@ -44,14 +53,7 @@ func drown():
 	$ColorRect.color = "dark_blue"
 	$ColorRect/ColorRect2.color = "light_blue"
 	z_index = 0
-
-func follow_log(entered_log: Node2D):
-	following_log = entered_log
-
-func unfollow_log(exited_log: Node2D):
-	var rivers = get_tree().get_nodes_in_group("rivers")
-	if exited_log == following_log:
-		following_log = null
-		for river in rivers:
-			if river.overlaps_body(self):
-				drown()
+	
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("cars"):
+		die()
