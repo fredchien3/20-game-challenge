@@ -15,7 +15,7 @@ const DIRECTIONS = [-1, 1]
 var num_objects = randi_range(4, 6)
 var spawn_path_fraction = 10
 
-var min_speed = 125
+var min_speed = 1
 var max_speed = 200
 
 func establish_lane_type_variables():
@@ -24,7 +24,7 @@ func establish_lane_type_variables():
 		$ColorRect.color = "blue"
 		num_objects = randi_range(3, 5)
 		spawn_path_fraction = 5
-		min_speed = 100
+		min_speed = 125
 		max_speed = 150
 
 func _ready() -> void:
@@ -36,9 +36,10 @@ func _ready() -> void:
 	var speed = randi_range(min_speed, max_speed)
 	var velocity = direction * speed
 
+	# TODO: This spawns objects inside each other. Low priority
 	for i in range(num_objects):
 		# Pick a random point to spawn, rounded to the nearest N-th
-		# so objects don't spawn inside each other
+		# so objects don't partially overlap
 		$SpawnPath/SpawnPoint.progress_ratio = \
 				floor(randf() * spawn_path_fraction) / spawn_path_fraction
 
