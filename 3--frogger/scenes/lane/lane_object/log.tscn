@@ -5,7 +5,7 @@
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c35m8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6c0se"]
-size = Vector2(96, 32)
+size = Vector2(112, 32)
 
 [node name="Log" type="Area2D"]
 collision_layer = 0

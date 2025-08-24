@@ -8,6 +8,7 @@ func _process(delta: float) -> void:
 		return
 
 	var new_pos = position
+
 	if Input.is_action_just_pressed("move_left"):
 		new_pos.x -= 64
 	elif Input.is_action_just_pressed("move_right"):
@@ -16,7 +17,7 @@ func _process(delta: float) -> void:
 		new_pos.y -= 64
 	elif Input.is_action_just_pressed("move_down"):
 		new_pos.y += 64
-	
+
 	if following_log:
 		new_pos.x += following_log.normalized_velocity
 
@@ -48,9 +49,9 @@ func follow_log(entered_log: Node2D):
 	following_log = entered_log
 
 func unfollow_log(exited_log: Node2D):
+	var rivers = get_tree().get_nodes_in_group("rivers")
 	if exited_log == following_log:
 		following_log = null
-	var rivers = get_tree().get_nodes_in_group("rivers")
-	for river in rivers:
-		if river.overlaps_body(self):
-			drown()
+		for river in rivers:
+			if river.overlaps_body(self):
+				drown()

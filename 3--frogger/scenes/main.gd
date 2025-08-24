@@ -8,6 +8,9 @@ func _ready() -> void:
 	for river in get_tree().get_nodes_in_group("rivers"):
 		river.frog_above_water.connect(_on_frog_above_water)
 		river.frog_oob.connect(_on_frog_oob)
+		
+	for lilypad in get_tree().get_nodes_in_group("lilypads"):
+		lilypad.frog_made_it.connect(_on_frog_made_it)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -22,4 +25,7 @@ func _on_frog_above_water(frog):
 		frog.drown()
 		
 func _on_frog_oob(frog):
-	frog.die()
+	frog.drown()
+
+func _on_frog_made_it(frog):
+	print('mama we made it')
