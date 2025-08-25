@@ -1,5 +1,8 @@
 extends Area2D
 
+signal frog_made_it(frog)
+
+const RESPAWN_TIMER = 1
 var alive = true
 
 func _process(delta: float) -> void:
@@ -17,16 +20,21 @@ func _process(delta: float) -> void:
 	elif Input.is_action_just_pressed("move_down"):
 		new_pos.y += 64
 	
-	var following_log
+	var on_log = null
+	var on_lilypad = null
 	var in_river = false
 	for area in get_overlapping_areas():
 		if area.is_in_group("logs"):
-			following_log = area
+			on_log = area
 		if area.is_in_group("rivers"):
 			in_river = true
+		if area.is_in_group("lilypads"):
+			on_lilypad = area
 
-	if following_log:
-		new_pos.x += following_log.normalized_velocity
+	if on_log:
+		new_pos.x += on_log.normalized_velocity
+	elif on_lilypad:
+		pass
 	elif in_river:
 		drown()
 
@@ -53,6 +61,9 @@ func drown():
 	$ColorRect.color = "dark_blue"
 	$ColorRect/ColorRect2.color = "light_blue"
 	z_index = 0
+	
+func wait_and_respawn():
+	await get_tree().create_timer(RESPAWN_TIMER).timeout
 	
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("cars"):

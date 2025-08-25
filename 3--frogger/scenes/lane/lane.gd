@@ -15,7 +15,7 @@ const DIRECTIONS = [-1, 1]
 var num_objects = randi_range(4, 6)
 var spawn_path_fraction = 10
 
-var min_speed = 1
+var min_speed = 150
 var max_speed = 200
 
 func establish_lane_type_variables():

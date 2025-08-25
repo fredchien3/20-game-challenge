@@ -18,7 +18,7 @@ metadata/_edit_lock_ = true
 
 [node name="Background" type="ColorRect" parent="Map" groups=["background"]]
 offset_right = 1024.0
-offset_bottom = 1024.0
+offset_bottom = 1088.0
 color = Color(0.214103, 0.214103, 0.214103, 1)
 
 [node name="Highway" type="Node2D" parent="Map"]
@@ -84,19 +84,19 @@ position = Vector2(512, 32)
 shape = SubResource("RectangleShape2D_tbgi4")
 
 [node name="Lilypad" parent="Map/FinishLine" instance=ExtResource("3_tbgi4")]
-position = Vector2(96, 32)
+position = Vector2(64, 0)
 
 [node name="Lilypad2" parent="Map/FinishLine" instance=ExtResource("3_tbgi4")]
-position = Vector2(288, 32)
+position = Vector2(256, 0)
 
 [node name="Lilypad3" parent="Map/FinishLine" instance=ExtResource("3_tbgi4")]
-position = Vector2(480, 32)
+position = Vector2(448, 0)
 
 [node name="Lilypad4" parent="Map/FinishLine" instance=ExtResource("3_tbgi4")]
-position = Vector2(672, 32)
+position = Vector2(640, 0)
 
 [node name="Lilypad5" parent="Map/FinishLine" instance=ExtResource("3_tbgi4")]
-position = Vector2(864, 32)
+position = Vector2(832, 0)
 
 [node name="Frog" parent="." instance=ExtResource("1_o5qli")]
 position = Vector2(448, 384)
@@ -107,8 +107,22 @@ zoom = Vector2(0.8, 0.8)
 position_smoothing_enabled = true
 script = ExtResource("4_jyhfs")
 
-[node name="GUI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="NumLives" type="Label" parent="GUI"]
+offset_top = 576.0
+offset_right = 128.0
+offset_bottom = 640.0
+text = "🐸🐸🐸"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YouWin" type="Label" parent="GUI"]
+visible = false
+offset_left = 256.0
+offset_top = 384.0
+offset_right = 384.0
+offset_bottom = 512.0
+text = "You Win!"
+horizontal_alignment = 1
+vertical_alignment = 1
