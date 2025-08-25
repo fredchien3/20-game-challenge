@@ -1,8 +1,5 @@
 extends Node2D
 
-#signal frog_above_water
-#signal frog_oob(frog)
-
 @export_enum("Road", "River") var lane_type: String
 
 

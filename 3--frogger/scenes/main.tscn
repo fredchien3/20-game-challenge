@@ -117,7 +117,7 @@ text = "🐸🐸🐸"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="YouWin" type="Label" parent="GUI"]
+[node name="MainText" type="Label" parent="GUI"]
 visible = false
 offset_left = 256.0
 offset_top = 384.0
@@ -126,3 +126,5 @@ offset_bottom = 512.0
 text = "You Win!"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="death" from="Frog" to="." method="_on_frog_death"]
