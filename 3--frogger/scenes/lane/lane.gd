@@ -23,9 +23,21 @@ func establish_lane_type_variables():
 		spawn_path_fraction = 5
 		min_speed = 125
 		max_speed = 150
+	else:
+		add_to_group("roads")
 
 func _ready() -> void:
 	establish_lane_type_variables()
+	spawn_lane_items()
+	
+func reset() -> void:
+	for child in get_children():
+		if child.is_in_group("logs") or child.is_in_group("cars"):
+			child.queue_free()
+
+	spawn_lane_items()
+
+func spawn_lane_items() -> void:
 	var path = TYPE_TO_OBJECT_PATH_MAP[lane_type]
 	var object_scene = load(path)
 

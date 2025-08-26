@@ -99,7 +99,7 @@ position = Vector2(640, 0)
 position = Vector2(832, 0)
 
 [node name="Frog" parent="." instance=ExtResource("1_o5qli")]
-position = Vector2(448, 384)
+position = Vector2(448, 1024)
 
 [node name="Camera" type="Camera2D" parent="Frog"]
 position = Vector2(32, 32)
@@ -107,9 +107,28 @@ zoom = Vector2(0.8, 0.8)
 position_smoothing_enabled = true
 script = ExtResource("4_jyhfs")
 
-[node name="GUI" type="CanvasLayer" parent="."]
+[node name="GameOverGui" type="CanvasLayer" parent="."]
+visible = false
 
-[node name="NumLives" type="Label" parent="GUI"]
+[node name="MainText" type="Label" parent="GameOverGui"]
+offset_left = 272.0
+offset_top = 200.0
+offset_right = 400.0
+offset_bottom = 328.0
+text = "You Win!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Restart" type="Button" parent="GameOverGui"]
+offset_left = 312.0
+offset_top = 288.0
+offset_right = 362.0
+offset_bottom = 319.0
+text = "Retry"
+
+[node name="NumLivesGui" type="CanvasLayer" parent="."]
+
+[node name="NumLives" type="Label" parent="NumLivesGui"]
 offset_top = 576.0
 offset_right = 128.0
 offset_bottom = 640.0
@@ -117,14 +136,5 @@ text = "🐸🐸🐸"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MainText" type="Label" parent="GUI"]
-visible = false
-offset_left = 256.0
-offset_top = 384.0
-offset_right = 384.0
-offset_bottom = 512.0
-text = "You Win!"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [connection signal="death" from="Frog" to="." method="_on_frog_death"]
+[connection signal="pressed" from="GameOverGui/Restart" to="." method="_on_restart_pressed"]
