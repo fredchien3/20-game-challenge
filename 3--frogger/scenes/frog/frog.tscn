@@ -1,0 +1,94 @@
+[gd_scene load_steps=14 format=3 uid="uid://ivpxyjlfyggg"]
+
+[ext_resource type="Script" uid="uid://cb0yieqh70h0a" path="res://scenes/frog/frog.gd" id="1_mqod6"]
+[ext_resource type="Texture2D" uid="uid://nlf030p7pb52" path="res://scenes/frog/frog_idle.png" id="2_fcru8"]
+[ext_resource type="Texture2D" uid="uid://cdvncddagrkyk" path="res://scenes/frog/frog_jump.png" id="3_qsc3k"]
+[ext_resource type="Texture2D" uid="uid://cu83d365if41h" path="res://scenes/frog/frog_squished.png" id="4_iplly"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qi8j7"]
+radius = 24.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsc3k"]
+atlas = ExtResource("2_fcru8")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iplly"]
+atlas = ExtResource("2_fcru8")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmr5u"]
+atlas = ExtResource("3_qsc3k")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2m60h"]
+atlas = ExtResource("3_qsc3k")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbi47"]
+atlas = ExtResource("3_qsc3k")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jy1n"]
+atlas = ExtResource("4_iplly")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejaa1"]
+atlas = ExtResource("4_iplly")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gm3u6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsc3k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iplly")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmr5u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2m60h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbi47")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jy1n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejaa1")
+}],
+"loop": true,
+"name": &"squished",
+"speed": 2.0
+}]
+
+[node name="Frog" type="Area2D"]
+z_index = 2
+z_as_relative = false
+collision_mask = 6
+script = ExtResource("1_mqod6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qi8j7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gm3u6")
+animation = &"jump"
+autoplay = "idle"
+frame = 2
+frame_progress = 1.0
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

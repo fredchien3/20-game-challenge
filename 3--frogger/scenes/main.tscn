@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://d2xckpw4qhijp"]
 
 [ext_resource type="PackedScene" uid="uid://ca5tbgiharyx6" path="res://scenes/lane/lane.tscn" id="1_0wfyh"]
-[ext_resource type="PackedScene" uid="uid://ivpxyjlfyggg" path="res://scenes/frog.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://ivpxyjlfyggg" path="res://scenes/frog/frog.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://curn18o3prvno" path="res://scenes/main.gd" id="1_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://b4k26de1brr50" path="res://scenes/lilypad.tscn" id="3_tbgi4"]
 [ext_resource type="Script" uid="uid://d1eltcw8mc5jy" path="res://scenes/camera.gd" id="4_jyhfs"]
@@ -99,10 +99,9 @@ position = Vector2(640, 0)
 position = Vector2(832, 0)
 
 [node name="Frog" parent="." instance=ExtResource("1_o5qli")]
-position = Vector2(448, 1024)
+position = Vector2(480, 1056)
 
 [node name="Camera" type="Camera2D" parent="Frog"]
-position = Vector2(32, 32)
 zoom = Vector2(0.8, 0.8)
 position_smoothing_enabled = true
 script = ExtResource("4_jyhfs")

@@ -1,7 +1,5 @@
 extends Area2D
 
-signal request_respawn(frog)
-
 signal death(frog)
 
 const RESPAWN_TIMER = 1
@@ -18,12 +16,24 @@ func _process(delta: float) -> void:
 	var new_pos = position
 
 	if Input.is_action_just_pressed("move_left"):
+		rotation_degrees = 270
+		$AnimatedSprite2D.stop()
+		$AnimatedSprite2D.play("jump")
 		new_pos.x -= 64
 	elif Input.is_action_just_pressed("move_right"):
+		rotation_degrees = 90
+		$AnimatedSprite2D.stop()
+		$AnimatedSprite2D.play("jump")
 		new_pos.x += 64
 	elif Input.is_action_just_pressed("move_up"):
+		rotation_degrees = 0
+		$AnimatedSprite2D.stop()
+		$AnimatedSprite2D.play("jump")
 		new_pos.y -= 64
 	elif Input.is_action_just_pressed("move_down"):
+		rotation_degrees = 180
+		$AnimatedSprite2D.stop()
+		$AnimatedSprite2D.play("jump")
 		new_pos.y += 64
 	
 	var on_log = null
@@ -59,8 +69,7 @@ func die() -> void:
 	if !alive: return
 	print("Ribbit... I'm dead")
 	alive = false
-	$ColorRect.color = "red"
-	$ColorRect/ColorRect2.color = "pink"
+	$AnimatedSprite2D.animation = "squished"
 	z_index = 0
 	death.emit(self)
 
@@ -68,8 +77,7 @@ func drown():
 	if !alive: return
 	print("Glug glug glug")
 	alive = false
-	$ColorRect.color = "dark_blue"
-	$ColorRect/ColorRect2.color = "light_blue"
+	$AnimatedSprite2D.animation = "squished"
 	z_index = 0
 	death.emit(self)
 
@@ -77,6 +85,5 @@ func revive():
 	immunity_timer = 0.1
 	print("Hallelujer")
 	alive = true
-	$ColorRect.color = "dark_green"
-	$ColorRect/ColorRect2.color = "light_green"
+	$AnimatedSprite2D.animation = "idle"
 	z_index = 2
