@@ -21,6 +21,11 @@ window/size/viewport_width=640
 window/size/viewport_height=640
 window/size/resizable=false
 
+[editor]
+
+movie_writer/movie_file="C:/Ford Docs/GameDev/20 Game Challenge/3--frogger/movie.avi"
+movie_writer/fps=120
+
 [input]
 
 move_left={
