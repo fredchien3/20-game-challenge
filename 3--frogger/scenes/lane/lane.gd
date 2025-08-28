@@ -2,7 +2,7 @@ extends Node2D
 
 @export_enum("Road", "River") var lane_type: String
 
-const EASY_MODE = true
+const EASY_MODE = false
 
 const TYPE_TO_OBJECT_PATH_MAP = {
 	"Road": "res://scenes/lane/car/car.tscn",
@@ -10,7 +10,7 @@ const TYPE_TO_OBJECT_PATH_MAP = {
 }
 const DIRECTIONS = [-1, 1]
 
-var num_objects = 1 if EASY_MODE else randi_range(4, 6)
+var num_objects = 1 if EASY_MODE else randi_range(2, 5)
 var spawn_path_fraction = 10
 
 var min_speed = 150
@@ -20,7 +20,7 @@ func establish_lane_type_variables():
 	if lane_type == "River":
 		add_to_group("rivers")
 		$ColorRect.color = "blue"
-		num_objects = 15 if EASY_MODE else randi_range(3, 5)
+		num_objects = 15 if EASY_MODE else randi_range(3, 6)
 		spawn_path_fraction = 5
 		min_speed = 125
 		max_speed = 150

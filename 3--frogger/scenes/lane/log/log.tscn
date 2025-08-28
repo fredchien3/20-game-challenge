@@ -17,7 +17,3 @@ texture = ExtResource("2_ixd7o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6c0se")
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
-update_rotation = false
-update_scale = false

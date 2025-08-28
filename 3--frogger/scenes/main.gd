@@ -4,7 +4,7 @@ var score = 0
 var num_lives = 3
 const SPAWN_POSITION = [480, 1056]
 
-const SPAWN_DELAY = 2
+const SPAWN_DELAY = 1
 
 func _ready() -> void:
 	for lilypad in get_tree().get_nodes_in_group("lilypads"):
@@ -22,7 +22,12 @@ func _on_frog_entered(frog):
 	if score == 5:
 		game_over(frog, "You win!")
 	else:
+		frog.visible = false
+		frog.alive = false
+		await get_tree().create_timer(SPAWN_DELAY).timeout
 		reset_position(frog)
+		frog.visible = true
+		frog.alive = true
 
 func _on_frog_death(frog: Variant) -> void:
 	num_lives -= 1

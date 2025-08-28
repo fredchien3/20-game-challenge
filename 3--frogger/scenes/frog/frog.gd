@@ -86,5 +86,9 @@ func revive():
 	print("Hallelujer")
 	alive = true
 	rotation_degrees = 0
-	$AnimatedSprite2D.animation = "idle"
+	$AnimatedSprite2D.play("idle")
 	z_index = 2
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	$AnimatedSprite2D.play("idle")

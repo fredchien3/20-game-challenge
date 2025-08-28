@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://ivpxyjlfyggg"]
+[gd_scene load_steps=24 format=3 uid="uid://ivpxyjlfyggg"]
 
 [ext_resource type="Script" uid="uid://cb0yieqh70h0a" path="res://scenes/frog/frog.gd" id="1_mqod6"]
 [ext_resource type="Texture2D" uid="uid://nlf030p7pb52" path="res://scenes/frog/frog_idle.png" id="2_fcru8"]
+[ext_resource type="Texture2D" uid="uid://blgrpvxij3uo6" path="res://scenes/circle_shadow.tres" id="2_gm3u6"]
 [ext_resource type="Texture2D" uid="uid://cnma0l2ry5el3" path="res://scenes/frog/frog_disappearing.png" id="2_iplly"]
 [ext_resource type="Texture2D" uid="uid://cdvncddagrkyk" path="res://scenes/frog/frog_jump.png" id="3_qsc3k"]
 [ext_resource type="Texture2D" uid="uid://cu83d365if41h" path="res://scenes/frog/frog_squished.png" id="4_iplly"]
@@ -146,12 +147,19 @@ z_as_relative = false
 collision_mask = 6
 script = ExtResource("1_mqod6")
 
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(-1, 5)
+scale = Vector2(1.17188, 1.17188)
+texture = ExtResource("2_gm3u6")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gm3u6")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.267969
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qi8j7")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
