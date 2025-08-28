@@ -1,25 +1,67 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4k26de1brr50"]
+[gd_scene load_steps=10 format=3 uid="uid://b4k26de1brr50"]
 
-[ext_resource type="Script" uid="uid://htkjilgro65y" path="res://scenes/lilypad.gd" id="1_eatds"]
+[ext_resource type="Script" uid="uid://htkjilgro65y" path="res://scenes/lilypad/lilypad.gd" id="1_eatds"]
+[ext_resource type="Texture2D" uid="uid://yr3grso65mvm" path="res://scenes/lilypad/lilypad.png" id="2_byb13"]
+[ext_resource type="Texture2D" uid="uid://b81f1iqj60sa7" path="res://scenes/lilypad/lilypad_with_frog.png" id="3_ii1sw"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gpon4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ii1sw"]
+atlas = ExtResource("2_byb13")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_eatds"]
-size = Vector2(8.25197, 8.25197)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fccxl"]
+atlas = ExtResource("2_byb13")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmell"]
+atlas = ExtResource("3_ii1sw")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hn13d"]
+atlas = ExtResource("3_ii1sw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bmell"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ii1sw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fccxl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmell")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hn13d")
+}],
+"loop": true,
+"name": &"with_frog",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hn13d"]
+radius = 8.25197
 
 [node name="Lilypad" type="Area2D"]
 z_index = 1
 collision_layer = 2
 script = ExtResource("1_eatds")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(32, 32)
-scale = Vector2(48, 48)
-texture = SubResource("PlaceholderTexture2D_gpon4")
+sprite_frames = SubResource("SpriteFrames_bmell")
+animation = &"with_frog"
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(32, 32)
 scale = Vector2(3.87786, 3.87786)
-shape = SubResource("RectangleShape2D_eatds")
+shape = SubResource("CircleShape2D_hn13d")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

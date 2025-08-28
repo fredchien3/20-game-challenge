@@ -2,7 +2,7 @@ extends Node2D
 
 var score = 0
 var num_lives = 3
-const SPAWN_POSITION = [448, 1024]
+const SPAWN_POSITION = [480, 1056]
 
 const SPAWN_DELAY = 2
 
