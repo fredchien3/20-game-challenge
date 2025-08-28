@@ -5,8 +5,8 @@ extends Node2D
 const EASY_MODE = true
 
 const TYPE_TO_OBJECT_PATH_MAP = {
-	"Road": "res://scenes/lane/lane_object/car.tscn",
-	"River": "res://scenes/lane/lane_object/log.tscn",
+	"Road": "res://scenes/lane/car/car.tscn",
+	"River": "res://scenes/lane/log/log.tscn",
 }
 const DIRECTIONS = [-1, 1]
 
@@ -56,6 +56,7 @@ func spawn_lane_items() -> void:
 		var object = object_scene.instantiate()
 		object.position = $SpawnPath/SpawnPoint.position
 		object.velocity = velocity
+		object.rotation_degrees = 0 if direction > 0 else 180
 		add_child(object)
 
 func _on_death_zone_area_entered(area: Area2D) -> void:

@@ -37,11 +37,11 @@ shape = SubResource("RectangleShape2D_q2kvu")
 [node name="DeathZone" type="Area2D" parent="."]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DeathZone"]
-position = Vector2(-40, 32)
+position = Vector2(-32, 32)
 shape = SubResource("RectangleShape2D_7i0ow")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="DeathZone"]
-position = Vector2(1064, 32)
+position = Vector2(1056, 32)
 shape = SubResource("RectangleShape2D_7i0ow")
 
 [connection signal="area_entered" from="DeathZone" to="." method="_on_death_zone_area_entered"]

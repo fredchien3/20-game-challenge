@@ -1,8 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://g411mltdndra"]
 
-[ext_resource type="Script" uid="uid://b672j4ctiw5aj" path="res://scenes/lane/lane_object/log.gd" id="1_n23x3"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c35m8"]
+[ext_resource type="Script" uid="uid://b672j4ctiw5aj" path="res://scenes/lane/log/log.gd" id="1_n23x3"]
+[ext_resource type="Texture2D" uid="uid://vy8er1hfjpn2" path="res://scenes/lane/log/log.png" id="2_ixd7o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6c0se"]
 size = Vector2(112, 32)
@@ -14,8 +13,7 @@ collision_priority = 2.0
 script = ExtResource("1_n23x3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(128, 32)
-texture = SubResource("PlaceholderTexture2D_c35m8")
+texture = ExtResource("2_ixd7o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6c0se")
