@@ -69,7 +69,7 @@ func die() -> void:
 	if !alive: return
 	print("Ribbit... I'm dead")
 	alive = false
-	$AnimatedSprite2D.animation = "squished"
+	$AnimatedSprite2D.play("squished")
 	z_index = 0
 	death.emit(self)
 
@@ -77,7 +77,7 @@ func drown():
 	if !alive: return
 	print("Glug glug glug")
 	alive = false
-	$AnimatedSprite2D.animation = "squished"
+	$AnimatedSprite2D.play("disappear")
 	z_index = 0
 	death.emit(self)
 
@@ -85,5 +85,6 @@ func revive():
 	immunity_timer = 0.1
 	print("Hallelujer")
 	alive = true
+	rotation_degrees = 0
 	$AnimatedSprite2D.animation = "idle"
 	z_index = 2
