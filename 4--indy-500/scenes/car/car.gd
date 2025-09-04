@@ -1,36 +1,12 @@
 extends RigidBody2D
 
-var acceleration = 500
-var roll_friction = 500
-#var max_velocity = 300
-var steer_direction
-var steer_speed = 5
-var angular_velocity_limit = 2.5
+var acceleration = 600
+var roll_friction = 200
 
-#func _draw():
-	#var fred = Vector2(1, 0) * velocity
-	#var left = Vector2(0, -1) * 100
-	#var right = Vector2(0, 1) * 100
-	#draw_line(Vector2(0,0), fred, "white", 2.0)
-	#draw_line(Vector2(0,0), left, "red", 2.0)
-	#draw_line(Vector2(0,0), right, "blue", 2.0)
-#
-#func _process(_delta):
-	#queue_redraw()
+var steer_speed = 20
+var steer_limit = 2.5
 
-#func _physics_process(delta: float) -> void:
-	#if Input.is_action_pressed("accelerate_forward") or \
-	   #Input.is_action_pressed("accelerate_backward"):
-		#steer_direction = Input.get_axis("steer_left", "steer_right")
-		#rotation += steer_direction * steer_speed * delta
-		#velocity += transform.x * Input.get_axis("accelerate_backward", "accelerate_forward") * acceleration * delta
-	#var left = Vector2(0, -1)
-	#var right = Vector2(0, 1)
-	##else:
-		##velocity.x = move_toward(velocity.x, 0, roll_friction)
-		##velocity.y = move_toward(velocity.y, 0, roll_friction)
-#
-	#move_and_slide()
+var sideways_friction = 1.5
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var velocity := state.get_linear_velocity()
@@ -46,13 +22,19 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if accelerating or decelerating:
 		velocity += transform.x * Input.get_axis("accelerate_backward", "accelerate_forward") * acceleration * step
 		if steering_left or steering_right:
-			steer_direction = Input.get_axis("steer_left", "steer_right")
-			if angular_velocity > -angular_velocity_limit and angular_velocity < angular_velocity_limit:
+			var steer_direction = Input.get_axis("steer_left", "steer_right")
+			if angular_velocity > -steer_limit and angular_velocity < steer_limit:
 				angular_velocity += steer_direction * steer_speed * step
 
 	# Correct course if not already steering
 	if !steering_left && !steering_right:
 		angular_velocity = move_toward(angular_velocity, 0, steer_speed * step)
+		
+	# Handle lateral friction
+	var sideways_velocity = transform.y.dot(linear_velocity)
+	var sideways_force = -transform.y * sideways_velocity * sideways_friction * step
+	velocity.x += sideways_force.x
+	velocity.y += sideways_force.y
 
 	# Roll to stop
 	if not accelerating and not decelerating and velocity != Vector2(0, 0):
