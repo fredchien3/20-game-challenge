@@ -1,12 +1,13 @@
 extends RigidBody2D
 
-var acceleration = 600
-var roll_friction = 200
+const ACCELERATION = 800
+const ROLL_FRICTION = 200
 
-var steer_speed = 20
-var steer_limit = 2.5
+const STEER_SPEED = 20
+const STEER_LIMIT = 2.5
 
-var sideways_friction = 1.5
+const SIDEWAYS_FRICTION = 1
+const DRIFTING_FRICTION = 3
 
 func _process(delta: float) -> void:
 	$Wheels/LeftWheel.rotation_degrees = angular_velocity * 12
@@ -20,17 +21,28 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var accelerating := Input.is_action_pressed("accelerate_forward")
 	var decelerating := Input.is_action_pressed("accelerate_backward")
 	var steer_direction := Input.get_axis("steer_left", "steer_right")
+	var drifting := Input.is_action_pressed("drift")
+	
+	# Handle drift
+	var sideways_friction
+	if drifting:
+		sideways_friction = DRIFTING_FRICTION
+	else:
+		sideways_friction = SIDEWAYS_FRICTION
 	
 	# Handle gas or reverse
 	if accelerating or decelerating:
-		velocity += transform.x * Input.get_axis("accelerate_backward", "accelerate_forward") * acceleration * step
+		if not drifting:
+			velocity += transform.x \
+				* Input.get_axis("accelerate_backward", "accelerate_forward") \
+				* ACCELERATION * step
 		if steer_direction != 0:
-			if angular_velocity > -steer_limit and angular_velocity < steer_limit:
-				angular_velocity += steer_direction * steer_speed * step
+			if angular_velocity > -STEER_LIMIT and angular_velocity < STEER_LIMIT:
+				angular_velocity += steer_direction * STEER_SPEED * step
 
 	# Correct course if not already steering
 	if steer_direction == 0:
-		angular_velocity = move_toward(angular_velocity, 0, steer_speed * step)
+		angular_velocity = move_toward(angular_velocity, 0, STEER_SPEED * step)
 
 	# Handle lateral friction
 	var sideways_velocity = transform.y.dot(linear_velocity)
@@ -40,8 +52,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 	# Roll to stop
 	if not accelerating and not decelerating and velocity != Vector2(0, 0):
-		velocity.x = move_toward(velocity.x, 0, roll_friction * step)
-		velocity.y = move_toward(velocity.y, 0, roll_friction * step)
+		velocity.x = move_toward(velocity.x, 0, ROLL_FRICTION * step)
+		velocity.y = move_toward(velocity.y, 0, ROLL_FRICTION * step)
 
 	state.set_linear_velocity(velocity)
 
