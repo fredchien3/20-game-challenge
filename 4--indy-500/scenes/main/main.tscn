@@ -17,6 +17,7 @@ tile_set = ExtResource("1_hyk8p")
 position = Vector2(389, 763)
 rotation = -1.57079
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(1113, 763)
+[node name="Camera2D" type="Camera2D" parent="Car"]
+position = Vector2(-2.12193e-05, -2.20537e-06)
+rotation = 1.57079
 zoom = Vector2(0.645, 0.645)

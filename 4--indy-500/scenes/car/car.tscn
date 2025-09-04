@@ -6,13 +6,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yhfra"]
 size = Vector2(64, 112)
 
-[node name="Car" type="CharacterBody2D"]
+[node name="Car" type="RigidBody2D"]
+custom_integrator = true
 script = ExtResource("1_yhfra")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = -4.71238
+rotation = 1.5708
 texture = ExtResource("1_yr3gr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = -4.71238
+rotation = 1.5708
 shape = SubResource("RectangleShape2D_yhfra")
