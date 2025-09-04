@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnu6d2o6nev7s"]
+[gd_scene load_steps=5 format=3 uid="uid://dnu6d2o6nev7s"]
 
 [ext_resource type="Script" uid="uid://0qfc1k0hid4p" path="res://scenes/car/car.gd" id="1_yhfra"]
 [ext_resource type="Texture2D" uid="uid://d4ks2s60xu6mh" path="res://scenes/car/car_red.png" id="1_yr3gr"]
+[ext_resource type="Texture2D" uid="uid://lxb4hftqbh5h" path="res://scenes/car/wheel.png" id="2_rytg7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yhfra"]
 size = Vector2(64, 112)
@@ -10,7 +11,25 @@ size = Vector2(64, 112)
 custom_integrator = true
 script = ExtResource("1_yhfra")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Wheels" type="Node2D" parent="."]
+
+[node name="LeftWheel" type="Sprite2D" parent="Wheels"]
+position = Vector2(32, -32)
+texture = ExtResource("2_rytg7")
+
+[node name="RightWheel" type="Sprite2D" parent="Wheels"]
+position = Vector2(32, 32)
+texture = ExtResource("2_rytg7")
+
+[node name="RearLeftWheel" type="Sprite2D" parent="Wheels"]
+position = Vector2(-29.9648, -31.875)
+texture = ExtResource("2_rytg7")
+
+[node name="RearRightWheel" type="Sprite2D" parent="Wheels"]
+position = Vector2(-29.9648, 32.125)
+texture = ExtResource("2_rytg7")
+
+[node name="Body" type="Sprite2D" parent="."]
 rotation = 1.5708
 texture = ExtResource("1_yr3gr")
 
