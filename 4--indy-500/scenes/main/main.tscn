@@ -14,10 +14,16 @@ tile_map_data = PackedByteArray("AAACAAIAAAAFAAYAAAACAAMAAAAFAAQAAGACAAQAAAAEAAk
 tile_set = ExtResource("1_hyk8p")
 
 [node name="Car" parent="." instance=ExtResource("2_iuonh")]
-position = Vector2(389, 763)
+position = Vector2(440, 771)
 rotation = -1.57079
+player_num = 1
 
 [node name="Camera2D" type="Camera2D" parent="Car"]
 position = Vector2(-2.12193e-05, -2.20537e-06)
 rotation = 1.57079
 zoom = Vector2(0.645, 0.645)
+
+[node name="Car2" parent="." instance=ExtResource("2_iuonh")]
+position = Vector2(323, 772)
+rotation = -1.57079
+player_num = 2
