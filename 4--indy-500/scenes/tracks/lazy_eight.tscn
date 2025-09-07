@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=4 uid="uid://8sr8h3fgosf2"]
 
 [ext_resource type="Script" uid="uid://jd7nk7n8mcu4" path="res://scenes/tracks/big_o.gd" id="1_w7xro"]
-[ext_resource type="TileSet" uid="uid://dqvid33ganbnt" path="res://scenes/main/main_tileset.tres" id="2_4y7hx"]
+[ext_resource type="TileSet" uid="uid://dqvid33ganbnt" path="res://scenes/tracks/main_tileset.tres" id="2_4y7hx"]
 
 [sub_resource type="Curve2D" id="Curve2D_qhpfk"]
 _data = {

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7cxax87gaado"
-path="res://.godot/imported/spritesheet_tiles.png-6e2abaa767745397b0f1c881bcbccbbb.ctex"
+uid="uid://b8rq34ioehmoi"
+path="res://.godot/imported/arrow_yellow.png-3512576ef92a72a55189bca4365d5a5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/main/spritesheet_tiles.png"
-dest_files=["res://.godot/imported/spritesheet_tiles.png-6e2abaa767745397b0f1c881bcbccbbb.ctex"]
+source_file="res://scenes/tracks/arrow_yellow.png"
+dest_files=["res://.godot/imported/arrow_yellow.png-3512576ef92a72a55189bca4365d5a5a.ctex"]
 
 [params]
 
