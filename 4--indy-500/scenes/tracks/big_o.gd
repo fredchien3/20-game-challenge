@@ -32,3 +32,8 @@ func _on_halfway_line_body_entered(body: Node2D) -> void:
 		finish_line_enabled = true
 		$HalfwayLine/ArrowYellow.visible = false
 		$FinishLine/ArrowYellow.visible = true
+
+func end_game():
+	finish_line_enabled = false
+	$HalfwayLine.queue_free()
+	$FinishLine.queue_free()
