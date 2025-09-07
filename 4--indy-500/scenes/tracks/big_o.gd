@@ -27,7 +27,7 @@ func _on_finish_line_body_entered(body: Node2D) -> void:
 		$FinishLine/ArrowYellow.visible = false
 
 
-func _on_halfway_line_body_entered(_body: Node2D) -> void:
+func _on_halfway_line_body_entered(body: Node2D) -> void:
 	if !finish_line_enabled:
 		finish_line_enabled = true
 		$HalfwayLine/ArrowYellow.visible = false

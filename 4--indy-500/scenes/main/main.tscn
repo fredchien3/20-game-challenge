@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnn0cuvhidfar"]
+[gd_scene load_steps=5 format=3 uid="uid://cnn0cuvhidfar"]
 
 [ext_resource type="Script" uid="uid://brc4wj7ic4x5w" path="res://scenes/main/main.gd" id="1_hyk8p"]
 
@@ -6,7 +6,10 @@
 font_size = 116
 
 [sub_resource type="LabelSettings" id="LabelSettings_hyk8p"]
-font_size = 76
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_iuonh"]
+font_size = 50
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_hyk8p")
@@ -47,6 +50,15 @@ offset_top = 47.0
 offset_right = 303.0
 offset_bottom = 189.0
 label_settings = SubResource("LabelSettings_hyk8p")
+
+[node name="WinLabel" type="Label" parent="HUD"]
+visible = false
+offset_left = 841.0
+offset_top = 489.0
+offset_right = 1046.0
+offset_bottom = 558.0
+text = "You win!"
+label_settings = SubResource("LabelSettings_iuonh")
 
 [node name="GameCamera" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)

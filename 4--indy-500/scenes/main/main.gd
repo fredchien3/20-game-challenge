@@ -23,7 +23,7 @@ func _on_track_selected(id):
 	# Load car, attach camera
 	var car = load("res://scenes/car/car.tscn").instantiate()
 	car.player_num = 1
-	$GameCamera.reparent(car)
+	#$GameCamera.reparent(car)
 
 	car.position = track.get_spawn_position()
 	car.rotation_degrees = -90
@@ -32,10 +32,10 @@ func _on_track_selected(id):
 	$MainMenu.visible = false
 	
 	$HUD/LapCounter.text = str(laps_complete) + "/" + str(laps_needed) + " laps"
-	$HUD/LapCounter.visible = true
+	$HUD.visible = true
 
 func _on_finish_line_crossed(_body):
 	laps_complete += 1
 	$HUD/LapCounter.text = str(laps_complete) + "/" + str(laps_needed) + " laps"
 	if laps_complete == 3:
-		print("you win")
+		$HUD/WinLabel.visible = true
