@@ -16,6 +16,9 @@ var decelerate_action
 var steer_left_action
 var steer_right_action
 var drift_action
+
+var previous_steer_direction
+
 func _ready() -> void:
 	if player_num == 2:
 		$Body.texture = load("res://scenes/car/car_green.png")
@@ -45,7 +48,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		sideways_friction = DRIFTING_FRICTION
 	else:
 		sideways_friction = SIDEWAYS_FRICTION
-	
+
 	# Handle gas or reverse
 	if accelerating or decelerating:
 		if not drifting:
@@ -53,7 +56,9 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 				* Input.get_axis(decelerate_action, accelerate_action) \
 				* ACCELERATION * step
 		if steer_direction != 0:
-			if angular_velocity > -STEER_LIMIT and angular_velocity < STEER_LIMIT:
+			if (previous_steer_direction != steer_direction) \
+			or (angular_velocity > -STEER_LIMIT and angular_velocity < STEER_LIMIT):
+				previous_steer_direction = steer_direction
 				angular_velocity += steer_direction * STEER_SPEED * step
 
 	# Correct course if not already steering
