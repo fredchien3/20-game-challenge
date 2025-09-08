@@ -96,7 +96,8 @@ offset_bottom = 259.0
 text = "Main Menu"
 
 [node name="GameCamera" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.75, 0.75)
+process_callback = 0
 limit_left = 0
 limit_top = 0
 position_smoothing_enabled = true

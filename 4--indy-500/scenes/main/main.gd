@@ -37,10 +37,14 @@ func _on_track_selected(id):
 	track.finish_line_crossed.connect(_on_finish_line_crossed)
 	add_child(track)
 	
+	var track_bounds = track.get_right_and_bottom_bounds()
+	$GameCamera.limit_right = track_bounds[0]
+	$GameCamera.limit_bottom = track_bounds[1]
+	
 	# Load car
 	var car = load("res://scenes/car/car.tscn").instantiate()
 	car.player_num = 1
-	#$GameCamera.reparent(car)
+	$GameCamera.reparent(car)
 
 	car.position = track.get_spawn_position()
 	car.rotation_degrees = -90

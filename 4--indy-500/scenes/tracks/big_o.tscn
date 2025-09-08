@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://wolv0jbvkokr"]
+[gd_scene load_steps=17 format=4 uid="uid://wolv0jbvkokr"]
 
 [ext_resource type="TileSet" uid="uid://dqvid33ganbnt" path="res://scenes/tracks/main_tileset.tres" id="1_qhpfk"]
 [ext_resource type="Script" uid="uid://jd7nk7n8mcu4" path="res://scenes/tracks/big_o.gd" id="1_u7fg4"]
@@ -8,6 +8,17 @@
 [ext_resource type="Texture2D" uid="uid://dse1em85f7tho" path="res://scenes/tracks/obstacles/rock2.png" id="4_5251s"]
 [ext_resource type="Texture2D" uid="uid://bawyosq0qklj3" path="res://scenes/tracks/obstacles/tree_large.png" id="5_vahvq"]
 [ext_resource type="PackedScene" uid="uid://dmmklbxwph2tu" path="res://scenes/tracks/obstacles/cone.tscn" id="6_n564s"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_n564s"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1gypo"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_e5yux"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xpjii"]
+normal = Vector2(0, 1)
 
 [sub_resource type="Curve2D" id="Curve2D_qhpfk"]
 _data = {
@@ -30,6 +41,25 @@ _data = {
 [node name="Big O" type="Node2D"]
 z_index = -1
 script = ExtResource("1_u7fg4")
+
+[node name="Bounds" type="StaticBody2D" parent="."]
+position = Vector2(1766, 1723)
+
+[node name="Bottom" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(-1827, 579)
+shape = SubResource("WorldBoundaryShape2D_n564s")
+
+[node name="Left" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(-1767, -1817)
+shape = SubResource("WorldBoundaryShape2D_1gypo")
+
+[node name="Right" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(1819, -1760)
+shape = SubResource("WorldBoundaryShape2D_e5yux")
+
+[node name="Top" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(-1852, -1722)
+shape = SubResource("WorldBoundaryShape2D_xpjii")
 
 [node name="TileMaps" type="Node2D" parent="."]
 

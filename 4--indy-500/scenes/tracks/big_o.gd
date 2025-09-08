@@ -17,6 +17,11 @@ func _process(_delta: float) -> void:
 func get_spawn_position():
 	$SpawnPath/PathFollow2D.progress_ratio = randf_range(0, 1)
 	return $SpawnPath/PathFollow2D.global_position
+	
+func get_right_and_bottom_bounds():
+	var right = $Bounds/Right.global_position.x
+	var bottom = $Bounds/Bottom.global_position.y
+	return [right, bottom]
 
 
 func _on_finish_line_body_entered(body: Node2D) -> void:
