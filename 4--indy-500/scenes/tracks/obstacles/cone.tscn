@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmmklbxwph2tu"]
+
+[ext_resource type="Texture2D" uid="uid://bptxafvtmyraa" path="res://scenes/tracks/obstacles/cone_straight.png" id="1_ja4x8"]
+
+[node name="Cone" type="RigidBody2D"]
+gravity_scale = 0.0
+linear_damp = 7.0
+angular_damp = 7.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.17909, 2.17909)
+texture = ExtResource("1_ja4x8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-42, -46, -44, 45, 45, 46, 47, -47)

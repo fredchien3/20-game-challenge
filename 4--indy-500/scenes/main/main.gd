@@ -24,7 +24,7 @@ func _ready() -> void:
 	reset_variables()
 	$MainMenu/TrackSelector.get_popup().id_pressed.connect(_on_track_selected)
 	# debug
-	#_on_track_selected(0)
+	_on_track_selected(0)
 
 func _process(delta: float) -> void:
 	if game_running:
