@@ -57,7 +57,6 @@ popup/item_1/text = "Lazy 8"
 popup/item_1/id = 1
 
 [node name="HUD" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="LapLabel" type="Label" parent="HUD"]
 offset_left = 46.0
@@ -74,7 +73,6 @@ offset_bottom = 202.0
 label_settings = SubResource("LabelSettings_k2fmo")
 
 [node name="WinLabel" type="Label" parent="HUD"]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -86,12 +84,21 @@ offset_right = 310.0
 offset_bottom = 145.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "You win!"
 label_settings = SubResource("LabelSettings_iuonh")
 horizontal_alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="HUD/WinLabel"]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 228.0
+offset_right = 356.0
+offset_bottom = 259.0
+text = "Main Menu"
 
 [node name="GameCamera" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
 limit_left = 0
 limit_top = 0
 position_smoothing_enabled = true
+
+[connection signal="pressed" from="HUD/WinLabel/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

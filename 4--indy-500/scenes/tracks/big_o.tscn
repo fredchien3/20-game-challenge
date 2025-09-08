@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://wolv0jbvkokr"]
+[gd_scene load_steps=9 format=4 uid="uid://wolv0jbvkokr"]
 
 [ext_resource type="TileSet" uid="uid://dqvid33ganbnt" path="res://scenes/tracks/main_tileset.tres" id="1_qhpfk"]
 [ext_resource type="Script" uid="uid://jd7nk7n8mcu4" path="res://scenes/tracks/big_o.gd" id="1_u7fg4"]
 [ext_resource type="Texture2D" uid="uid://b8rq34ioehmoi" path="res://scenes/tracks/arrow_yellow.png" id="3_scaqv"]
+[ext_resource type="Animation" uid="uid://fx033375fy0g" path="res://scenes/tracks/float.res" id="4_0y5cs"]
 
 [sub_resource type="Curve2D" id="Curve2D_qhpfk"]
 _data = {
@@ -12,6 +13,15 @@ point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u7fg4"]
 size = Vector2(342, 53)
+
+[sub_resource type="Animation" id="Animation_0y5cs"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0y5cs"]
+_data = {
+&"RESET": SubResource("Animation_0y5cs"),
+&"float": ExtResource("4_0y5cs")
+}
 
 [node name="Big O" type="Node2D"]
 z_index = -1
@@ -36,10 +46,12 @@ position = Vector2(450, 1117)
 rotation = -0.00395255
 
 [node name="FinishLine" type="Area2D" parent="."]
+visible = false
 position = Vector2(575, 1087)
 
 [node name="ArrowYellow" type="Sprite2D" parent="FinishLine"]
-visible = false
+modulate = Color(1, 1, 1, 0.392157)
+position = Vector2(0, -0.568613)
 texture = ExtResource("3_scaqv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLine"]
@@ -49,11 +61,20 @@ shape = SubResource("RectangleShape2D_u7fg4")
 position = Vector2(3011, 1155)
 
 [node name="ArrowYellow" type="Sprite2D" parent="HalfwayLine"]
+modulate = Color(1, 1, 1, 0.509804)
+position = Vector2(0, -0.568613)
 rotation = 3.14159
 texture = ExtResource("3_scaqv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HalfwayLine"]
 shape = SubResource("RectangleShape2D_u7fg4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../HalfwayLine")
+libraries = {
+&"": SubResource("AnimationLibrary_0y5cs")
+}
+autoplay = "float"
 
 [connection signal="body_entered" from="FinishLine" to="." method="_on_finish_line_body_entered"]
 [connection signal="body_entered" from="HalfwayLine" to="." method="_on_halfway_line_body_entered"]

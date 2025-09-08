@@ -23,15 +23,15 @@ func _on_finish_line_body_entered(body: Node2D) -> void:
 	if finish_line_enabled:
 		finish_line_enabled = false
 		finish_line_crossed.emit(body)
-		$HalfwayLine/ArrowYellow.visible = true
-		$FinishLine/ArrowYellow.visible = false
+		$HalfwayLine.visible = true
+		$FinishLine.visible = false
 
 
 func _on_halfway_line_body_entered(body: Node2D) -> void:
 	if !finish_line_enabled:
 		finish_line_enabled = true
-		$HalfwayLine/ArrowYellow.visible = false
-		$FinishLine/ArrowYellow.visible = true
+		$HalfwayLine.visible = false
+		$FinishLine.visible = true
 
 func end_game():
 	finish_line_enabled = false
