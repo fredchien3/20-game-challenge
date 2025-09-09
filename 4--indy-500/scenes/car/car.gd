@@ -2,6 +2,8 @@ extends RigidBody2D
 
 @export var player_num: int
 
+var skid_scene = load("res://scenes/car/skid_square.tscn")
+
 const ACCELERATION = 800
 const ROLL_FRICTION = 200
 
@@ -31,6 +33,15 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	$Wheels/LeftWheel.rotation_degrees = angular_velocity * 12
 	$Wheels/RightWheel.rotation_degrees = angular_velocity * 12
+	
+	if drift_action and Input.is_action_pressed(drift_action):
+		for marker in [$LeftSkidMarker, $RightSkidMarker]:
+			var skid = skid_scene.instantiate()
+			skid.rotation_degrees = rotation_degrees
+			skid.position = marker.global_position
+			skid.top_level = true
+			skid.z_index = -1
+			add_child(skid)
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var velocity := state.get_linear_velocity()

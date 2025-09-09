@@ -8,6 +8,7 @@
 size = Vector2(64, 112)
 
 [node name="Car" type="RigidBody2D"]
+z_index = 1
 custom_integrator = true
 script = ExtResource("1_yhfra")
 
@@ -36,3 +37,9 @@ texture = ExtResource("1_yr3gr")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_yhfra")
+
+[node name="LeftSkidMarker" type="Marker2D" parent="."]
+position = Vector2(-31, -32)
+
+[node name="RightSkidMarker" type="Marker2D" parent="."]
+position = Vector2(-31, 34)

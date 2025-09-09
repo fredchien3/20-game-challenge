@@ -9,9 +9,11 @@ var laps_needed
 var game_running
 var elapsed_time
 
+var dev_mode = true
+
 func reset_variables():
 	laps_complete = 0
-	laps_needed = 1
+	laps_needed = 3
 	game_running = false
 	elapsed_time = 0.0
 
@@ -23,8 +25,9 @@ func reset_variables():
 func _ready() -> void:
 	reset_variables()
 	$MainMenu/TrackSelector.get_popup().id_pressed.connect(_on_track_selected)
-	# debug
-	#_on_track_selected(0)
+
+	if dev_mode:
+		_on_track_selected(0)
 
 func _process(delta: float) -> void:
 	if game_running:
@@ -55,13 +58,15 @@ func _on_track_selected(id):
 	$HUD.visible = true
 	$HUD/WinLabel.visible = false
 	
-	$HUD/CountdownLabel.text = "3"
-	await get_tree().create_timer(1).timeout
-	$HUD/CountdownLabel.text = "2"
-	await get_tree().create_timer(1).timeout
-	$HUD/CountdownLabel.text = "1"
-	await get_tree().create_timer(1).timeout
-	$HUD/CountdownLabel.text = "Start!"
+	if not dev_mode:
+		$HUD/CountdownLabel.text = "3"
+		await get_tree().create_timer(1).timeout
+		$HUD/CountdownLabel.text = "2"
+		await get_tree().create_timer(1).timeout
+		$HUD/CountdownLabel.text = "1"
+		await get_tree().create_timer(1).timeout
+		$HUD/CountdownLabel.text = "Start!"
+
 	game_running = true
 	car.freeze = false
 	await get_tree().create_timer(0.5).timeout
