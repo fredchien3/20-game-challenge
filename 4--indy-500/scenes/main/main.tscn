@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnn0cuvhidfar"]
+[gd_scene load_steps=7 format=3 uid="uid://cnn0cuvhidfar"]
 
 [ext_resource type="Script" uid="uid://brc4wj7ic4x5w" path="res://scenes/main/main.gd" id="1_hyk8p"]
 
@@ -13,6 +13,9 @@ font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_iuonh"]
 font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_l3cfh"]
+font_size = 75
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_hyk8p")
@@ -94,6 +97,20 @@ offset_top = 228.0
 offset_right = 356.0
 offset_bottom = 259.0
 text = "Main Menu"
+
+[node name="CountdownLabel" type="Label" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.0
+offset_top = -51.5
+offset_right = 107.0
+offset_bottom = 51.5
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_l3cfh")
 
 [node name="GameCamera" type="Camera2D" parent="."]
 zoom = Vector2(0.75, 0.75)

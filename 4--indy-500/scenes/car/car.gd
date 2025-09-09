@@ -77,5 +77,3 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		velocity.y = move_toward(velocity.y, 0, ROLL_FRICTION * step)
 
 	state.set_linear_velocity(velocity)
-
-	

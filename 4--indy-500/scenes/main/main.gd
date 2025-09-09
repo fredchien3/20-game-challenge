@@ -24,7 +24,7 @@ func _ready() -> void:
 	reset_variables()
 	$MainMenu/TrackSelector.get_popup().id_pressed.connect(_on_track_selected)
 	# debug
-	_on_track_selected(0)
+	#_on_track_selected(0)
 
 func _process(delta: float) -> void:
 	if game_running:
@@ -42,7 +42,8 @@ func _on_track_selected(id):
 	$GameCamera.limit_bottom = track_bounds[1]
 	
 	# Load car
-	var car = load("res://scenes/car/car.tscn").instantiate()
+	var car: RigidBody2D = load("res://scenes/car/car.tscn").instantiate()
+	car.freeze = true
 	car.player_num = 1
 	$GameCamera.reparent(car)
 
@@ -53,7 +54,18 @@ func _on_track_selected(id):
 	$MainMenu.visible = false
 	$HUD.visible = true
 	$HUD/WinLabel.visible = false
+	
+	$HUD/CountdownLabel.text = "3"
+	await get_tree().create_timer(1).timeout
+	$HUD/CountdownLabel.text = "2"
+	await get_tree().create_timer(1).timeout
+	$HUD/CountdownLabel.text = "1"
+	await get_tree().create_timer(1).timeout
+	$HUD/CountdownLabel.text = "Start!"
 	game_running = true
+	car.freeze = false
+	await get_tree().create_timer(0.5).timeout
+	$HUD/CountdownLabel.text = ""
 
 func _on_finish_line_crossed(_body):
 	laps_complete += 1
