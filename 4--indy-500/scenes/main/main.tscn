@@ -1,21 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnn0cuvhidfar"]
+[gd_scene load_steps=5 format=3 uid="uid://cnn0cuvhidfar"]
 
 [ext_resource type="Script" uid="uid://brc4wj7ic4x5w" path="res://scenes/main/main.gd" id="1_hyk8p"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_vom5j"]
-font_size = 116
-
-[sub_resource type="LabelSettings" id="LabelSettings_hyk8p"]
-font_size = 50
+[ext_resource type="LabelSettings" uid="uid://ct0e6v4je2p4l" path="res://label_settings.tres" id="2_iuonh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_k2fmo"]
-font_size = 32
+font_size = 96
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(4, 4)
 
 [sub_resource type="LabelSettings" id="LabelSettings_iuonh"]
-font_size = 50
-
-[sub_resource type="LabelSettings" id="LabelSettings_l3cfh"]
-font_size = 75
+font_size = 48
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(4, 4)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_hyk8p")
@@ -38,7 +36,9 @@ offset_bottom = 474.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 text = "Freddy 500"
-label_settings = SubResource("LabelSettings_vom5j")
+label_settings = SubResource("LabelSettings_k2fmo")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TrackSelector" type="MenuButton" parent="MainMenu"]
 anchors_preset = 8
@@ -66,14 +66,14 @@ offset_left = 46.0
 offset_top = 36.0
 offset_right = 276.0
 offset_bottom = 178.0
-label_settings = SubResource("LabelSettings_hyk8p")
+label_settings = ExtResource("2_iuonh")
 
 [node name="TimeLabel" type="Label" parent="HUD"]
 offset_left = 51.0
 offset_top = 157.0
 offset_right = 91.0
 offset_bottom = 202.0
-label_settings = SubResource("LabelSettings_k2fmo")
+label_settings = SubResource("LabelSettings_iuonh")
 
 [node name="WinLabel" type="Label" parent="HUD"]
 anchors_preset = 8
@@ -87,7 +87,7 @@ offset_right = 310.0
 offset_bottom = 145.0
 grow_horizontal = 2
 grow_vertical = 2
-label_settings = SubResource("LabelSettings_iuonh")
+label_settings = ExtResource("2_iuonh")
 horizontal_alignment = 1
 
 [node name="MainMenuButton" type="Button" parent="HUD/WinLabel"]
@@ -110,7 +110,7 @@ offset_right = 107.0
 offset_bottom = 51.5
 grow_horizontal = 2
 grow_vertical = 2
-label_settings = SubResource("LabelSettings_l3cfh")
+label_settings = ExtResource("2_iuonh")
 
 [node name="GameCamera" type="Camera2D" parent="."]
 zoom = Vector2(0.75, 0.75)
