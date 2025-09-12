@@ -1,6 +1,6 @@
 extends Node2D
 
-const SPEED = 60
+const SPEED = 90
 
 @onready var current_direction = null
 @onready var queued_direction = null
@@ -62,3 +62,8 @@ func _input(event):
 			queued_direction = null
 		else:
 			queued_direction = "right"
+
+
+func _on_body_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("coins"):
+		area.obtain()
