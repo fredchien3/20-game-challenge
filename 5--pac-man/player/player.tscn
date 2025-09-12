@@ -1,20 +1,60 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbu6myjpnjrb1"]
+[gd_scene load_steps=9 format=3 uid="uid://cbu6myjpnjrb1"]
 
 [ext_resource type="Texture2D" uid="uid://bx7swyxsplrsr" path="res://colored-transparent_packed.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://bblgh713rse7x" path="res://player/player.gd" id="1_rkbax"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rkbax"]
-radius = 8.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g1dw6"]
+size = Vector2(14, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yw30f"]
+size = Vector2(14, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjkh3"]
+size = Vector2(1, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6k8r"]
+size = Vector2(1, 14)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g1dw6"]
 atlas = ExtResource("1_oul6g")
 region = Rect2(400, 0, 16, 16)
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="Node2D"]
 script = ExtResource("1_rkbax")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_rkbax")
+[node name="BodyArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
+shape = SubResource("RectangleShape2D_rkbax")
+
+[node name="UpArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpArea"]
+position = Vector2(0, -8.5)
+shape = SubResource("RectangleShape2D_g1dw6")
+
+[node name="DownArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DownArea"]
+position = Vector2(0, 8.5)
+shape = SubResource("RectangleShape2D_yw30f")
+
+[node name="LeftArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftArea"]
+position = Vector2(-8.5, 0)
+shape = SubResource("RectangleShape2D_qjkh3")
+
+[node name="RightArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightArea"]
+position = Vector2(8.5, 0)
+shape = SubResource("RectangleShape2D_g6k8r")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.6, 1.6)
 texture = SubResource("AtlasTexture_g1dw6")

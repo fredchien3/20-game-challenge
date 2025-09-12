@@ -1,8 +1,6 @@
-[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://cmg61khv31w77"]
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cmg61khv31w77"]
 
 [ext_resource type="Texture2D" uid="uid://bx7swyxsplrsr" path="res://colored-transparent_packed.png" id="1_iroac"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iroac"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7a01b"]
 texture = ExtResource("1_iroac")
@@ -167,9 +165,13 @@ texture = ExtResource("1_iroac")
 12:3/0 = 0
 13:3/0 = 0
 14:3/0 = 0
+14:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 15:3/0 = 0
+15:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 16:3/0 = 0
+16:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 17:3/0 = 0
+17:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 18:3/0 = 0
 19:3/0 = 0
 20:3/0 = 0
@@ -761,6 +763,7 @@ texture = ExtResource("1_iroac")
 18:15/0 = 0
 19:15/0 = 0
 20:15/0 = 0
+20:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 21:15/0 = 0
 22:15/0 = 0
 23:15/0 = 0
@@ -1086,5 +1089,5 @@ texture = ExtResource("1_iroac")
 
 [resource]
 physics_layer_0/collision_layer = 1
-physics_layer_0/physics_material = SubResource("PhysicsMaterial_iroac")
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_7a01b")
