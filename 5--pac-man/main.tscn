@@ -1,10 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://hk0h1uetgj8g"]
 
 [ext_resource type="PackedScene" uid="uid://c4jx1nq4bs35e" path="res://map/map.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://p7pdf0mfh1fj" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://cbu6myjpnjrb1" path="res://player/player.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://btsw8ijofmlig" path="res://map/dot.tscn" id="3_h2yge"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_1bvp3")
 
 [node name="Map" parent="." instance=ExtResource("1_0xm2m")]
 metadata/_edit_lock_ = true
@@ -13,11 +14,29 @@ metadata/_edit_lock_ = true
 position = Vector2(224, 328)
 metadata/_edit_lock_ = true
 
-[node name="Dot" parent="." instance=ExtResource("3_h2yge")]
-position = Vector2(296, 328)
+[node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="Dot2" parent="." instance=ExtResource("3_h2yge")]
-position = Vector2(296, 280)
+[node name="HighScoreText" type="Label" parent="GUI"]
+offset_left = 184.0
+offset_right = 267.0
+offset_bottom = 23.0
+text = "High Score"
+horizontal_alignment = 1
 
-[node name="Dot3" parent="." instance=ExtResource("3_h2yge")]
-position = Vector2(200, 208)
+[node name="ScoreDisplay" type="Label" parent="GUI"]
+offset_left = 16.0
+offset_top = 24.0
+offset_right = 88.0
+offset_bottom = 47.0
+size_flags_horizontal = 4
+text = "0"
+horizontal_alignment = 1
+
+[node name="HighScoreDisplay" type="Label" parent="GUI"]
+offset_left = 184.0
+offset_top = 24.0
+offset_right = 256.0
+offset_bottom = 47.0
+size_flags_horizontal = 4
+text = "0"
+horizontal_alignment = 1

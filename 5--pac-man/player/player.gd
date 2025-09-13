@@ -65,5 +65,5 @@ func _input(event):
 
 
 func _on_body_area_area_entered(area: Area2D) -> void:
-	if area.is_in_group("coins"):
+	if area.is_in_group("dots"):
 		area.obtain()

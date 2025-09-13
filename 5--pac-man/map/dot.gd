@@ -1,8 +1,10 @@
 extends Area2D
 
+signal obtained
+
 func _ready() -> void:
-	add_to_group("coins")
+	add_to_group("dots")
 
 func obtain():
-	print("coin obtained")
+	obtained.emit()
 	queue_free()
