@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 window/size/viewport_width=448
 window/size/viewport_height=576
 window/size/resizable=false
+window/layer_2="objects"
+window/layer_1="walls"
 
 [input]
 

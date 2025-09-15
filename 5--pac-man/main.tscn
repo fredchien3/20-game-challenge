@@ -14,6 +14,9 @@ metadata/_edit_lock_ = true
 position = Vector2(224, 328)
 metadata/_edit_lock_ = true
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(5, 5)
+
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="HighScoreText" type="Label" parent="GUI"]
