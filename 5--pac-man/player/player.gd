@@ -1,6 +1,7 @@
 extends Node2D
 
 const SPEED = 90
+const TILE_SIZE = 16
 
 @onready var current_direction = null
 @onready var queued_direction = null
@@ -25,17 +26,30 @@ func _physics_process(delta: float) -> void:
 		"up":
 			if $UpArea.get_overlapping_bodies().is_empty():
 				position.y -= SPEED * delta
+			else:
+				snap_to_grid()
 		"down":
 			if $DownArea.get_overlapping_bodies().is_empty():
 				position.y += SPEED * delta
+			else:
+				snap_to_grid()
 		"left":
 			if $LeftArea.get_overlapping_bodies().is_empty():
 				position.x -= SPEED * delta
+			else:
+				snap_to_grid()
 		"right":
 			if $RightArea.get_overlapping_bodies().is_empty():
 				position.x += SPEED * delta
+			else:
+				snap_to_grid()
 		_:
 			pass
+			
+	for body in $BodyArea.get_overlapping_bodies():
+		if body.is_in_group("walls"):
+			print('collision')
+			snap_to_grid()
 
 func _input(event):
 	if event.is_action_pressed("move_up"):
@@ -63,6 +77,9 @@ func _input(event):
 		else:
 			queued_direction = "right"
 
+func snap_to_grid():
+	position.x = snapped(position.x, TILE_SIZE / 2)
+	position.y = snapped(position.y, TILE_SIZE / 2)
 
 func _on_body_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("dots"):

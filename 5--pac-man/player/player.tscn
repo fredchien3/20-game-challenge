@@ -26,38 +26,43 @@ region = Rect2(400, 0, 16, 16)
 script = ExtResource("1_rkbax")
 
 [node name="BodyArea" type="Area2D" parent="."]
+scale = Vector2(0.993953, 0.993953)
 collision_layer = 0
-collision_mask = 2
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
 shape = SubResource("RectangleShape2D_rkbax")
 
 [node name="UpArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UpArea"]
-position = Vector2(0, -7)
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_g1dw6")
 
 [node name="DownArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DownArea"]
-position = Vector2(0, 7)
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_yw30f")
 
 [node name="LeftArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftArea"]
-position = Vector2(-7, 0)
+position = Vector2(-8, 0)
 shape = SubResource("RectangleShape2D_qjkh3")
 
 [node name="RightArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightArea"]
-position = Vector2(7, 0)
+position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_g6k8r")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
