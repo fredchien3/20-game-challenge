@@ -77,6 +77,8 @@ func can_move_towards(direction: String) -> bool:
 func _on_body_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("dots"):
 		area.obtain()
+	elif area.is_in_group("power_pellets"):
+		area.obtain()
 		
 func _on_body_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("ghosts"):

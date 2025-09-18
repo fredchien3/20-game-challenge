@@ -6,11 +6,13 @@ var high_score
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	init_variables()
-	call_deferred("connect_dot_signals")
+	call_deferred("connect_pickup_signals")
 
-func connect_dot_signals():
+func connect_pickup_signals():
 	for dot in get_tree().get_nodes_in_group("dots"):
 		dot.obtained.connect(_on_dot_obtained)
+	for power_pellet in get_tree().get_nodes_in_group("power_pellets"):
+		power_pellet.obtained.connect(_on_power_pellet_obtained)
 	
 func init_variables():
 	score = 0
@@ -23,6 +25,9 @@ func _process(_delta: float) -> void:
 func _on_dot_obtained():
 	increment_score()
 	
+func _on_power_pellet_obtained():
+	get_tree().call_group("ghosts", "trigger_scatter_mode")
+	
 func increment_score():
 	score += 10
 	$GUI/ScoreDisplay.text = str(score)
@@ -32,6 +37,8 @@ func increment_score():
 	
 
 func _on_ghost_target_poll_timeout() -> void:
-	if not $Player: return
+	var player = get_tree().get_first_node_in_group("player")
+	if not player: return
+	
 	for ghost in get_tree().get_nodes_in_group("ghosts"):
-		ghost.set_movement_target($Player.global_position)
+		ghost.set_movement_target(player.global_position)
