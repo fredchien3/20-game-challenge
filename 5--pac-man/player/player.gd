@@ -68,8 +68,8 @@ func _input(event):
 		queued_direction = "right"
 
 func snap_to_grid():
-	position.x = snapped(position.x, TILE_SIZE / 2)
-	position.y = snapped(position.y, TILE_SIZE / 2)
+	position.x = snapped(position.x, TILE_SIZE / 2.0)
+	position.y = snapped(position.y, TILE_SIZE / 2.0)
 		
 func can_move_towards(direction: String) -> bool:
 	return feelers[direction].get_overlapping_bodies().is_empty()

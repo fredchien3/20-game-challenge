@@ -17,7 +17,7 @@ func init_variables():
 	high_score = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _on_dot_obtained():
@@ -30,3 +30,8 @@ func increment_score():
 		high_score = score
 		$GUI/HighScoreDisplay.text = str(high_score)
 	
+
+func _on_ghost_target_poll_timeout() -> void:
+	if not $Player: return
+	for ghost in get_tree().get_nodes_in_group("ghosts"):
+		ghost.set_movement_target($Player.global_position)
