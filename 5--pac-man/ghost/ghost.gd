@@ -7,6 +7,8 @@ var movement_target_position: Vector2 = Vector2(24,72)
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
 func _ready():
+	add_to_group("ghosts")
+
 	navigation_agent.path_desired_distance = 1.0
 	navigation_agent.target_desired_distance = 1.0
 

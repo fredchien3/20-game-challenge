@@ -13,12 +13,15 @@ const TILE_SIZE = 16
 	"right": $RightArea,
 }
 
+@onready var alive = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	if not alive: return
 	if (queued_direction and
 		queued_direction != current_direction and
 		can_move_towards(queued_direction)):
@@ -74,3 +77,13 @@ func can_move_towards(direction: String) -> bool:
 func _on_body_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("dots"):
 		area.obtain()
+		
+func _on_body_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("ghosts"):
+		die()
+
+func die():
+	alive = false
+	$Sprite2D.rotation_degrees = 90
+	await get_tree().create_timer(1).timeout
+	queue_free()
