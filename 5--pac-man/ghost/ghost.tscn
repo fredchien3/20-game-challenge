@@ -23,4 +23,5 @@ scale = Vector2(1.6, 1.6)
 texture = SubResource("AtlasTexture_mrk1n")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+simplify_path = true
 debug_enabled = true

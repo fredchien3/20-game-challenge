@@ -13,7 +13,7 @@ func _ready():
 
 func set_movement_target(player_position: Vector2):
 	if scatter_mode:
-		navigation_agent.target_position = global_position - player_position
+		navigation_agent.target_position = to_global(global_position - player_position)
 	else:
 		navigation_agent.target_position = player_position
 
@@ -30,8 +30,8 @@ func _physics_process(_delta):
 func trigger_scatter_mode():
 	scatter_mode = true
 	$Sprite2D.rotation_degrees = 90
-	#await get_tree().create_timer(SCATTER_DURATION).timeout
-	#trigger_chase_mode()
+	await get_tree().create_timer(SCATTER_DURATION).timeout
+	trigger_chase_mode()
 	
 func trigger_chase_mode():
 	scatter_mode = false

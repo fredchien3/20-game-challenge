@@ -22,7 +22,7 @@ size = Vector2(2, 14)
 atlas = ExtResource("1_oul6g")
 region = Rect2(400, 0, 16, 16)
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" groups=["player"]]
 script = ExtResource("1_rkbax")
 
 [node name="BodyArea" type="Area2D" parent="." groups=["player"]]
