@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export_enum("blinky", "pinky", "inky", "clide") var ghost_name: String
 
 const SCATTER_DURATION = 7
+const TILE_SIZE = 16
 
 var movement_speed: float = 50.0
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
@@ -18,20 +19,24 @@ func _ready():
 		"inky": $Sprite2D.modulate = Color("blue")
 		"clide": $Sprite2D.modulate = Color("orange")
 
-func set_movement_target(player_position: Vector2):
+func set_movement_target(player_position: Vector2, player_facing: Vector2):
 	if scatter_mode:
 		flee(player_position)
 	else:
 		match ghost_name:
 			"blinky": chase(player_position)
-			"pinky": chase(player_position)
+			"pinky": cut_off(player_position, player_facing)
 			"inky": chase(player_position)
 			"clide": flee(player_position)
 			_: chase(player_position)
 
 func chase(player_position: Vector2):
 	navigation_agent.target_position = player_position
-	
+
+func cut_off(player_position: Vector2, player_facing: Vector2):
+	print(player_facing * TILE_SIZE)
+	navigation_agent.target_position = player_position + (player_facing * TILE_SIZE * 4)
+
 # Currently:
 # ghost pos - player pos = vector pointing from the player to the ghost
 # We transform that vector to_global (but originating at the ghost's pos)

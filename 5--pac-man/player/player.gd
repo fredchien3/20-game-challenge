@@ -14,6 +14,7 @@ const TILE_SIZE = 16
 }
 
 @onready var alive = true
+@onready var facing = Vector2.DOWN
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,24 +34,28 @@ func _physics_process(delta: float) -> void:
 		"up":
 			if can_move_towards("up"):
 				position.y -= SPEED * delta
+				facing = Vector2.UP
 			else:
 				snap_to_grid()
 				current_direction = null
 		"down":
 			if can_move_towards("down"):
 				position.y += SPEED * delta
+				facing = Vector2.DOWN
 			else:
 				snap_to_grid()
 				current_direction = null
 		"left":
 			if can_move_towards("left"):
 				position.x -= SPEED * delta
+				facing = Vector2.LEFT
 			else:
 				snap_to_grid()
 				current_direction = null
 		"right":
 			if can_move_towards("right"):
 				position.x += SPEED * delta
+				facing = Vector2.RIGHT
 			else:
 				snap_to_grid()
 				current_direction = null

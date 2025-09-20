@@ -41,4 +41,4 @@ func _on_ghost_target_poll_timeout() -> void:
 	if not player: return
 	
 	for ghost in get_tree().get_nodes_in_group("ghosts"):
-		ghost.set_movement_target(player.global_position)
+		ghost.set_movement_target(player.global_position, player.facing)
