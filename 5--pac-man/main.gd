@@ -13,7 +13,7 @@ func connect_pickup_signals():
 		dot.obtained.connect(_on_dot_obtained)
 	for power_pellet in get_tree().get_nodes_in_group("power_pellets"):
 		power_pellet.obtained.connect(_on_power_pellet_obtained)
-	
+
 func init_variables():
 	score = 0
 	high_score = 0

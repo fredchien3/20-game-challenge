@@ -17,6 +17,7 @@ metadata/_edit_lock_ = true
 
 [node name="Ghost" parent="." instance=ExtResource("4_1bvp3")]
 position = Vector2(232, 296)
+ghost_name = "pinky"
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
