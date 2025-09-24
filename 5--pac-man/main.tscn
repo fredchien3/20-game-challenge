@@ -15,9 +15,13 @@ metadata/_edit_lock_ = true
 position = Vector2(224, 328)
 metadata/_edit_lock_ = true
 
-[node name="Ghost" parent="." instance=ExtResource("4_1bvp3")]
-position = Vector2(232, 296)
-ghost_name = "pinky"
+[node name="Inky" parent="." instance=ExtResource("4_1bvp3")]
+position = Vector2(264, 296)
+ghost_name = "inky"
+
+[node name="Blinky" parent="." instance=ExtResource("4_1bvp3")]
+position = Vector2(184, 296)
+ghost_name = "blinky"
 
 [node name="GUI" type="CanvasLayer" parent="."]
 

@@ -14,10 +14,15 @@ func _ready():
 	navigation_agent.path_desired_distance = 1.0
 	navigation_agent.target_desired_distance = 1.0
 	match ghost_name:
-		"blinky": $Sprite2D.modulate = Color("red")
-		"pinky": $Sprite2D.modulate = Color("pink")
-		"inky": $Sprite2D.modulate = Color("blue")
-		"clide": $Sprite2D.modulate = Color("orange")
+		"blinky":
+			add_to_group("blinky")
+			$Sprite2D.modulate = Color("red")
+		"pinky":
+			$Sprite2D.modulate = Color("pink")
+		"inky":
+			$Sprite2D.modulate = Color("blue")
+		"clide":
+			$Sprite2D.modulate = Color("orange")
 
 func set_movement_target(player_position: Vector2, player_facing: Vector2):
 	if scatter_mode:
@@ -26,7 +31,7 @@ func set_movement_target(player_position: Vector2, player_facing: Vector2):
 		match ghost_name:
 			"blinky": chase(player_position)
 			"pinky": cut_off(player_position, player_facing)
-			"inky": chase(player_position)
+			"inky": inky_move(player_position, player_facing)
 			"clide": flee(player_position)
 			_: chase(player_position)
 
@@ -36,6 +41,16 @@ func chase(player_position: Vector2):
 func cut_off(player_position: Vector2, player_facing: Vector2):
 	print(player_facing * TILE_SIZE)
 	navigation_agent.target_position = player_position + (player_facing * TILE_SIZE * 4)
+
+## Draw a line from Blinky’s position to the cell two tiles in front of Pac-Man,
+## then double the length of the line. That is Inky’s target position.
+func inky_move(player_position: Vector2, player_facing: Vector2):
+	var blinky = get_tree().get_first_node_in_group("blinky")
+	if not blinky: return
+	
+	var ahead_of_player = player_position + (player_facing * TILE_SIZE * 2)
+	var line = (ahead_of_player - blinky.position) * 2
+	navigation_agent.target_position = to_global(line)
 
 # Currently:
 # ghost pos - player pos = vector pointing from the player to the ghost
