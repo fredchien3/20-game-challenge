@@ -32,7 +32,7 @@ func set_movement_target(player_position: Vector2, player_facing: Vector2):
 			"blinky": chase(player_position)
 			"pinky": cut_off(player_position, player_facing)
 			"inky": inky_move(player_position, player_facing)
-			"clide": flee(player_position)
+			"clide": clide_move(player_position)
 			_: chase(player_position)
 
 func chase(player_position: Vector2):
@@ -51,6 +51,14 @@ func inky_move(player_position: Vector2, player_facing: Vector2):
 	var ahead_of_player = player_position + (player_facing * TILE_SIZE * 2)
 	var line = (ahead_of_player - blinky.position) * 2
 	navigation_agent.target_position = to_global(line)
+
+## Orange ghost “Clyde” will target Pac-Man directly,
+## but will scatter whenever he gets within an 8 tile radius of Pac-Man.
+func clide_move(player_position: Vector2):
+	if (player_position - position).length() < TILE_SIZE * 8:
+		flee(player_position)
+	else:
+		chase(player_position)
 
 # Currently:
 # ghost pos - player pos = vector pointing from the player to the ghost
