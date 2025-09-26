@@ -26,7 +26,7 @@ func _on_dot_obtained():
 	increment_score()
 	
 func _on_power_pellet_obtained():
-	get_tree().call_group("ghosts", "trigger_scatter_mode")
+	get_tree().call_group("ghosts", "turn_blue_and_scatter")
 	
 func increment_score():
 	score += 10

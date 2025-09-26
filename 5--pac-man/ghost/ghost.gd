@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 @export_enum("blinky", "pinky", "inky", "clide") var ghost_name: String
 
-const SCATTER_DURATION = 7
+const SCATTER_DURATION = 5.0
+const CLIDE_FLEE_DURATION = 2.0
 const TILE_SIZE = 16
 
 @onready var movement_speed := randi_range(85, 90)
@@ -80,7 +81,7 @@ func inky_move(player_position: Vector2, player_facing: Vector2):
 ## but will scatter whenever he gets within an 8 tile radius of Pac-Man.
 func clide_move(player_position: Vector2):
 	if (player_position - global_position).length() < TILE_SIZE * 8:
-		flee(player_position)
+		trigger_flee_with_timeout(CLIDE_FLEE_DURATION)
 	else:
 		chase(player_position)
 
@@ -103,12 +104,15 @@ func _physics_process(_delta):
 	velocity = current_agent_position.direction_to(next_path_position) * movement_speed
 	move_and_slide()
 
-func trigger_scatter_mode():
-	scatter_mode = true
+func turn_blue_and_scatter():
 	$Sprite2D.rotation_degrees = 90
-	await get_tree().create_timer(SCATTER_DURATION).timeout
+	trigger_flee_with_timeout(SCATTER_DURATION)
+
+func trigger_flee_with_timeout(duration: float):
+	scatter_mode = true
+	await get_tree().create_timer(duration).timeout
 	trigger_chase_mode()
-	
+
 func trigger_chase_mode():
 	scatter_mode = false
 	$Sprite2D.rotation_degrees = 0
