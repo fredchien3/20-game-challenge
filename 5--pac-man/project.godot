@@ -51,3 +51,4 @@ move_right={
 2d_physics/layer_1="walls"
 2d_physics/layer_2="objects"
 2d_physics/layer_3="ghosts"
+2d_physics/layer_4="player"

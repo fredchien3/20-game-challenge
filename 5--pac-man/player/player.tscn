@@ -22,16 +22,22 @@ size = Vector2(2, 14)
 atlas = ExtResource("1_oul6g")
 region = Rect2(400, 0, 16, 16)
 
-[node name="Player" type="Node2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("1_rkbax")
+
+[node name="PlayerBodyCollider" type="CollisionShape2D" parent="."]
+scale = Vector2(0.993953, 0.993953)
+shape = SubResource("RectangleShape2D_rkbax")
 
 [node name="BodyArea" type="Area2D" parent="." groups=["player"]]
 visible = false
 scale = Vector2(0.993953, 0.993953)
-collision_layer = 0
+collision_layer = 8
 collision_mask = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
+[node name="ObjectCollider" type="CollisionShape2D" parent="BodyArea"]
 shape = SubResource("RectangleShape2D_rkbax")
 
 [node name="UpArea" type="Area2D" parent="."]

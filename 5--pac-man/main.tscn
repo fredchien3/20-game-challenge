@@ -15,7 +15,19 @@ metadata/_edit_lock_ = true
 position = Vector2(224, 328)
 metadata/_edit_lock_ = true
 
+[node name="Blinky" parent="." instance=ExtResource("4_1bvp3")]
+position = Vector2(224, 232)
+ghost_name = "blinky"
+
+[node name="Pinky" parent="." instance=ExtResource("4_1bvp3")]
+position = Vector2(224, 296)
+ghost_name = "pinky"
+
 [node name="Inky" parent="." instance=ExtResource("4_1bvp3")]
+position = Vector2(184, 296)
+ghost_name = "inky"
+
+[node name="Clide" parent="." instance=ExtResource("4_1bvp3")]
 position = Vector2(264, 296)
 ghost_name = "clide"
 
@@ -47,7 +59,7 @@ text = "0"
 horizontal_alignment = 1
 
 [node name="GhostTargetPoll" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.1
 autostart = true
 
 [connection signal="timeout" from="GhostTargetPoll" to="." method="_on_ghost_target_poll_timeout"]

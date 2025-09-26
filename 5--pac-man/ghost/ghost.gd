@@ -5,9 +5,9 @@ extends CharacterBody2D
 const SCATTER_DURATION = 7
 const TILE_SIZE = 16
 
-var movement_speed: float = 50.0
+@onready var movement_speed := randi_range(85, 90)
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
-var scatter_mode = false
+var scatter_mode := false
 
 func _ready():
 	add_to_group("ghosts")
@@ -35,11 +35,35 @@ func set_movement_target(player_position: Vector2, player_facing: Vector2):
 			"clide": clide_move(player_position)
 			_: chase(player_position)
 
+## Special logic is needed to make the ghosts aware of the warp tunnels
 func chase(player_position: Vector2):
-	navigation_agent.target_position = player_position
+	var self_to_player_direct_distance = (player_position - global_position).length()
+
+	var left_warp = get_tree().get_first_node_in_group("left_warp")
+	var right_warp = get_tree().get_first_node_in_group("right_warp")
+	var distance_via_left_warp = get_distance_to_player_via_warp(left_warp, right_warp, player_position)
+	var distance_via_right_warp = get_distance_to_player_via_warp(right_warp, left_warp, player_position)
+
+	var shortest = min(self_to_player_direct_distance, distance_via_left_warp, distance_via_right_warp)
+	if self_to_player_direct_distance == shortest:
+		navigation_agent.target_position = player_position
+	elif distance_via_left_warp == shortest:
+		navigation_agent.target_position = left_warp.global_position
+	else:
+		navigation_agent.target_position = right_warp.global_position
+	
+func get_distance_to_player_via_warp(
+	entry_warp: Area2D,
+	exit_warp: Area2D,
+	player_position: Vector2
+) -> float:
+	var other_warp = "left_warp"
+	var self_to_warp_distance = (entry_warp.global_position - global_position).length()
+	var warp_to_player_distance = (player_position - exit_warp.global_position).length()
+	const BUFFER = 16.0
+	return self_to_warp_distance + warp_to_player_distance + BUFFER
 
 func cut_off(player_position: Vector2, player_facing: Vector2):
-	print(player_facing * TILE_SIZE)
 	navigation_agent.target_position = player_position + (player_facing * TILE_SIZE * 4)
 
 ## Draw a line from Blinky’s position to the cell two tiles in front of Pac-Man,
@@ -49,13 +73,13 @@ func inky_move(player_position: Vector2, player_facing: Vector2):
 	if not blinky: return
 	
 	var ahead_of_player = player_position + (player_facing * TILE_SIZE * 2)
-	var line = (ahead_of_player - blinky.position) * 2
+	var line = (ahead_of_player - blinky.global_position) * 2
 	navigation_agent.target_position = to_global(line)
 
 ## Orange ghost “Clyde” will target Pac-Man directly,
 ## but will scatter whenever he gets within an 8 tile radius of Pac-Man.
 func clide_move(player_position: Vector2):
-	if (player_position - position).length() < TILE_SIZE * 8:
+	if (player_position - global_position).length() < TILE_SIZE * 8:
 		flee(player_position)
 	else:
 		chase(player_position)

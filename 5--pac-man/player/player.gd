@@ -86,8 +86,9 @@ func _on_body_area_area_entered(area: Area2D) -> void:
 		area.obtain()
 		
 func _on_body_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("ghosts"):
-		die()
+	pass
+	#if body.is_in_group("ghosts"):
+		#die()
 
 func die():
 	alive = false
