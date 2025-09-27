@@ -1,5 +1,7 @@
 extends Node2D
 
+signal ghost_eaten
+
 const SPEED = 90
 const TILE_SIZE = 16
 
@@ -86,9 +88,15 @@ func _on_body_area_area_entered(area: Area2D) -> void:
 		area.obtain()
 		
 func _on_body_area_body_entered(body: Node2D) -> void:
-	pass
-	#if body.is_in_group("ghosts"):
-		#die()
+	if body.is_in_group("ghosts"):
+		if body.vulnerable:
+			eat(body)
+		else:
+			die()
+
+func eat(ghost: Node2D) -> void:
+	ghost.eaten()
+	ghost_eaten.emit()
 
 func die():
 	alive = false

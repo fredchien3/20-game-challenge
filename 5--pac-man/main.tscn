@@ -62,4 +62,5 @@ horizontal_alignment = 1
 wait_time = 0.1
 autostart = true
 
+[connection signal="ghost_eaten" from="Player" to="." method="_on_player_ghost_eaten"]
 [connection signal="timeout" from="GhostTargetPoll" to="." method="_on_ghost_target_poll_timeout"]

@@ -23,13 +23,13 @@ func _process(_delta: float) -> void:
 	pass
 
 func _on_dot_obtained():
-	increment_score()
+	increment_score(10)
 	
 func _on_power_pellet_obtained():
-	get_tree().call_group("ghosts", "turn_blue_and_scatter")
+	get_tree().call_group("ghosts", "trigger_scatter_mode")
 	
-func increment_score():
-	score += 10
+func increment_score(amount: int):
+	score += amount
 	$GUI/ScoreDisplay.text = str(score)
 	if score > high_score:
 		high_score = score
@@ -42,3 +42,6 @@ func _on_ghost_target_poll_timeout() -> void:
 	
 	for ghost in get_tree().get_nodes_in_group("ghosts"):
 		ghost.set_movement_target(player.global_position, player.facing)
+
+func _on_player_ghost_eaten() -> void:
+	increment_score(333)
