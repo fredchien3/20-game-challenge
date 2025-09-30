@@ -250,7 +250,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 30.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -341,7 +341,6 @@ scale = Vector2(0.9, 0.9)
 sprite_frames = SubResource("SpriteFrames_hg6s5")
 animation = &"death"
 autoplay = "idle"
-frame_progress = 1.0
 
 [connection signal="area_entered" from="BodyArea" to="." method="_on_body_area_area_entered"]
 [connection signal="body_entered" from="BodyArea" to="." method="_on_body_area_body_entered"]

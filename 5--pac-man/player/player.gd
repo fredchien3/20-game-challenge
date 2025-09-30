@@ -119,6 +119,10 @@ func die():
 	died.emit()
 	
 	$AnimatedSprite2D.rotation_degrees = 0
+	
+	$AnimatedSprite2D.translate(Vector2(0, -4))
 	$AnimatedSprite2D.animation = "death"
+	$AnimatedSprite2D.translate(Vector2(0, 0))
+	
 	await get_tree().create_timer(2).timeout
 	queue_free()
