@@ -1,6 +1,7 @@
 extends Node2D
 
 signal ghost_eaten
+signal died
 
 const SPEED = 90
 const TILE_SIZE = 16
@@ -37,30 +38,42 @@ func _physics_process(delta: float) -> void:
 			if can_move_towards("up"):
 				position.y -= SPEED * delta
 				facing = Vector2.UP
+				$AnimatedSprite2D.rotation_degrees = 270
+				$AnimatedSprite2D.animation = "eating"
 			else:
 				snap_to_grid()
 				current_direction = null
+				$AnimatedSprite2D.animation = "idle"
 		"down":
 			if can_move_towards("down"):
 				position.y += SPEED * delta
 				facing = Vector2.DOWN
+				$AnimatedSprite2D.rotation_degrees = 90
+				$AnimatedSprite2D.animation = "eating"
 			else:
 				snap_to_grid()
 				current_direction = null
+				$AnimatedSprite2D.animation = "idle"
 		"left":
 			if can_move_towards("left"):
 				position.x -= SPEED * delta
 				facing = Vector2.LEFT
+				$AnimatedSprite2D.rotation_degrees = 180
+				$AnimatedSprite2D.animation = "eating"
 			else:
 				snap_to_grid()
 				current_direction = null
+				$AnimatedSprite2D.animation = "idle"
 		"right":
 			if can_move_towards("right"):
 				position.x += SPEED * delta
 				facing = Vector2.RIGHT
+				$AnimatedSprite2D.rotation_degrees = 0
+				$AnimatedSprite2D.animation = "eating"
 			else:
 				snap_to_grid()
 				current_direction = null
+				$AnimatedSprite2D.animation = "idle"
 		_:
 			pass
 
@@ -100,6 +113,12 @@ func eat(ghost: Node2D) -> void:
 
 func die():
 	alive = false
-	$Sprite2D.rotation_degrees = 90
-	await get_tree().create_timer(1).timeout
+	$AnimatedSprite2D.animation = "idle"
+	await get_tree().create_timer(2).timeout
+	
+	died.emit()
+	
+	$AnimatedSprite2D.rotation_degrees = 0
+	$AnimatedSprite2D.animation = "death"
+	await get_tree().create_timer(2).timeout
 	queue_free()

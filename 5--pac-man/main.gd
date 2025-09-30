@@ -41,7 +41,14 @@ func _on_ghost_target_poll_timeout() -> void:
 	if not player: return
 	
 	for ghost in get_tree().get_nodes_in_group("ghosts"):
-		ghost.set_movement_target(player.global_position, player.facing)
+		if player.alive:
+			ghost.set_movement_target(player.global_position, player.facing)
+		else:
+			ghost.process_mode = Node.PROCESS_MODE_DISABLED
 
 func _on_player_ghost_eaten() -> void:
 	increment_score(333)
+
+
+func _on_player_died() -> void:
+	get_tree().call_group("ghosts", "queue_free")
