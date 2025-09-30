@@ -1,7 +1,8 @@
 extends Node2D
 
 signal ghost_eaten
-signal died
+signal death_started
+signal death_finished
 
 const SPEED = 90
 const TILE_SIZE = 16
@@ -21,7 +22,7 @@ const TILE_SIZE = 16
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	add_to_group("player")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -114,9 +115,9 @@ func eat(ghost: Node2D) -> void:
 func die():
 	alive = false
 	$AnimatedSprite2D.animation = "idle"
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(1.7).timeout
 	
-	died.emit()
+	death_started.emit()
 	
 	$AnimatedSprite2D.rotation_degrees = 0
 	
@@ -125,4 +126,5 @@ func die():
 	$AnimatedSprite2D.translate(Vector2(0, 0))
 	
 	await get_tree().create_timer(2).timeout
+	death_finished.emit()
 	queue_free()

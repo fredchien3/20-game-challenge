@@ -1,14 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://hk0h1uetgj8g"]
+[gd_scene load_steps=7 format=3 uid="uid://hk0h1uetgj8g"]
 
 [ext_resource type="PackedScene" uid="uid://c4jx1nq4bs35e" path="res://map/map.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://p7pdf0mfh1fj" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://cbu6myjpnjrb1" path="res://player/player.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://dc4kes20tel8h" path="res://ghost/ghost.tscn" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://dobhmpnv2pxmu" path="res://player/eating.png" id="5_lquwl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mycd"]
+atlas = ExtResource("5_lquwl")
+region = Rect2(104, 0, 26, 26)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_1bvp3")
 
-[node name="Map" parent="." instance=ExtResource("1_0xm2m")]
+[node name="Map" parent="." groups=["map"] instance=ExtResource("1_0xm2m")]
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_0xm2m")]
@@ -58,10 +63,28 @@ size_flags_horizontal = 4
 text = "0"
 horizontal_alignment = 1
 
+[node name="LifeDisplay1" type="TextureRect" parent="GUI"]
+texture_filter = 1
+offset_left = 35.0
+offset_top = 548.0
+offset_right = 57.0
+offset_bottom = 570.0
+texture = SubResource("AtlasTexture_7mycd")
+expand_mode = 1
+flip_h = true
+
+[node name="LifeDisplay2" type="TextureRect" parent="GUI"]
+texture_filter = 1
+offset_left = 67.0
+offset_top = 548.0
+offset_right = 89.0
+offset_bottom = 570.0
+texture = SubResource("AtlasTexture_7mycd")
+expand_mode = 1
+flip_h = true
+
 [node name="GhostTargetPoll" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
 
-[connection signal="died" from="Player" to="." method="_on_player_died"]
-[connection signal="ghost_eaten" from="Player" to="." method="_on_player_ghost_eaten"]
 [connection signal="timeout" from="GhostTargetPoll" to="." method="_on_ghost_target_poll_timeout"]

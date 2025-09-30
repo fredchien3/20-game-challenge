@@ -44,19 +44,19 @@ func chase(player_position: Vector2):
 	navigate_or_warp_to(player_position)
 
 ## Special logic is needed to make the ghosts aware of the warp tunnels
-func navigate_or_warp_to(position: Vector2):
-	var distance_direct = (position - global_position).length()
+func navigate_or_warp_to(pos: Vector2):
+	var distance_direct = (pos - global_position).length()
 
 	var left_warp = get_tree().get_first_node_in_group("left_warp")
 	var right_warp = get_tree().get_first_node_in_group("right_warp")
 
-	var distance_via_left_warp = get_distance_to_target_via_warp(left_warp, right_warp, position)
-	var distance_via_right_warp = get_distance_to_target_via_warp(right_warp, left_warp, position)
+	var distance_via_left_warp = get_distance_to_target_via_warp(left_warp, right_warp, pos)
+	var distance_via_right_warp = get_distance_to_target_via_warp(right_warp, left_warp, pos)
 
 	var shortest = min(distance_direct, distance_via_left_warp, distance_via_right_warp)
 
 	if distance_direct == shortest:
-		navigation_agent.target_position = position
+		navigation_agent.target_position = pos
 	elif distance_via_left_warp == shortest:
 		navigation_agent.target_position = left_warp.global_position
 	else:
@@ -79,7 +79,7 @@ func cut_off(player_position: Vector2, player_facing: Vector2):
 ## then double the length of the line. That is Inky’s target position.
 func inky_move(player_position: Vector2, player_facing: Vector2):
 	var blinky = get_tree().get_first_node_in_group("blinky")
-	if not blinky: chase(player_position)
+	if not blinky: return chase(player_position)
 	
 	var position_in_front_of_player = player_position + (player_facing * TILE_SIZE * 2)
 	var target_position = (position_in_front_of_player - blinky.global_position) * 2
