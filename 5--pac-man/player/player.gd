@@ -115,7 +115,7 @@ func eat(ghost: Node2D) -> void:
 func die():
 	alive = false
 	$AnimatedSprite2D.animation = "idle"
-	await get_tree().create_timer(1.7).timeout
+	await get_tree().create_timer(1.5).timeout
 	
 	death_started.emit()
 	
@@ -125,6 +125,6 @@ func die():
 	$AnimatedSprite2D.animation = "death"
 	$AnimatedSprite2D.translate(Vector2(0, 0))
 	
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(1.5).timeout
 	death_finished.emit()
 	queue_free()

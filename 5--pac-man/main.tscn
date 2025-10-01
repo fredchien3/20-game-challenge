@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://hk0h1uetgj8g"]
+[gd_scene load_steps=8 format=3 uid="uid://hk0h1uetgj8g"]
 
 [ext_resource type="PackedScene" uid="uid://c4jx1nq4bs35e" path="res://map/map.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://p7pdf0mfh1fj" path="res://main.gd" id="1_1bvp3"]
@@ -10,6 +10,11 @@
 atlas = ExtResource("5_lquwl")
 region = Rect2(104, 0, 26, 26)
 
+[sub_resource type="LabelSettings" id="LabelSettings_lquwl"]
+font_size = 18
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_1bvp3")
 
@@ -17,8 +22,7 @@ script = ExtResource("1_1bvp3")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(224, 328)
-metadata/_edit_lock_ = true
+position = Vector2(224, 424)
 
 [node name="Blinky" parent="." instance=ExtResource("4_1bvp3")]
 position = Vector2(224, 232)
@@ -83,8 +87,49 @@ texture = SubResource("AtlasTexture_7mycd")
 expand_mode = 1
 flip_h = true
 
+[node name="GameOverDisplay" type="Control" parent="GUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="GUI/GameOverDisplay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -23.0
+offset_right = 59.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game over!"
+label_settings = SubResource("LabelSettings_lquwl")
+horizontal_alignment = 1
+
+[node name="NewGameButton" type="Button" parent="GUI/GameOverDisplay"]
+layout_mode = 0
+offset_left = -28.0
+offset_top = 44.0
+offset_right = 69.0
+offset_bottom = 75.0
+text = "New game?"
+
 [node name="GhostTargetPoll" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
 
+[connection signal="pressed" from="GUI/GameOverDisplay/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="timeout" from="GhostTargetPoll" to="." method="_on_ghost_target_poll_timeout"]
