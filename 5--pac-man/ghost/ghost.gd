@@ -5,13 +5,21 @@ extends CharacterBody2D
 const SCATTER_DURATION = 5.0
 const CLIDE_FLEE_DURATION = 2.0
 const TILE_SIZE = 16
+
+enum Status { NORMAL, FLEEING, RESPAWNING }
+const status_speeds = {
+	Status.NORMAL: 85,
+	Status.FLEEING: 55,
+	Status.RESPAWNING: 135,
+}
 const REGULAR_SPEED = 85
 const SLOWER_SPEED = 60
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
-var movement_speed := REGULAR_SPEED
-var fleeing := false
+var spawn_point = Vector2(216, 280)
+
+var current_status = Status.NORMAL
 var vulnerable := false
 
 func _ready():
@@ -30,15 +38,18 @@ func _ready():
 			$Sprite2D.modulate = Color("orange")
 
 func set_movement_target(player_position: Vector2, player_facing: Vector2):
-	if fleeing:
-		flee(player_position)
-	else:
-		match ghost_name:
-			"blinky": chase(player_position)
-			"pinky": cut_off(player_position, player_facing)
-			"inky": inky_move(player_position, player_facing)
-			"clide": clide_move(player_position)
-			_: chase(player_position)
+	match current_status:
+		Status.NORMAL:
+			match ghost_name:
+				"blinky": chase(player_position)
+				"pinky": cut_off(player_position, player_facing)
+				"inky": inky_move(player_position, player_facing)
+				"clide": clide_move(player_position)
+				_: chase(player_position)
+		Status.FLEEING:
+			flee(player_position)
+		Status.RESPAWNING:
+			navigate_or_warp_to(spawn_point)
 
 func chase(player_position: Vector2):
 	navigate_or_warp_to(player_position)
@@ -109,7 +120,9 @@ func _physics_process(_delta):
 	var current_agent_position: Vector2 = global_position
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
 
-	velocity = current_agent_position.direction_to(next_path_position) * movement_speed
+	velocity = current_agent_position.direction_to(next_path_position) \
+		* status_speeds[current_status]
+
 	move_and_slide()
 
 ## Scatter mode is a combo of fleeing + vulnerable
@@ -117,19 +130,18 @@ func trigger_scatter_mode():
 	vulnerable = true
 	$ScaredSprite2D.visible = true
 
-	movement_speed = SLOWER_SPEED
 	await flee_with_timeout(SCATTER_DURATION)
-	movement_speed = REGULAR_SPEED
 
 	vulnerable = false
 	$ScaredSprite2D.visible = false
 
 func flee_with_timeout(duration: float):
-	fleeing = true
+	current_status = Status.FLEEING
 	await get_tree().create_timer(duration).timeout
-	fleeing = false
+	current_status = Status.NORMAL
 
 ## When a ghost is eaten, it should turn into eyes, return to the pen,
 ## and respawn as a regular ghost
 func eaten():
-	queue_free()
+	$Sprite2D.visible = false
+	current_status = Status.RESPAWNING

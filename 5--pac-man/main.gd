@@ -103,6 +103,7 @@ func respawn_characters():
 		var ghost = ghost_scene.instantiate()
 		ghost.ghost_name = ghost_name
 		ghost.position = initial_ghost_positions[ghost_name]
+		ghost.spawn_point = initial_ghost_positions[ghost_name]
 		add_child(ghost)
 		
 func decrement_lives() -> void:

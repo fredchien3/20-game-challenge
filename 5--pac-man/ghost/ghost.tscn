@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dc4kes20tel8h"]
+[gd_scene load_steps=7 format=3 uid="uid://dc4kes20tel8h"]
 
 [ext_resource type="Script" uid="uid://d0ijntggmw71e" path="res://ghost/ghost.gd" id="1_2iaaw"]
 [ext_resource type="Texture2D" uid="uid://bx7swyxsplrsr" path="res://colored-transparent_packed.png" id="2_tqhd8"]
@@ -13,6 +13,8 @@ region = Rect2(416, 96, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_2iaaw"]
 atlas = ExtResource("2_tqhd8")
 region = Rect2(416, 96, 16, 16)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2iaaw"]
 
 [node name="Ghost" type="CharacterBody2D"]
 collision_layer = 4
@@ -31,6 +33,12 @@ visible = false
 modulate = Color(0, 0, 0.623529, 1)
 scale = Vector2(1.6, 1.6)
 texture = SubResource("AtlasTexture_2iaaw")
+
+[node name="EyesPlaceholder" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-0.2, -4)
+scale = Vector2(8.4, 1.8)
+texture = SubResource("PlaceholderTexture2D_2iaaw")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 simplify_path = true
