@@ -41,4 +41,3 @@ scale = Vector2(8.4, 1.8)
 texture = SubResource("PlaceholderTexture2D_2iaaw")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-simplify_path = true

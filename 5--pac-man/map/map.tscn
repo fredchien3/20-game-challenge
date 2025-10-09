@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=4 uid="uid://c4jx1nq4bs35e"]
+[gd_scene load_steps=12 format=4 uid="uid://c4jx1nq4bs35e"]
 
 [ext_resource type="Texture2D" uid="uid://dbq7r6xhwxkyw" path="res://trace.png" id="1_a0dt8"]
 [ext_resource type="Script" uid="uid://byuo0ejjwhmm7" path="res://map/map.gd" id="1_kffv2"]
 [ext_resource type="TileSet" uid="uid://cmg61khv31w77" path="res://game_tileset.tres" id="2_4hjbm"]
 [ext_resource type="PackedScene" uid="uid://btsw8ijofmlig" path="res://map/dot.tscn" id="3_4hjbm"]
 [ext_resource type="PackedScene" uid="uid://c8jcex5lfapc3" path="res://map/power_pellet.tscn" id="4_lgq1i"]
+[ext_resource type="Script" uid="uid://behc1ikwqwrev" path="res://map/respawn_zone.gd" id="6_7lyie"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_lgq1i"]
 scenes/1/scene = ExtResource("3_4hjbm")
@@ -24,6 +25,9 @@ agent_radius = 7.9
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lgq1i"]
 size = Vector2(8, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kffv2"]
+size = Vector2(87, 19.5)
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_kffv2")
@@ -75,7 +79,17 @@ collision_mask = 12
 shape = SubResource("RectangleShape2D_lgq1i")
 metadata/_edit_lock_ = true
 
+[node name="RespawnZone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("6_7lyie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RespawnZone"]
+position = Vector2(223.5, 290.25)
+shape = SubResource("RectangleShape2D_kffv2")
+
 [connection signal="area_entered" from="LeftWarp" to="." method="_on_left_warp_area_entered"]
 [connection signal="body_entered" from="LeftWarp" to="." method="_on_left_warp_body_entered"]
 [connection signal="area_entered" from="RightWarp" to="." method="_on_right_warp_area_entered"]
 [connection signal="body_entered" from="RightWarp" to="." method="_on_right_warp_body_entered"]
+[connection signal="body_entered" from="RespawnZone" to="RespawnZone" method="_on_body_entered"]

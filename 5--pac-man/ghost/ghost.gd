@@ -2,25 +2,25 @@ extends CharacterBody2D
 
 @export_enum("blinky", "pinky", "inky", "clide") var ghost_name: String
 
-const SCATTER_DURATION = 5.0
+const VULNERABLE_DURATION = 5.0
 const CLIDE_FLEE_DURATION = 2.0
+const RESPAWN_DELAY = 2.0
 const TILE_SIZE = 16
 
-enum Status { NORMAL, FLEEING, RESPAWNING }
+enum Status { NORMAL, FLEEING, VULNERABLE_FLEEING, RESPAWNING }
+
 const status_speeds = {
 	Status.NORMAL: 85,
-	Status.FLEEING: 55,
+	Status.FLEEING: 85,
+	Status.VULNERABLE_FLEEING: 45,
 	Status.RESPAWNING: 135,
 }
-const REGULAR_SPEED = 85
-const SLOWER_SPEED = 60
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
 var spawn_point = Vector2(216, 280)
 
 var current_status = Status.NORMAL
-var vulnerable := false
 
 func _ready():
 	add_to_group("ghosts")
@@ -48,6 +48,8 @@ func set_movement_target(player_position: Vector2, player_facing: Vector2):
 				_: chase(player_position)
 		Status.FLEEING:
 			flee(player_position)
+		Status.VULNERABLE_FLEEING:
+			flee(player_position)
 		Status.RESPAWNING:
 			navigate_or_warp_to(spawn_point)
 
@@ -72,7 +74,7 @@ func navigate_or_warp_to(pos: Vector2):
 		navigation_agent.target_position = left_warp.global_position
 	else:
 		navigation_agent.target_position = right_warp.global_position
-	
+
 func get_distance_to_target_via_warp(
 	entry_warp: Area2D,
 	exit_warp: Area2D,
@@ -91,7 +93,7 @@ func cut_off(player_position: Vector2, player_facing: Vector2):
 func inky_move(player_position: Vector2, player_facing: Vector2):
 	var blinky = get_tree().get_first_node_in_group("blinky")
 	if not blinky: return chase(player_position)
-	
+
 	var position_in_front_of_player = player_position + (player_facing * TILE_SIZE * 2)
 	var target_position = (position_in_front_of_player - blinky.global_position) * 2
 	navigate_or_warp_to(to_global(target_position))
@@ -100,7 +102,14 @@ func inky_move(player_position: Vector2, player_facing: Vector2):
 ## but will scatter whenever he gets within an 8 tile radius of Pac-Man.
 func clide_move(player_position: Vector2):
 	if (player_position - global_position).length() < TILE_SIZE * 8:
-		flee_with_timeout(CLIDE_FLEE_DURATION)
+		# Guard clauses to not interfere with respawning behavior
+		if current_status == Status.NORMAL:
+			current_status = Status.FLEEING
+			
+		await get_tree().create_timer(CLIDE_FLEE_DURATION).timeout
+		
+		if current_status == Status.FLEEING:
+			current_status = Status.NORMAL
 	else:
 		chase(player_position)
 
@@ -125,23 +134,31 @@ func _physics_process(_delta):
 
 	move_and_slide()
 
-## Scatter mode is a combo of fleeing + vulnerable
 func trigger_scatter_mode():
-	vulnerable = true
 	$ScaredSprite2D.visible = true
+	current_status = Status.VULNERABLE_FLEEING
 
-	await flee_with_timeout(SCATTER_DURATION)
+	await get_tree().create_timer(VULNERABLE_DURATION).timeout
 
-	vulnerable = false
-	$ScaredSprite2D.visible = false
+	if current_status != Status.RESPAWNING:
+		current_status = Status.NORMAL
+		$ScaredSprite2D.visible = false
 
-func flee_with_timeout(duration: float):
-	current_status = Status.FLEEING
-	await get_tree().create_timer(duration).timeout
-	current_status = Status.NORMAL
+func is_vulnerable() -> bool:
+	return current_status == Status.VULNERABLE_FLEEING \
+		or current_status == Status.RESPAWNING
 
 ## When a ghost is eaten, it should turn into eyes, return to the pen,
 ## and respawn as a regular ghost
 func eaten():
 	$Sprite2D.visible = false
 	current_status = Status.RESPAWNING
+	$CollisionShape2D.scale = Vector2(0.5, 0.5)
+	
+func respawn():
+	await get_tree().create_timer(RESPAWN_DELAY).timeout
+	$Sprite2D.visible = true
+	$ScaredSprite2D.visible = false
+	current_status = Status.NORMAL
+	$CollisionShape2D.scale = Vector2(1, 1)
+	

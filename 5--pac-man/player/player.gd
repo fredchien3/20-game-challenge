@@ -103,7 +103,7 @@ func _on_body_area_area_entered(area: Area2D) -> void:
 		
 func _on_body_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("ghosts"):
-		if body.vulnerable:
+		if body.is_vulnerable():
 			eat(body)
 		else:
 			die()
