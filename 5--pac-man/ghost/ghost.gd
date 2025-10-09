@@ -26,16 +26,12 @@ func _ready():
 	add_to_group("ghosts")
 	navigation_agent.path_desired_distance = 1.0
 	navigation_agent.target_desired_distance = 1.0
-	match ghost_name:
-		"blinky":
-			add_to_group("blinky")
-			$Sprite2D.modulate = Color("red")
-		"pinky":
-			$Sprite2D.modulate = Color("pink")
-		"inky":
-			$Sprite2D.modulate = Color("blue")
-		"clide":
-			$Sprite2D.modulate = Color("orange")
+	
+	$BodySprite.animation = ghost_name
+	$BodySprite.play()
+	
+	if ghost_name == "blinky":
+		add_to_group("blinky")
 
 func set_movement_target(player_position: Vector2, player_facing: Vector2):
 	match current_status:
@@ -135,14 +131,17 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func trigger_scatter_mode():
-	$ScaredSprite2D.visible = true
+	$BodySprite.animation = "scared"
 	current_status = Status.VULNERABLE_FLEEING
-
-	await get_tree().create_timer(VULNERABLE_DURATION).timeout
+	await get_tree().create_timer(VULNERABLE_DURATION / 2).timeout
+	
+	if current_status == Status.VULNERABLE_FLEEING:
+		$BodySprite.animation = "scared_blinking"
+	await get_tree().create_timer(VULNERABLE_DURATION / 2).timeout
 
 	if current_status != Status.RESPAWNING:
 		current_status = Status.NORMAL
-		$ScaredSprite2D.visible = false
+		$BodySprite.animation = ghost_name
 
 func is_vulnerable() -> bool:
 	return current_status == Status.VULNERABLE_FLEEING \
@@ -151,14 +150,15 @@ func is_vulnerable() -> bool:
 ## When a ghost is eaten, it should turn into eyes, return to the pen,
 ## and respawn as a regular ghost
 func eaten():
-	$Sprite2D.visible = false
+	$BodySprite.visible = false
 	current_status = Status.RESPAWNING
+	# To prevent getting stuck on corners (I think due to higher movement speed)
 	$CollisionShape2D.scale = Vector2(0.5, 0.5)
 	
 func respawn():
 	await get_tree().create_timer(RESPAWN_DELAY).timeout
-	$Sprite2D.visible = true
-	$ScaredSprite2D.visible = false
+	$BodySprite.visible = true
+	$BodySprite.animation = ghost_name
 	current_status = Status.NORMAL
 	$CollisionShape2D.scale = Vector2(1, 1)
 	
