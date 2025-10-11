@@ -3,8 +3,8 @@ extends CharacterBody2D
 @export_enum("blinky", "pinky", "inky", "clide") var ghost_name: String
 
 const VULNERABLE_DURATION = 5.0
-const CLIDE_FLEE_DURATION = 2.0
-const RESPAWN_DELAY = 2.0
+const CLIDE_FLEE_DURATION = 1.0
+const RESPAWN_DELAY = 1.0
 const TILE_SIZE = 16
 
 enum Status { NORMAL, FLEEING, VULNERABLE_FLEEING, RESPAWNING }
@@ -18,7 +18,7 @@ const status_speeds = {
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
-var spawn_point = Vector2(216, 280)
+var spawn_point = Vector2(224, 288)
 
 var current_status = Status.NORMAL
 
@@ -29,6 +29,7 @@ func _ready():
 	
 	$BodySprite.animation = ghost_name
 	$BodySprite.play()
+	$EyesSprite.play()
 	
 	if ghost_name == "blinky":
 		add_to_group("blinky")
@@ -48,6 +49,22 @@ func set_movement_target(player_position: Vector2, player_facing: Vector2):
 			flee(player_position)
 		Status.RESPAWNING:
 			navigate_or_warp_to(spawn_point)
+
+	update_eyes()
+			
+func update_eyes():
+	var next_pos = navigation_agent.get_next_path_position()
+	var direction = (next_pos - global_position).normalized()
+	direction = Vector2(round(direction.x), round(direction.y))
+	match direction:
+		Vector2.UP:
+			$EyesSprite.animation = "up"
+		Vector2.DOWN:
+			$EyesSprite.animation = "down"
+		Vector2.LEFT:
+			$EyesSprite.animation = "left"
+		Vector2.RIGHT:
+			$EyesSprite.animation = "right"
 
 func chase(player_position: Vector2):
 	navigate_or_warp_to(player_position)
@@ -131,17 +148,23 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func trigger_scatter_mode():
-	$BodySprite.animation = "scared"
-	current_status = Status.VULNERABLE_FLEEING
+	if current_status != Status.RESPAWNING:
+		$BodySprite.animation = "scared"
+		$EyesSprite.visible = false
+		current_status = Status.VULNERABLE_FLEEING
+
 	await get_tree().create_timer(VULNERABLE_DURATION / 2).timeout
 	
 	if current_status == Status.VULNERABLE_FLEEING:
 		$BodySprite.animation = "scared_blinking"
+
 	await get_tree().create_timer(VULNERABLE_DURATION / 2).timeout
 
 	if current_status != Status.RESPAWNING:
 		current_status = Status.NORMAL
 		$BodySprite.animation = ghost_name
+		$EyesSprite.visible = true
+
 
 func is_vulnerable() -> bool:
 	return current_status == Status.VULNERABLE_FLEEING \
@@ -151,13 +174,16 @@ func is_vulnerable() -> bool:
 ## and respawn as a regular ghost
 func eaten():
 	$BodySprite.visible = false
+	$EyesSprite.visible = true
+	
 	current_status = Status.RESPAWNING
 	# To prevent getting stuck on corners (I think due to higher movement speed)
-	$CollisionShape2D.scale = Vector2(0.5, 0.5)
+	$CollisionShape2D.scale = Vector2(0.1, 0.1)
 	
 func respawn():
 	await get_tree().create_timer(RESPAWN_DELAY).timeout
 	$BodySprite.visible = true
+	$EyesSprite.visible = true
 	$BodySprite.animation = ghost_name
 	current_status = Status.NORMAL
 	$CollisionShape2D.scale = Vector2(1, 1)

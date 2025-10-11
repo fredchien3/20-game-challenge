@@ -27,7 +27,7 @@ agent_radius = 7.9
 size = Vector2(8, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kffv2"]
-size = Vector2(87, 19.5)
+size = Vector2(87, 40)
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_kffv2")
@@ -85,7 +85,7 @@ collision_mask = 4
 script = ExtResource("6_7lyie")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RespawnZone"]
-position = Vector2(223.5, 290.25)
+position = Vector2(223.5, 280)
 shape = SubResource("RectangleShape2D_kffv2")
 
 [connection signal="area_entered" from="LeftWarp" to="." method="_on_left_warp_area_entered"]

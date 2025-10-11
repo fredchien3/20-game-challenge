@@ -1,13 +1,16 @@
-[gd_scene load_steps=30 format=3 uid="uid://dc4kes20tel8h"]
+[gd_scene load_steps=44 format=3 uid="uid://dc4kes20tel8h"]
 
 [ext_resource type="Script" uid="uid://d0ijntggmw71e" path="res://ghost/ghost.gd" id="1_2iaaw"]
 [ext_resource type="Texture2D" uid="uid://dc2ylqbp5kdij" path="res://ghost/blinky.png" id="2_sbw1e"]
-[ext_resource type="Texture2D" uid="uid://bx7swyxsplrsr" path="res://colored-transparent_packed.png" id="2_tqhd8"]
 [ext_resource type="Texture2D" uid="uid://c78ru5mhxobw8" path="res://ghost/clide.png" id="3_t4vom"]
 [ext_resource type="Texture2D" uid="uid://2rwhyq7bcoh4" path="res://ghost/inky.png" id="4_h054d"]
 [ext_resource type="Texture2D" uid="uid://1hl84lpt8eg5" path="res://ghost/pinky.png" id="5_fc1pc"]
 [ext_resource type="Texture2D" uid="uid://ctquo864hgbga" path="res://ghost/scared.png" id="6_h054d"]
 [ext_resource type="Texture2D" uid="uid://d2aqwplrkuxra" path="res://ghost/scared_blinking.png" id="7_fc1pc"]
+[ext_resource type="Texture2D" uid="uid://btw1wf0aoah0e" path="res://ghost/eyes_down.png" id="8_salmi"]
+[ext_resource type="Texture2D" uid="uid://qcr1ksjpqjke" path="res://ghost/eyes_left.png" id="9_salmi"]
+[ext_resource type="Texture2D" uid="uid://d4k6wpcbk54ww" path="res://ghost/eyes_right.png" id="10_flsxg"]
+[ext_resource type="Texture2D" uid="uid://gkx4i3sq6r4y" path="res://ghost/eyes_up.png" id="11_6qf1j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sbw1e"]
 size = Vector2(16, 16)
@@ -164,11 +167,112 @@ animations = [{
 "speed": 3.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2iaaw"]
-atlas = ExtResource("2_tqhd8")
-region = Rect2(416, 96, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjitc"]
+atlas = ExtResource("8_salmi")
+region = Rect2(0, 0, 26, 26)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2iaaw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5f1bh"]
+atlas = ExtResource("8_salmi")
+region = Rect2(26, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dxkq"]
+atlas = ExtResource("8_salmi")
+region = Rect2(52, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xxsf"]
+atlas = ExtResource("9_salmi")
+region = Rect2(0, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64pxy"]
+atlas = ExtResource("9_salmi")
+region = Rect2(26, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jl6q"]
+atlas = ExtResource("9_salmi")
+region = Rect2(52, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2j0fh"]
+atlas = ExtResource("10_flsxg")
+region = Rect2(0, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pum3c"]
+atlas = ExtResource("10_flsxg")
+region = Rect2(26, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23xtm"]
+atlas = ExtResource("10_flsxg")
+region = Rect2(52, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3chuf"]
+atlas = ExtResource("11_6qf1j")
+region = Rect2(0, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fg66"]
+atlas = ExtResource("11_6qf1j")
+region = Rect2(26, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwiob"]
+atlas = ExtResource("11_6qf1j")
+region = Rect2(52, 0, 26, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vjitc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjitc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5f1bh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dxkq")
+}],
+"loop": true,
+"name": &"down",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xxsf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64pxy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jl6q")
+}],
+"loop": true,
+"name": &"left",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2j0fh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pum3c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23xtm")
+}],
+"loop": true,
+"name": &"right",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3chuf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7fg66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwiob")
+}],
+"loop": true,
+"name": &"up",
+"speed": 3.0
+}]
 
 [node name="Ghost" type="CharacterBody2D"]
 collision_layer = 4
@@ -180,19 +284,12 @@ shape = SubResource("RectangleShape2D_sbw1e")
 
 [node name="BodySprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fc1pc")
-animation = &"scared_blinking"
-frame_progress = 0.29818
+animation = &"blinky"
 
-[node name="ScaredSprite2D" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(0, 0, 0.623529, 1)
-scale = Vector2(1.6, 1.6)
-texture = SubResource("AtlasTexture_2iaaw")
-
-[node name="EyesPlaceholder" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-0.2, -4)
-scale = Vector2(8.4, 1.8)
-texture = SubResource("PlaceholderTexture2D_2iaaw")
+[node name="EyesSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vjitc")
+animation = &"left"
+frame_progress = 0.156641
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 2

@@ -105,8 +105,9 @@ func _on_body_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("ghosts"):
 		if body.is_vulnerable():
 			eat(body)
-		else:
-			die()
+		# Commented out for debugging
+		#else:
+			#die()
 
 func eat(ghost: Node2D) -> void:
 	ghost.eaten()
