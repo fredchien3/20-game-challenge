@@ -16,6 +16,7 @@ outline_size = 3
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_1bvp3")
 
 [node name="Map" parent="." groups=["map"] instance=ExtResource("1_0xm2m")]
@@ -115,7 +116,6 @@ offset_right = 59.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Game over!"
 label_settings = SubResource("LabelSettings_lquwl")
 horizontal_alignment = 1
 

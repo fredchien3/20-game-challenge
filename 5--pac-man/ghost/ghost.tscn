@@ -289,7 +289,7 @@ animation = &"blinky"
 [node name="EyesSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vjitc")
 animation = &"left"
-frame_progress = 0.156641
+frame_progress = 0.43754
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 2

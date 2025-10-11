@@ -52,9 +52,14 @@ func reset_map():
 	add_child(new_map)
 	move_child(new_map, 0)
 	call_deferred("connect_pickup_signals")
-
+	
 func _on_dot_obtained():
 	increment_score(10)
+	get_tree().process_frame.connect(check_win_condition, CONNECT_ONE_SHOT)
+
+func check_win_condition():
+	if get_tree().get_nodes_in_group("dots").size() < 1:
+		you_win()
 	
 func _on_power_pellet_obtained():
 	get_tree().call_group("ghosts", "trigger_scatter_mode")
@@ -117,7 +122,17 @@ func decrement_lives() -> void:
 		game_over()
 
 func game_over() -> void:
+	$GUI/GameOverDisplay/Label.text = "Game over!"
 	$GUI/GameOverDisplay.visible = true
+	get_tree().call_group("player", "pause")
+	get_tree().call_group("ghosts", "queue_free")
+	
+func you_win() -> void:
+	$GUI/GameOverDisplay/Label.text = "You win!"
+	$GUI/GameOverDisplay.visible = true
+	get_tree().call_group("player", "pause")
+	get_tree().call_group("ghosts", "queue_free")
 
 func _on_new_game_button_pressed() -> void:
+	get_tree().paused = false
 	new_game()

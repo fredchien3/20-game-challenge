@@ -105,9 +105,8 @@ func _on_body_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("ghosts"):
 		if body.is_vulnerable():
 			eat(body)
-		# Commented out for debugging
-		#else:
-			#die()
+		else:
+			die()
 
 func eat(ghost: Node2D) -> void:
 	ghost.eaten()
@@ -129,3 +128,7 @@ func die():
 	await get_tree().create_timer(1.5).timeout
 	death_finished.emit()
 	queue_free()
+
+func pause():
+	alive = false
+	$AnimatedSprite2D.pause()
