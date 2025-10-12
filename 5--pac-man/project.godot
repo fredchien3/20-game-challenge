@@ -23,6 +23,10 @@ window/size/resizable=false
 window/layer_2="objects"
 window/layer_1="walls"
 
+[editor]
+
+movie_writer/movie_file="C:/Ford Docs/GameDev/20 Game Challenge/5--pac-man/movie.avi"
+
 [input]
 
 move_up={

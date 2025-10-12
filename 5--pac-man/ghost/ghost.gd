@@ -10,10 +10,10 @@ const TILE_SIZE = 16
 enum Status { NORMAL, FLEEING, VULNERABLE_FLEEING, RESPAWNING }
 
 const status_speeds = {
-	Status.NORMAL: 85,
-	Status.FLEEING: 85,
-	Status.VULNERABLE_FLEEING: 45,
-	Status.RESPAWNING: 135,
+	Status.NORMAL: 85.0,
+	Status.FLEEING: 85.0,
+	Status.VULNERABLE_FLEEING: 45.0,
+	Status.RESPAWNING: 135.0,
 }
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
