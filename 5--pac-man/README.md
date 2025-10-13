@@ -1,5 +1,7 @@
 Pac Man
 
+Play it! https://fredchien3.itch.io/pac-man
+
 Learned:
 
 * NavigationAgent2D very cool
