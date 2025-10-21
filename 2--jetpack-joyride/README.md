@@ -8,3 +8,7 @@ Learned:
 
 https://github.com/user-attachments/assets/b57fbfd1-ed4b-46dc-837a-f6922350473a
 
+
+Art assets by https://github.com/kenneynl
+
+Thank you Kenney!
