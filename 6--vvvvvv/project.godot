@@ -11,5 +11,10 @@ config_version=5
 [application]
 
 config/name="6: VVVVVV"
+run/main_scene="uid://bhrlvuch7heqs"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[layer_names]
+
+2d_physics/layer_1="walls"
