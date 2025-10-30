@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://3nsssrfp15wp"]
+[gd_scene load_steps=10 format=3 uid="uid://3nsssrfp15wp"]
 
 [ext_resource type="Texture2D" uid="uid://gjgfjnuuki6x" path="res://tilemap_packed.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://b0v1v71sifrf" path="res://player/player.gd" id="1_rkbax"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
-size = Vector2(8, 8)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjkh3"]
+atlas = ExtResource("1_oul6g")
+region = Rect2(16, 48, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oul6g"]
 atlas = ExtResource("1_oul6g")
@@ -24,6 +25,14 @@ region = Rect2(16, 48, 8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yw30f"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjkh3")
+}],
+"loop": true,
+"name": &"falling",
+"speed": 0.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oul6g")
@@ -47,18 +56,18 @@ animations = [{
 "speed": 6.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
+size = Vector2(8, 8)
+
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
 collision_layer = 0
 script = ExtResource("1_rkbax")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
-shape = SubResource("RectangleShape2D_rkbax")
-
 [node name="AnimationPlayer" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_yw30f")
-animation = &"idle"
+animation = &"falling"
 autoplay = "idle"
-frame_progress = 0.611173
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rkbax")
