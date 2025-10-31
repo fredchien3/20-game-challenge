@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
-
-const SPEED = 150.0
+const SPEED = 80.0
 
 @onready var gravity_multiplier = 0.4
+@onready var spawn_position = global_position
 
 func get_modified_gravity():
 	return get_gravity() * gravity_multiplier
@@ -13,7 +13,7 @@ func flip_gravity():
 	up_direction = Vector2.DOWN if up_direction == Vector2.UP else Vector2.UP
 	var current_scale = $AnimationPlayer.scale
 	$AnimationPlayer.scale = Vector2(1, -current_scale.y)
-
+	
 func _physics_process(delta: float) -> void:
 	velocity += get_modified_gravity() * delta
 
@@ -37,3 +37,14 @@ func _physics_process(delta: float) -> void:
 		$AnimationPlayer.animation = "falling"
 
 	move_and_slide()
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	die()
+
+func die():
+	print("ribbit... I'm dead")
+	await get_tree().create_timer(2).timeout
+	respawn()
+	
+func respawn():
+	global_position = spawn_position
