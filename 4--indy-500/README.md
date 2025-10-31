@@ -14,3 +14,6 @@ https://github.com/user-attachments/assets/ddb87ba6-85ab-457a-86f4-773aee5a2a1e
 
 https://github.com/user-attachments/assets/b17e81ac-8e91-4b48-a567-89377157654a
 
+Art assets by https://github.com/kenneynl
+
+Thank you Kenney!
