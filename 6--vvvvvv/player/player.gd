@@ -4,6 +4,8 @@ const SPEED = 80.0
 
 @onready var gravity_multiplier = 0.4
 @onready var spawn_position = global_position
+@onready var alive = true
+
 
 func get_modified_gravity():
 	return get_gravity() * gravity_multiplier
@@ -15,6 +17,8 @@ func flip_gravity():
 	$AnimationPlayer.scale = Vector2(1, -current_scale.y)
 	
 func _physics_process(delta: float) -> void:
+	if not alive: return
+
 	velocity += get_modified_gravity() * delta
 
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
@@ -43,8 +47,10 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 
 func die():
 	print("ribbit... I'm dead")
+	alive = false
 	await get_tree().create_timer(2).timeout
 	respawn()
 	
 func respawn():
 	global_position = spawn_position
+	alive = true
