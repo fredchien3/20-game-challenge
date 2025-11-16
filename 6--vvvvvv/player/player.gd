@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 const SPEED = 80.0
+const SHIFT_AMOUNT = 8.0
 
 @onready var gravity_multiplier = 0.4
 @onready var spawn_position = global_position
@@ -54,3 +55,17 @@ func die():
 func respawn():
 	global_position = spawn_position
 	alive = true
+
+## Nudges the player's position in a certain direction.
+## Used by the camera to move the player away from the edge after snapping
+## between screens.
+func shift(direction):
+	match direction:
+		"up":
+			position.y -= SHIFT_AMOUNT
+		"down":
+			position.y += SHIFT_AMOUNT
+		"left":
+			position.x -= SHIFT_AMOUNT
+		"right":
+			position.x += SHIFT_AMOUNT
