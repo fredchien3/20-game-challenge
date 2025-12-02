@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://bhrlvuch7heqs"]
+[gd_scene load_steps=10 format=4 uid="uid://bhrlvuch7heqs"]
 
 [ext_resource type="TileSet" uid="uid://csst3f3y35i38" path="res://main/main.tres" id="1_pjrb6"]
 [ext_resource type="Script" uid="uid://dvnhg6am166xr" path="res://main/main.gd" id="1_xwkvk"]
 [ext_resource type="PackedScene" uid="uid://3nsssrfp15wp" path="res://player/player.tscn" id="2_pjrb6"]
 [ext_resource type="Script" uid="uid://jn0nllgtfvcp" path="res://main/camera_2d.gd" id="4_c651c"]
+[ext_resource type="PackedScene" uid="uid://ducem6nk4n158" path="res://checkpoint/checkpoint.tscn" id="5_3wy1v"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_c651c"]
 a = Vector2(-192, 0)
@@ -45,6 +46,7 @@ position = Vector2(24, 32)
 position = Vector2(192, 108)
 zoom = Vector2(3, 3)
 script = ExtResource("4_c651c")
+metadata/_edit_lock_ = true
 
 [node name="BottomArea" type="Area2D" parent="Camera2D"]
 collision_layer = 0
@@ -88,6 +90,9 @@ position = Vector2(-192, 4)
 rotation = 1.57079
 shape = SubResource("SegmentShape2D_4dugh")
 metadata/_edit_lock_ = true
+
+[node name="Checkpoint" parent="." instance=ExtResource("5_3wy1v")]
+position = Vector2(172, 36)
 
 [connection signal="body_entered" from="Camera2D/BottomArea" to="Camera2D" method="_on_bottom_area_body_entered"]
 [connection signal="body_entered" from="Camera2D/RightArea" to="Camera2D" method="_on_right_area_body_entered"]
