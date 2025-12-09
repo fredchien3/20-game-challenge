@@ -69,3 +69,6 @@ func shift(direction):
 			position.x -= SHIFT_AMOUNT
 		"right":
 			position.x += SHIFT_AMOUNT
+
+func set_spawn_position(pos: Vector2):
+	spawn_position = pos

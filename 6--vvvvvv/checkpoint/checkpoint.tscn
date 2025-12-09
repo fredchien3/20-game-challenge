@@ -14,14 +14,14 @@ region = Rect2(112, 32, 8, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_10gex"]
 size = Vector2(8, 8)
 
-[node name="Checkpoint" type="Node2D"]
+[node name="Checkpoint" type="Node2D" groups=["checkpoints"]]
 texture_filter = 1
 script = ExtResource("1_q42b1")
 
-[node name="SpriteFresh" type="Sprite2D" parent="."]
+[node name="SpriteFlag" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_q42b1")
 
-[node name="SpriteUsed" type="Sprite2D" parent="."]
+[node name="SpritePole" type="Sprite2D" parent="."]
 visible = false
 texture = SubResource("AtlasTexture_10gex")
 
