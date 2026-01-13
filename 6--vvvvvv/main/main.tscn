@@ -1,26 +1,10 @@
-[gd_scene load_steps=10 format=4 uid="uid://bhrlvuch7heqs"]
+[gd_scene load_steps=6 format=4 uid="uid://bhrlvuch7heqs"]
 
 [ext_resource type="TileSet" uid="uid://csst3f3y35i38" path="res://main/main.tres" id="1_pjrb6"]
 [ext_resource type="Script" uid="uid://dvnhg6am166xr" path="res://main/main.gd" id="1_xwkvk"]
 [ext_resource type="PackedScene" uid="uid://3nsssrfp15wp" path="res://player/player.tscn" id="2_pjrb6"]
 [ext_resource type="Script" uid="uid://jn0nllgtfvcp" path="res://main/camera_2d.gd" id="4_c651c"]
 [ext_resource type="PackedScene" uid="uid://ducem6nk4n158" path="res://checkpoint/checkpoint.tscn" id="5_3wy1v"]
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_c651c"]
-a = Vector2(-192, 0)
-b = Vector2(192, 0)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_3wy1v"]
-a = Vector2(112, -0.000244141)
-b = Vector2(-104, 0.000244141)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_kfbq2"]
-a = Vector2(-192, -0.000852966)
-b = Vector2(192, 0.000852966)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_4dugh"]
-a = Vector2(104, 0.000231012)
-b = Vector2(-112, -0.000248782)
 
 [node name="Main" type="Node2D"]
 texture_filter = 1
@@ -48,48 +32,9 @@ zoom = Vector2(3, 3)
 script = ExtResource("4_c651c")
 metadata/_edit_lock_ = true
 
-[node name="BottomArea" type="Area2D" parent="Camera2D"]
-collision_layer = 0
-collision_mask = 4
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/BottomArea"]
-position = Vector2(0, 108)
-shape = SubResource("SegmentShape2D_c651c")
-metadata/_edit_lock_ = true
-
-[node name="RightArea" type="Area2D" parent="Camera2D"]
-collision_layer = 0
-collision_mask = 4
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/RightArea"]
-position = Vector2(192, 4)
-rotation = -1.57079
-shape = SubResource("SegmentShape2D_3wy1v")
-metadata/_edit_lock_ = true
-
-[node name="TopArea" type="Area2D" parent="Camera2D"]
-collision_layer = 0
-collision_mask = 4
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/TopArea"]
-position = Vector2(0, -108)
-rotation = 3.14159
-shape = SubResource("SegmentShape2D_kfbq2")
-metadata/_edit_lock_ = true
-
-[node name="LeftArea" type="Area2D" parent="Camera2D"]
-collision_layer = 0
-collision_mask = 4
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/LeftArea"]
-position = Vector2(-192, 4)
-rotation = 1.57079
-shape = SubResource("SegmentShape2D_4dugh")
-metadata/_edit_lock_ = true
+[node name="Timer" type="Timer" parent="Camera2D"]
+wait_time = 0.1
+autostart = true
 
 [node name="Checkpoint" parent="." instance=ExtResource("5_3wy1v")]
 position = Vector2(164, 36)
@@ -97,7 +42,4 @@ position = Vector2(164, 36)
 [node name="Checkpoint2" parent="." instance=ExtResource("5_3wy1v")]
 position = Vector2(188, 356)
 
-[connection signal="body_entered" from="Camera2D/BottomArea" to="Camera2D" method="_on_bottom_area_body_entered"]
-[connection signal="body_entered" from="Camera2D/RightArea" to="Camera2D" method="_on_right_area_body_entered"]
-[connection signal="body_entered" from="Camera2D/TopArea" to="Camera2D" method="_on_top_area_body_entered"]
-[connection signal="body_entered" from="Camera2D/LeftArea" to="Camera2D" method="_on_left_area_body_entered"]
+[connection signal="timeout" from="Camera2D/Timer" to="Camera2D" method="_on_timer_timeout"]

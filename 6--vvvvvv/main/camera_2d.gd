@@ -3,44 +3,24 @@ extends Camera2D
 @onready var start_position = position
 @onready var camera_width = get_viewport().size.x / zoom.x
 @onready var camera_height = get_viewport().size.y / zoom.y
-@onready var cooldown = 0.0
+@onready var camera_x_offset = camera_width / 2
+@onready var camera_y_offset = camera_height / 2
 
-# TBD: If camera desync becomes an issue due to player speed surpassing
-# the cooldown period, and the camera loses the player, a possible fix could be
-# to poll the player's position and center the camera on the nearest
-# camera-sized grid position that contains the player's position (math).
+var player
 
-func _process(delta: float) -> void:
-	if cooldown > 0.0: cooldown -= 0.1
+func _ready():
+	player = get_tree().get_nodes_in_group("player")[0]
 
-func _on_bottom_area_body_entered(body: Node2D) -> void:
-	if cooldown > 0: return
+func center_on(node):
+	var node_pos = node.global_position
 	
-	if body.is_in_group("player"):
-		body.shift("down")
-		position.y += camera_height
-		cooldown = 3.0
-
-func _on_right_area_body_entered(body: Node2D) -> void:
-	if cooldown > 0: return
+	var num_camera_widths = floor(node_pos.x / camera_width)
+	var num_camera_heights = floor(node_pos.y / camera_height)
 	
-	if body.is_in_group("player"):
-		body.shift("right")
-		position.x += camera_width
-		cooldown = 3.0
-
-func _on_top_area_body_entered(body: Node2D) -> void:
-	if cooldown > 0: return
+	var x = (num_camera_widths * camera_width) + camera_x_offset
+	var y = (num_camera_heights * camera_height) + camera_y_offset
 	
-	if body.is_in_group("player"):
-		body.shift("up")
-		position.y -= camera_height
-		cooldown = 3.0
+	global_position = Vector2(x, y)
 
-func _on_left_area_body_entered(body: Node2D) -> void:
-	if cooldown > 0: return
-	
-	if body.is_in_group("player"):
-		body.shift("left")
-		position.x -= camera_width
-		cooldown = 3.0
+func _on_timer_timeout() -> void:
+	if player: center_on(player)
