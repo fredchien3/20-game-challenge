@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=4 uid="uid://bhrlvuch7heqs"]
+[gd_scene load_steps=8 format=4 uid="uid://bhrlvuch7heqs"]
 
 [ext_resource type="TileSet" uid="uid://csst3f3y35i38" path="res://main/main.tres" id="1_pjrb6"]
 [ext_resource type="Script" uid="uid://dvnhg6am166xr" path="res://main/main.gd" id="1_xwkvk"]
 [ext_resource type="PackedScene" uid="uid://3nsssrfp15wp" path="res://player/player.tscn" id="2_pjrb6"]
 [ext_resource type="Script" uid="uid://jn0nllgtfvcp" path="res://main/camera_2d.gd" id="4_c651c"]
 [ext_resource type="PackedScene" uid="uid://ducem6nk4n158" path="res://checkpoint/checkpoint.tscn" id="5_3wy1v"]
+[ext_resource type="PackedScene" uid="uid://b5tnqquvt75qb" path="res://key/key.tscn" id="6_4dugh"]
 [ext_resource type="PackedScene" uid="uid://bvspqhbpgs3bq" path="res://door/door.tscn" id="6_kfbq2"]
 
 [node name="Main" type="Node2D"]
@@ -57,6 +58,9 @@ position = Vector2(188, 356)
 
 [node name="Door" parent="." instance=ExtResource("6_kfbq2")]
 position = Vector2(280, 352)
+
+[node name="Key" parent="." instance=ExtResource("6_4dugh")]
+position = Vector2(52, 356)
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("2_pjrb6")]
 position = Vector2(24, 32)
