@@ -9,6 +9,9 @@ func _ready() -> void:
 	for checkpoint in checkpoints:
 		checkpoint.connect("checkpoint_reached", _on_checkpoint_entered)
 		
+	var door = $Door
+	door.connect("door_reached", _on_door_reached)
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -19,3 +22,7 @@ func _on_checkpoint_entered(checkpoint) -> void:
 
 	latest_checkpoint = checkpoint
 	$Player.set_spawn_position(checkpoint.global_position)
+
+func _on_door_reached() -> void:
+	$Player.queue_free()
+	$Camera2D/Container/Label.visible = true
