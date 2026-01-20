@@ -1,18 +1,38 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdbrbobaqmblm"]
+[gd_scene load_steps=6 format=3 uid="uid://cdbrbobaqmblm"]
 
 [ext_resource type="Script" uid="uid://c1gh8ng2ipfgj" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="Script" uid="uid://by0nl5fcu8w8l" path="res://main/test_poly.gd" id="2_pjrb6"]
+[ext_resource type="Script" uid="uid://cjbbjcjx1u0w" path="res://main/terrain.gd" id="2_xwkvk"]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("test_node", "terrain_node")]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c651c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xwkvk"]
+size = Vector2(16, 16)
+
+[node name="Main" type="Node2D"]
 script = ExtResource("1_53q0u")
-test_node = NodePath("TestPoly")
-terrain_node = NodePath("Terrain")
 
-[node name="Terrain" type="Polygon2D" parent="."]
+[node name="Terrain" type="StaticBody2D" parent="." node_paths=PackedStringArray("test_poly")]
+script = ExtResource("2_xwkvk")
+test_poly = NodePath("../TestPoly")
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain"]
 color = Color(1, 0.376471, 1, 1)
 polygon = PackedVector2Array(128, 64, 384, 64, 448, 192, 64, 192)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain"]
 
 [node name="TestPoly" type="Polygon2D" parent="."]
 color = Color(0.52549, 1, 1, 1)
 polygon = PackedVector2Array(272, 40, 352, 40, 312, 128)
 script = ExtResource("2_pjrb6")
+
+[node name="Object" type="RigidBody2D" parent="."]
+position = Vector2(192, 16)
+
+[node name="Sprite2D" type="Sprite2D" parent="Object"]
+scale = Vector2(16, 16)
+texture = SubResource("PlaceholderTexture2D_c651c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Object"]
+shape = SubResource("RectangleShape2D_xwkvk")
