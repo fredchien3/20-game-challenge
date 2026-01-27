@@ -1,41 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdbrbobaqmblm"]
+[gd_scene format=3 uid="uid://cdbrbobaqmblm"]
 
 [ext_resource type="Script" uid="uid://c1gh8ng2ipfgj" path="res://main/main.gd" id="1_53q0u"]
-[ext_resource type="Script" uid="uid://by0nl5fcu8w8l" path="res://main/test_clipper.gd" id="2_pjrb6"]
 [ext_resource type="Script" uid="uid://cjbbjcjx1u0w" path="res://main/terrain.gd" id="2_xwkvk"]
+[ext_resource type="PackedScene" uid="uid://doykh5xnsi8a0" path="res://worm/worm.tscn" id="4_c651c"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c651c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xwkvk"]
 size = Vector2(16, 16)
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=422347337 node_paths=PackedStringArray("worm")]
 script = ExtResource("1_53q0u")
+worm = NodePath("Worm")
 
-[node name="Terrain" type="StaticBody2D" parent="." node_paths=PackedStringArray("test_clipper")]
+[node name="Terrain" type="StaticBody2D" parent="." unique_id=68683989]
 script = ExtResource("2_xwkvk")
-test_clipper = NodePath("../TestClipper")
 
-[node name="Polygon2D" type="Polygon2D" parent="Terrain"]
+[node name="Polygon2D" type="Polygon2D" parent="Terrain" unique_id=1398486921]
 position = Vector2(576, 360)
 color = Color(1, 0.376471, 1, 1)
 polygon = PackedVector2Array(-336, -72, 352, -72, 536, 272, -520, 272)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain" unique_id=537344312]
 polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
 
-[node name="TestClipper" type="Polygon2D" parent="."]
-position = Vector2(632, 128)
-color = Color(0.52549, 1, 1, 1)
-polygon = PackedVector2Array(-56, -40, 56, -40, 0, 104)
-script = ExtResource("2_pjrb6")
+[node name="Object" type="RigidBody2D" parent="." unique_id=1091333873]
+position = Vector2(416, 232)
 
-[node name="Object" type="RigidBody2D" parent="."]
-position = Vector2(376, 168)
-
-[node name="Sprite2D" type="Sprite2D" parent="Object"]
+[node name="Sprite2D" type="Sprite2D" parent="Object" unique_id=2025940852]
 scale = Vector2(16, 16)
 texture = SubResource("PlaceholderTexture2D_c651c")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Object"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Object" unique_id=1838424763]
 shape = SubResource("RectangleShape2D_xwkvk")
+
+[node name="Worm" parent="." unique_id=774521155 instance=ExtResource("4_c651c")]
+position = Vector2(336, 232)

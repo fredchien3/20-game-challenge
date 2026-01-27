@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://doykh5xnsi8a0"]
+
+[ext_resource type="Script" uid="uid://dyfr84pc3vg3s" path="res://worm/worm.gd" id="1_owvmj"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_wm2cs"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wm2cs"]
+
+[node name="Worm" type="CharacterBody2D" unique_id=1631304650]
+script = ExtResource("1_owvmj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=622019416]
+position = Vector2(-4.76837e-07, -2.38419e-07)
+scale = Vector2(20, 30)
+texture = SubResource("PlaceholderTexture2D_wm2cs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2094025430]
+shape = SubResource("CapsuleShape2D_wm2cs")
