@@ -7,6 +7,7 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wm2cs"]
 
 [node name="Worm" type="CharacterBody2D" unique_id=1631304650]
+collision_layer = 0
 script = ExtResource("1_owvmj")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=622019416]
