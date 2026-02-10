@@ -41,3 +41,5 @@ shape = SubResource("RectangleShape2D_xwkvk")
 
 [node name="Worm" parent="." unique_id=774521155 instance=ExtResource("4_c651c")]
 position = Vector2(336, 232)
+
+[connection signal="grenade_thrown" from="Worm" to="." method="_on_worm_grenade_thrown"]

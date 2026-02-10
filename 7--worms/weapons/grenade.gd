@@ -1,10 +1,12 @@
 extends RigidBody2D
 
-signal explode(pos, radius)
-const TIME_DELAY = 1.0
-const EXPLOSION_RADIUS = 50
+signal exploded(pos, radius)
+
+@export var TIME_DELAY: float
+@export var EXPLOSION_RADIUS: float
+
 
 func _ready() -> void:
 	await get_tree().create_timer(TIME_DELAY).timeout
-	explode.emit(global_position, EXPLOSION_RADIUS)
+	exploded.emit(global_position, EXPLOSION_RADIUS)
 	queue_free()
