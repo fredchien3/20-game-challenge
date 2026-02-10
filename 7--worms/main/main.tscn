@@ -14,9 +14,11 @@ script = ExtResource("1_53q0u")
 worm = NodePath("Worm")
 terrain = NodePath("Terrain")
 
-[node name="Terrain" type="StaticBody2D" parent="." unique_id=68683989]
+[node name="Terrain" type="StaticBody2D" parent="." unique_id=68683989 node_paths=PackedStringArray("collision", "terrain")]
 collision_mask = 0
 script = ExtResource("2_xwkvk")
+collision = NodePath("CollisionPolygon2D")
+terrain = NodePath("Polygon2D")
 
 [node name="Polygon2D" type="Polygon2D" parent="Terrain" unique_id=1398486921]
 position = Vector2(576, 360)
