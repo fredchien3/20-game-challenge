@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://cmg61khv31w77"]
+[gd_resource type="TileSet" format=3 uid="uid://cmg61khv31w77"]
 
 [ext_resource type="Texture2D" uid="uid://bx7swyxsplrsr" path="res://colored-transparent_packed.png" id="1_iroac"]
 
