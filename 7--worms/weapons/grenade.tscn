@@ -10,7 +10,7 @@ radius = 5.0
 [node name="Grenade" type="RigidBody2D" unique_id=1112143225]
 collision_layer = 0
 script = ExtResource("1_edgka")
-TIME_DELAY = 1.0
+TIME_DELAY = 2.0
 EXPLOSION_RADIUS = 50.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1147942112]
