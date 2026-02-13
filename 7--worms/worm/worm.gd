@@ -1,16 +1,18 @@
 extends CharacterBody2D
 
 signal grenade_thrown(grenade)
+signal bazooka_shot(bazooka)
 
 # Movement
 const SPEED := 150.0
-const JUMP_VELOCITY := -250.0
+const JUMP_VELOCITY := -300.0
 
 # Aiming/charging
 @export var power_rate: float
 @export var max_power: float
 # Weapon scenes
 @export var GrenadeScene: PackedScene
+@export var BazookaScene: PackedScene
 
 @onready var power := 0.0
 
@@ -31,7 +33,8 @@ func _input(event: InputEvent) -> void:
 		var a = position
 		var b = event.position
 		var vector = (b - a).normalized() * power
-		throw_grenade(vector)
+		#throw_grenade(vector)
+		shoot_bazooka(vector)
 		power = 0
 
 
@@ -68,3 +71,12 @@ func throw_grenade(vector: Vector2):
 	grenade.position = position
 	grenade.apply_impulse(vector)
 	grenade_thrown.emit(grenade)
+
+
+func shoot_bazooka(vector: Vector2):
+	var bazooka = BazookaScene.instantiate()
+	bazooka.shooter = self
+	bazooka.rotation = vector.angle()
+	bazooka.position = position
+	bazooka.apply_impulse(vector)
+	bazooka_shot.emit(bazooka)

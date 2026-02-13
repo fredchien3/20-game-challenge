@@ -30,4 +30,8 @@ func _on_explosion(pos, radius):
 	# For now, we just take the leftmost polygon
 	# Most likely later we will write code to take the largest polygon
 	terrain.polygon = terrain.global_transform.affine_inverse() * new_polygons[0]
+	call_deferred("update_terrain_polygon")
+
+
+func update_terrain_polygon():
 	collision.polygon = terrain.polygon

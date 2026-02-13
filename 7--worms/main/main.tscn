@@ -9,9 +9,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xwkvk"]
 size = Vector2(16, 16)
 
-[node name="Main" type="Node2D" unique_id=422347337 node_paths=PackedStringArray("worm", "terrain")]
+[node name="Main" type="Node2D" unique_id=422347337 node_paths=PackedStringArray("terrain")]
 script = ExtResource("1_53q0u")
-worm = NodePath("Worm")
 terrain = NodePath("Terrain")
 
 [node name="Terrain" type="StaticBody2D" parent="." unique_id=68683989 node_paths=PackedStringArray("collision", "terrain")]
@@ -30,7 +29,6 @@ polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
 
 [node name="Object" type="RigidBody2D" parent="." unique_id=1091333873]
 position = Vector2(416, 232)
-collision_layer = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="Object" unique_id=2025940852]
 scale = Vector2(16, 16)
@@ -41,5 +39,3 @@ shape = SubResource("RectangleShape2D_xwkvk")
 
 [node name="Worm" parent="." unique_id=774521155 instance=ExtResource("4_c651c")]
 position = Vector2(336, 232)
-
-[connection signal="grenade_thrown" from="Worm" to="." method="_on_worm_grenade_thrown"]
