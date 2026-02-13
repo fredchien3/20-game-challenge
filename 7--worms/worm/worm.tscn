@@ -24,9 +24,16 @@ texture = SubResource("PlaceholderTexture2D_wm2cs")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2094025430]
 shape = SubResource("CapsuleShape2D_wm2cs")
 
-[node name="DebugLabel" type="Label" parent="." unique_id=306341189]
+[node name="DebugPower" type="Label" parent="." unique_id=306341189]
 offset_left = -20.0
 offset_top = -39.0
 offset_right = 20.0
 offset_bottom = -16.0
 horizontal_alignment = 1
+
+[node name="DebugActive" type="Label" parent="." unique_id=1653785646]
+offset_left = -22.0
+offset_top = 10.0
+offset_right = 24.0
+offset_bottom = 33.0
+text = "active"
