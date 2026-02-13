@@ -16,8 +16,8 @@ const JUMP_VELOCITY := -300.0
 
 ## Whether it is this worm's turn to move and shoot
 var active = false
-
-@onready var power := 0.0
+var power := 0.0
+var health := 100.0
 
 
 func _physics_process(delta: float) -> void:
@@ -33,6 +33,7 @@ func _physics_process(delta: float) -> void:
 
 
 # Event-based input handling
+# TODO: Fix bug when camera is in play. Camera makes it so aim becomes offset.
 func _input(event: InputEvent) -> void:
 	if not active:
 		return
@@ -56,6 +57,8 @@ func handle_debug():
 		$DebugActive.visible = true
 	else:
 		$DebugActive.visible = false
+
+	$Health.value = health
 
 
 func handle_movement_input() -> void:
@@ -94,3 +97,9 @@ func shoot_bazooka(vector: Vector2):
 	bazooka.position = position
 	bazooka.apply_impulse(vector)
 	bazooka_shot.emit(bazooka)
+
+
+func receive_damage_and_knockback(_pos, radius):
+	## TODO: consider adding dedicated weapon damage value
+	var weapon_damage = radius * 0.5
+	health -= weapon_damage

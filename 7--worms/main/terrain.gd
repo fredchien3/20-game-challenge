@@ -7,19 +7,13 @@ const CRATER_SIDES = 24
 
 
 func _ready() -> void:
+	# Terrain's CollisionPolygon2D is initialized without a shape -
+	# we programmatically set its shape by copying over from the visual Polygon2D
 	collision.polygon = terrain.polygon
 	collision.global_transform = terrain.global_transform
 
-	for worm in get_tree().get_nodes_in_group("worms"):
-		worm.grenade_thrown.connect(_on_worm_grenade_thrown)
-		worm.bazooka_shot.connect(_on_worm_bazooka_shot)
 
-
-func update_terrain_polygon():
-	collision.polygon = terrain.polygon
-
-
-func _on_explosion(pos, radius):
+func cutout_hole(pos, radius):
 	# Local polygons need to be converted to global space to interact accurately
 	var globalized_terrain_polygon = \
 	terrain.global_transform * terrain.polygon
@@ -41,11 +35,5 @@ func _on_explosion(pos, radius):
 	call_deferred("update_terrain_polygon")
 
 
-func _on_worm_grenade_thrown(grenade: Variant) -> void:
-	add_child(grenade)
-	grenade.exploded.connect(_on_explosion)
-
-
-func _on_worm_bazooka_shot(bazooka: Variant) -> void:
-	add_child(bazooka)
-	bazooka.exploded.connect(_on_explosion)
+func update_terrain_polygon():
+	collision.polygon = terrain.polygon

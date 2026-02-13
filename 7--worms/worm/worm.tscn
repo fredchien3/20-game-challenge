@@ -26,9 +26,9 @@ shape = SubResource("CapsuleShape2D_wm2cs")
 
 [node name="DebugPower" type="Label" parent="." unique_id=306341189]
 offset_left = -20.0
-offset_top = -39.0
+offset_top = -50.0
 offset_right = 20.0
-offset_bottom = -16.0
+offset_bottom = -27.0
 horizontal_alignment = 1
 
 [node name="DebugActive" type="Label" parent="." unique_id=1653785646]
@@ -37,3 +37,11 @@ offset_top = 10.0
 offset_right = 24.0
 offset_bottom = 33.0
 text = "active"
+
+[node name="Health" type="ProgressBar" parent="." unique_id=171208404]
+offset_left = -22.0
+offset_top = -24.0
+offset_right = 22.0
+offset_bottom = -16.0
+value = 50.0
+show_percentage = false
