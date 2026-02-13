@@ -2,11 +2,14 @@ extends CharacterBody2D
 
 signal grenade_thrown(grenade)
 signal bazooka_shot(bazooka)
+signal died(worm)
+signal exploded(pos, radius)
 
 # Movement
 const SPEED := 150.0
 const JUMP_VELOCITY := -300.0
 
+@export var explosion_radius: float
 # Aiming/charging
 @export var power_rate: float
 @export var max_power: float
@@ -40,7 +43,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and not event.is_pressed():
 		# To find a vector pointing from A to B, use B - A.
 		var a = position
-		var b = event.position
+		var b = event.global_position
 		var vector = (b - a).normalized() * power
 		#throw_grenade(vector)
 		shoot_bazooka(vector)
@@ -110,3 +113,14 @@ func receive_damage_and_knockback(explosion_pos: Vector2, radius: float):
 	var knockback = (global_position - explosion_pos).normalized()
 	velocity.x += knockback.x * knockback_force
 	velocity.y += knockback.y * knockback_force
+
+	if health <= 0:
+		die_then_explode()
+
+
+func die_then_explode():
+	active = false
+	died.emit(self)
+	await get_tree().create_timer(2.5).timeout
+	exploded.emit(global_position, explosion_radius)
+	queue_free()

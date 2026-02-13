@@ -20,6 +20,8 @@ func _ready() -> void:
 	for worm in worms:
 		worm.grenade_thrown.connect(_on_worm_grenade_thrown)
 		worm.bazooka_shot.connect(_on_worm_bazooka_shot)
+		worm.died.connect(_on_worm_died)
+		worm.exploded.connect(_on_explosion)
 
 
 func _input(event: InputEvent) -> void:
@@ -27,16 +29,32 @@ func _input(event: InputEvent) -> void:
 		cycle_active_worm()
 
 
+## Cycles through the worms array, skipping past any worms that have been freed
 func cycle_active_worm():
-	active_worm.active = false
+	if len(worms) == 0:
+		return
+
+	if active_worm:
+		active_worm.active = false
 
 	active_worm_index += 1
 	if active_worm_index >= len(worms):
 		active_worm_index = 0
 
-	active_worm = worms[active_worm_index]
-	active_worm.active = true
-	camera.global_position = active_worm.global_position
+	if worms[active_worm_index]:
+		active_worm = worms[active_worm_index]
+		active_worm.active = true
+		camera.global_position = active_worm.global_position
+	else:
+		cycle_active_worm()
+
+
+func _on_worm_died(worm: CharacterBody2D):
+	worms.remove_at(worms.find(worm))
+	if active_worm == worm:
+		await get_tree().create_timer(2.5).timeout
+		active_worm_index -= 1
+		cycle_active_worm()
 
 
 func _on_worm_grenade_thrown(grenade: RigidBody2D) -> void:

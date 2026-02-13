@@ -48,7 +48,6 @@ position = Vector2(576, 240)
 position = Vector2(840, 232)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=114689593]
-enabled = false
 position_smoothing_enabled = true
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1764160728]
