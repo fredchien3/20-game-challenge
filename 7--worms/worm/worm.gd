@@ -24,9 +24,8 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	if active:
-		handle_movement_input()
-		handle_weapon_input(delta)
+	handle_movement_input()
+	handle_weapon_input(delta)
 
 	move_and_slide()
 	handle_debug()
@@ -62,19 +61,23 @@ func handle_debug():
 
 
 func handle_movement_input() -> void:
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if active:
+		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("move_left", "move_right")
-	if direction:
+	if active and direction:
 		velocity.x = direction * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, SPEED * 0.5)
 
 
 func handle_weapon_input(delta: float) -> void:
+	if not active:
+		return
+
 	# Charge up weapon power
 	if Input.is_action_pressed("shoot"):
 		if power < max_power:
@@ -99,7 +102,11 @@ func shoot_bazooka(vector: Vector2):
 	bazooka_shot.emit(bazooka)
 
 
-func receive_damage_and_knockback(_pos, radius):
-	## TODO: consider adding dedicated weapon damage value
-	var weapon_damage = radius * 0.5
+func receive_damage_and_knockback(explosion_pos: Vector2, radius: float):
+	# TODO: Move these variables into the weapons
+	var weapon_damage = 25
+	var knockback_force = radius * 6
 	health -= weapon_damage
+	var knockback = (global_position - explosion_pos).normalized()
+	velocity.x += knockback.x * knockback_force
+	velocity.y += knockback.y * knockback_force
