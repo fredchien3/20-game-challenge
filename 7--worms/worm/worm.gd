@@ -16,6 +16,9 @@ const JUMP_VELOCITY := -300.0
 # Weapon scenes
 @export var GrenadeScene: PackedScene
 @export var BazookaScene: PackedScene
+@export var Active: Label
+@export var Health: ProgressBar
+@export var PowerBar: ProgressBar
 
 ## Whether it is this worm's turn to move and shoot
 var active = false
@@ -31,7 +34,7 @@ func _physics_process(delta: float) -> void:
 	handle_weapon_input(delta)
 
 	move_and_slide()
-	handle_debug()
+	handle_labels()
 
 
 # Event-based input handling
@@ -49,17 +52,21 @@ func _input(event: InputEvent) -> void:
 		power = 0
 
 
-func handle_debug():
-	# debug
+func handle_labels():
 	if power > 0:
-		$DebugPower.text = str(int(power))
+		PowerBar.value = (power / max_power) * 100
+		var vec = (get_global_mouse_position() - global_position).normalized()
+		PowerBar.rotation = vec.angle()
+		PowerBar.visible = true
+	else:
+		PowerBar.visible = false
 
 	if active:
-		$DebugActive.visible = true
+		Active.visible = true
 	else:
-		$DebugActive.visible = false
+		Active.visible = false
 
-	$Health.value = health
+	Health.value = health
 
 
 func handle_movement_input() -> void:
