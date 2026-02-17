@@ -10,7 +10,7 @@ height = 12.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j11kb"]
 radius = 3.0
-height = 14.0
+height = 24.0
 
 [node name="Bazooka" type="RigidBody2D" unique_id=1754658141]
 collision_layer = 0
@@ -20,7 +20,7 @@ explosion_radius = 60.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=357294196]
 position = Vector2(-5.9604645e-08, 1.1920929e-07)
-scale = Vector2(14, 6.000001)
+scale = Vector2(23.999998, 6.000001)
 texture = SubResource("PlaceholderTexture2D_8hmnk")
 
 [node name="CollisionShapeDisabled" type="CollisionShape2D" parent="." unique_id=2104293576]

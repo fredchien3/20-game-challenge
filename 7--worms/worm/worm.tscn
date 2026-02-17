@@ -8,7 +8,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wm2cs"]
 
-[node name="Worm" type="CharacterBody2D" unique_id=1631304650 node_paths=PackedStringArray("Active", "Health", "PowerBar") groups=["worms"]]
+[node name="Worm" type="CharacterBody2D" unique_id=1631304650 node_paths=PackedStringArray("Health", "PowerBar", "WeaponLabel") groups=["worms"]]
 collision_layer = 2
 script = ExtResource("1_owvmj")
 explosion_radius = 50.0
@@ -16,9 +16,9 @@ power_rate = 500.0
 max_power = 750.0
 GrenadeScene = ExtResource("2_cbyew")
 BazookaScene = ExtResource("3_ro6a8")
-Active = NodePath("UI/Active")
 Health = NodePath("UI/Health")
 PowerBar = NodePath("UI/PowerBar")
+WeaponLabel = NodePath("UI/Weapon")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=622019416]
 position = Vector2(-4.76837e-07, -2.38419e-07)
@@ -28,16 +28,12 @@ texture = SubResource("PlaceholderTexture2D_wm2cs")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2094025430]
 shape = SubResource("CapsuleShape2D_wm2cs")
 
-[node name="UI" type="Node2D" parent="." unique_id=2081914720]
-
-[node name="Active" type="Label" parent="UI" unique_id=1653785646]
-offset_left = -22.0
-offset_top = 10.0
-offset_right = 24.0
-offset_bottom = 33.0
-text = "active"
+[node name="UI" type="Control" parent="." unique_id=852118461]
+layout_mode = 3
+anchors_preset = 0
 
 [node name="Health" type="ProgressBar" parent="UI" unique_id=171208404]
+layout_mode = 0
 offset_left = -22.0
 offset_top = -27.0
 offset_right = 22.0
@@ -46,6 +42,8 @@ value = 50.0
 show_percentage = false
 
 [node name="PowerBar" type="ProgressBar" parent="UI" unique_id=935247403]
+visible = false
+layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -57,3 +55,13 @@ grow_vertical = 2
 pivot_offset = Vector2(-17, 3)
 value = 50.0
 show_percentage = false
+
+[node name="Weapon" type="Label" parent="UI" unique_id=399106915]
+visible = false
+layout_mode = 0
+offset_left = 8.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 11.0
+pivot_offset = Vector2(-8, 12)
+text = "G"

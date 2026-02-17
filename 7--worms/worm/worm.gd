@@ -16,14 +16,16 @@ const JUMP_VELOCITY := -300.0
 # Weapon scenes
 @export var GrenadeScene: PackedScene
 @export var BazookaScene: PackedScene
-@export var Active: Label
 @export var Health: ProgressBar
 @export var PowerBar: ProgressBar
+@export var WeaponLabel: Label
 
 ## Whether it is this worm's turn to move and shoot
 var active = false
 var power := 0.0
 var health := 100.0
+
+@onready var current_weapon: PackedScene = GrenadeScene
 
 
 func _physics_process(delta: float) -> void:
@@ -47,9 +49,20 @@ func _input(event: InputEvent) -> void:
 		var a = global_position
 		var b = get_global_mouse_position()
 		var vector = (b - a).normalized() * power
-		#throw_grenade(vector)
-		shoot_bazooka(vector)
+		if current_weapon == GrenadeScene:
+			throw_grenade(vector)
+		elif current_weapon == BazookaScene:
+			shoot_bazooka(vector)
+		else:
+			printerr("Weapon not implemented")
 		power = 0
+
+	if event.is_action_pressed("select_grenade"):
+		current_weapon = GrenadeScene
+		WeaponLabel.text = "G"
+	elif event.is_action_pressed("select_bazooka"):
+		current_weapon = BazookaScene
+		WeaponLabel.text = "B"
 
 
 func handle_labels():
@@ -62,9 +75,9 @@ func handle_labels():
 		PowerBar.visible = false
 
 	if active:
-		Active.visible = true
+		WeaponLabel.visible = true
 	else:
-		Active.visible = false
+		WeaponLabel.visible = false
 
 	Health.value = health
 
