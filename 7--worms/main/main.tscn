@@ -3,10 +3,12 @@
 [ext_resource type="Script" uid="uid://c1gh8ng2ipfgj" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="PackedScene" uid="uid://cawnxutqlt4sl" path="res://main/level.tscn" id="2_pjrb6"]
 
-[node name="Main" type="Node2D" unique_id=422347337 node_paths=PackedStringArray("MainMenu")]
+[node name="Main" type="Node2D" unique_id=422347337 node_paths=PackedStringArray("MainMenu", "GameOverMenu", "Winner")]
 script = ExtResource("1_53q0u")
 MainMenu = NodePath("MainMenu")
+GameOverMenu = NodePath("GameOverMenu")
 LevelScene = ExtResource("2_pjrb6")
+Winner = NodePath("GameOverMenu/Container/Winner")
 
 [node name="MainMenu" type="CanvasLayer" parent="." unique_id=1764160728]
 
@@ -28,7 +30,7 @@ offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="MainMenu/Container" unique_id=1661465765]
+[node name="Title" type="Label" parent="MainMenu/Container" unique_id=1661465765]
 layout_mode = 2
 text = "Beans"
 
@@ -36,4 +38,37 @@ text = "Beans"
 layout_mode = 2
 text = "Start"
 
+[node name="GameOverMenu" type="CanvasLayer" parent="." unique_id=685846167]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="GameOverMenu" unique_id=1172972034]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.11372549, 0.1882353, 0.41960785, 0.5019608)
+
+[node name="Container" type="VBoxContainer" parent="GameOverMenu" unique_id=753083097]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -29.0
+offset_right = 24.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="GameOverMenu/Container" unique_id=705792072]
+layout_mode = 2
+text = "Game Over!"
+
+[node name="Winner" type="Label" parent="GameOverMenu/Container" unique_id=899992650]
+layout_mode = 2
+
+[node name="Restart" type="Button" parent="GameOverMenu/Container" unique_id=72066720]
+layout_mode = 2
+text = "Restart"
+
 [connection signal="pressed" from="MainMenu/Container/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="GameOverMenu/Container/Restart" to="." method="_on_start_pressed"]

@@ -25,7 +25,7 @@ const MOVEMENT_ALLOWANCE_AFTER_FIRING := 1.0
 var can_move = false
 var can_shoot = false
 var power := 0.0
-var health := 100.0
+var health := 20.0
 
 @onready var current_weapon: PackedScene = GrenadeScene
 
@@ -158,5 +158,4 @@ func die_then_explode():
 func die_from_oob():
 	set_active(false)
 	died.emit(self)
-	await get_tree().process_frame
 	queue_free()

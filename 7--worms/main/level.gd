@@ -1,18 +1,23 @@
 extends Node2D
 
+signal game_over(winning_worm)
+
 ## How long to wait after explosion before cycling active worm
 const WORM_CYCLE_DELAY := 1.0
 
 @export var terrain: StaticBody2D
 @export var camera: Camera2D
 
+var game_active = true
 var active_worm: CharacterBody2D
 var active_worm_index := 0
 var worms: Array[Node]
 
 
 func _ready() -> void:
+	Engine.time_scale = 1.0
 	worms = get_tree().get_nodes_in_group("worms")
+
 	worms.sort_custom(func(a, b): return a.global_position.x < b.global_position.x)
 
 	active_worm = worms[active_worm_index]
@@ -27,9 +32,27 @@ func _ready() -> void:
 		worm.exploded.connect(_on_explosion)
 
 
+func _physics_process(_delta: float) -> void:
+	if not game_active:
+		return
+
+	if len(worms) == 1:
+		game_over.emit(worms[0])
+		Engine.time_scale = 0.25
+		game_active = false
+	if len(worms) == 0:
+		game_over.emit(null)
+		Engine.time_scale = 0.25
+		game_active = false
+
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug_p"):
 		cycle_active_worm()
+
+
+func reload():
+	get_tree().reload_current_scene()
 
 
 ## Cycles through the worms array, skipping past any worms that have been freed
@@ -54,7 +77,7 @@ func cycle_active_worm():
 
 ## Worm died but hasn't yet exploded.
 func _on_worm_died(worm: CharacterBody2D):
-	worms.remove_at(worms.find(worm))
+	worms.erase(worm)
 	if active_worm == worm:
 		await get_tree().create_timer(2.5).timeout
 		active_worm_index -= 1
