@@ -1,5 +1,8 @@
 extends Node2D
 
+## How long to wait after explosion before cycling active worm
+const WORM_CYCLE_DELAY := 1.0
+
 @export var terrain: StaticBody2D
 @export var camera: Camera2D
 
@@ -59,12 +62,19 @@ func _on_worm_died(worm: CharacterBody2D):
 
 func _on_worm_grenade_thrown(grenade: RigidBody2D) -> void:
 	add_child(grenade)
-	grenade.exploded.connect(_on_explosion)
+	grenade.exploded.connect(_on_weapon_explosion)
 
 
 func _on_worm_bazooka_shot(bazooka: RigidBody2D) -> void:
 	add_child(bazooka)
-	bazooka.exploded.connect(_on_explosion)
+	bazooka.exploded.connect(_on_weapon_explosion)
+
+
+## Calls _on_explosion handler, and adds a delayed worm cycle
+func _on_weapon_explosion(pos, radius):
+	_on_explosion(pos, radius)
+	await get_tree().create_timer(WORM_CYCLE_DELAY).timeout
+	cycle_active_worm()
 
 
 func _on_explosion(pos, radius):

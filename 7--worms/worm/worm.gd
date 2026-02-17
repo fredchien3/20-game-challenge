@@ -8,6 +8,8 @@ signal exploded(pos, radius)
 # Movement
 const SPEED := 150.0
 const JUMP_VELOCITY := -300.0
+## How long the worm gets to move for after firing weapon
+const MOVEMENT_ALLOWANCE_AFTER_FIRING := 1.0
 
 @export var explosion_radius: float
 # Aiming/charging
@@ -56,6 +58,9 @@ func _input(event: InputEvent) -> void:
 		else:
 			printerr("Weapon not implemented")
 		power = 0
+
+		await get_tree().create_timer(MOVEMENT_ALLOWANCE_AFTER_FIRING).timeout
+		active = false
 
 	if event.is_action_pressed("select_grenade"):
 		current_weapon = GrenadeScene
