@@ -35,15 +35,14 @@ func _physics_process(delta: float) -> void:
 
 
 # Event-based input handling
-# TODO: Fix bug when camera is in play. Camera makes it so aim becomes offset.
 func _input(event: InputEvent) -> void:
 	if not active:
 		return
 
 	if event is InputEventMouseButton and not event.is_pressed():
 		# To find a vector pointing from A to B, use B - A.
-		var a = position
-		var b = event.global_position
+		var a = global_position
+		var b = get_global_mouse_position()
 		var vector = (b - a).normalized() * power
 		#throw_grenade(vector)
 		shoot_bazooka(vector)
