@@ -16,7 +16,7 @@ func _ready() -> void:
 	worms.sort_custom(func(a, b): return a.global_position.x < b.global_position.x)
 
 	active_worm = worms[active_worm_index]
-	active_worm.active = true
+	active_worm.set_active(true)
 	camera.global_position = active_worm.global_position
 
 	# Bind weapon spawns
@@ -38,7 +38,7 @@ func cycle_active_worm():
 		return
 
 	if active_worm:
-		active_worm.active = false
+		active_worm.set_active(false)
 
 	active_worm_index += 1
 	if active_worm_index >= len(worms):
@@ -46,12 +46,13 @@ func cycle_active_worm():
 
 	if worms[active_worm_index]:
 		active_worm = worms[active_worm_index]
-		active_worm.active = true
+		active_worm.set_active(true)
 		camera.global_position = active_worm.global_position
 	else:
 		cycle_active_worm()
 
 
+## Worm died but hasn't yet exploded.
 func _on_worm_died(worm: CharacterBody2D):
 	worms.remove_at(worms.find(worm))
 	if active_worm == worm:

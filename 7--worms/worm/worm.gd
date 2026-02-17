@@ -22,8 +22,8 @@ const MOVEMENT_ALLOWANCE_AFTER_FIRING := 1.0
 @export var PowerBar: ProgressBar
 @export var WeaponLabel: Label
 
-## Whether it is this worm's turn to move and shoot
-var active = false
+var can_move = false
+var can_shoot = false
 var power := 0.0
 var health := 100.0
 
@@ -43,7 +43,7 @@ func _physics_process(delta: float) -> void:
 
 # Event-based input handling
 func _input(event: InputEvent) -> void:
-	if not active:
+	if not can_shoot:
 		return
 
 	if event is InputEventMouseButton and not event.is_pressed():
@@ -58,9 +58,10 @@ func _input(event: InputEvent) -> void:
 		else:
 			printerr("Weapon not implemented")
 		power = 0
+		can_shoot = false
 
 		await get_tree().create_timer(MOVEMENT_ALLOWANCE_AFTER_FIRING).timeout
-		active = false
+		can_move = false
 
 	if event.is_action_pressed("select_grenade"):
 		current_weapon = GrenadeScene
@@ -71,15 +72,14 @@ func _input(event: InputEvent) -> void:
 
 
 func handle_labels():
-	if power > 0:
-		PowerBar.value = (power / max_power) * 100
-		var vec = (get_global_mouse_position() - global_position).normalized()
-		PowerBar.rotation = vec.angle()
-		PowerBar.visible = true
-	else:
-		PowerBar.visible = false
-
-	if active:
+	if can_move:
+		if can_shoot and power > 0:
+			PowerBar.value = (power / max_power) * 100
+			var vec = (get_global_mouse_position() - global_position).normalized()
+			PowerBar.rotation = vec.angle()
+			PowerBar.visible = true
+		else:
+			PowerBar.visible = false
 		WeaponLabel.visible = true
 	else:
 		WeaponLabel.visible = false
@@ -88,27 +88,32 @@ func handle_labels():
 
 
 func handle_movement_input() -> void:
-	if active:
+	if can_move:
 		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("move_left", "move_right")
-	if active and direction:
+	if can_move and direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * 0.5)
 
 
 func handle_weapon_input(delta: float) -> void:
-	if not active:
+	if not can_shoot:
 		return
 
 	# Charge up weapon power
 	if Input.is_action_pressed("shoot"):
 		if power < max_power:
 			power += power_rate * delta
+
+
+func set_active(status: bool):
+	can_move = status
+	can_shoot = status
 
 
 ## Instantiates a grenade with the correct position and velocity, emits it
@@ -143,7 +148,7 @@ func receive_damage_and_knockback(explosion_pos: Vector2, radius: float):
 
 
 func die_then_explode():
-	active = false
+	set_active(false)
 	died.emit(self)
 	await get_tree().create_timer(2.5).timeout
 	exploded.emit(global_position, explosion_radius)
