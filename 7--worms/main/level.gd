@@ -99,3 +99,8 @@ func _on_explosion(pos, radius):
 func _on_explosion_area_body_entered(body, pos, radius):
 	if body.is_in_group("worms"):
 		body.receive_damage_and_knockback(pos, radius)
+
+
+func _on_out_of_bounds_body_entered(body: Node2D) -> void:
+	if body.is_in_group("worms"):
+		body.die_from_oob()

@@ -153,3 +153,10 @@ func die_then_explode():
 	await get_tree().create_timer(2.5).timeout
 	exploded.emit(global_position, explosion_radius)
 	queue_free()
+
+
+func die_from_oob():
+	set_active(false)
+	died.emit(self)
+	await get_tree().process_frame
+	queue_free()
