@@ -77,6 +77,7 @@ func cycle_active_worm():
 
 ## Worm died but hasn't yet exploded.
 func _on_worm_died(worm: CharacterBody2D):
+	worm.remove_from_group("worms") # Fixes the Freed Object restart bug
 	worms.erase(worm)
 	if active_worm == worm:
 		await get_tree().create_timer(2.5).timeout

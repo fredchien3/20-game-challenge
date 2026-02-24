@@ -20,7 +20,7 @@ func _process(_delta: float) -> void:
 
 func _on_start_pressed() -> void:
 	if level:
-		level.free()
+		level.queue_free()
 
 	MainMenu.visible = false
 	GameOverMenu.visible = false
