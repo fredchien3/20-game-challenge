@@ -20,7 +20,9 @@ func _process(_delta: float) -> void:
 
 func _on_start_pressed() -> void:
 	if level:
-		level.free()
+		for nodes in get_tree().get_nodes_in_group("worms"):
+			nodes.remove_from_group("worms")
+		level.queue_free()
 
 	MainMenu.visible = false
 	GameOverMenu.visible = false
