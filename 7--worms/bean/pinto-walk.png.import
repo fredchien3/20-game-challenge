@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hnxodmg7uihx"
-path="res://.godot/imported/pinto-jump.png-4debec928a4bee09a09a61884b60e669.ctex"
+uid="uid://csl8ps1ntfmcn"
+path="res://.godot/imported/pinto-walk.png-b1fbe048d2f092a6ea6c4bcfa342f01a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://worm/pinto-jump.png"
-dest_files=["res://.godot/imported/pinto-jump.png-4debec928a4bee09a09a61884b60e669.ctex"]
+source_file="res://bean/pinto-walk.png"
+dest_files=["res://.godot/imported/pinto-walk.png-b1fbe048d2f092a6ea6c4bcfa342f01a.ctex"]
 
 [params]
 

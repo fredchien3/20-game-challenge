@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ckvvbgyd6fwgv"
-path="res://.godot/imported/pinto-idle.png-0b109c30bdf2e777db2673885b747d14.ctex"
+path="res://.godot/imported/pinto-idle.png-e55d976749d141dbce431601aced12f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://worm/pinto-idle.png"
-dest_files=["res://.godot/imported/pinto-idle.png-0b109c30bdf2e777db2673885b747d14.ctex"]
+source_file="res://bean/pinto-idle.png"
+dest_files=["res://.godot/imported/pinto-idle.png-e55d976749d141dbce431601aced12f7.ctex"]
 
 [params]
 

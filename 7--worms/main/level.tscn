@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bxebaaph0o3g" path="res://main/level.gd" id="1_uhgg0"]
 [ext_resource type="Script" uid="uid://cjbbjcjx1u0w" path="res://main/terrain.gd" id="2_2226f"]
-[ext_resource type="PackedScene" uid="uid://doykh5xnsi8a0" path="res://worm/worm.tscn" id="3_4f75v"]
+[ext_resource type="PackedScene" uid="uid://doykh5xnsi8a0" path="res://bean/bean.tscn" id="3_4f75v"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uhgg0"]
 
@@ -33,10 +33,10 @@ collision_mask = 2
 position = Vector2(576, 720)
 shape = SubResource("WorldBoundaryShape2D_uhgg0")
 
-[node name="Worm" parent="." unique_id=1631304650 instance=ExtResource("3_4f75v")]
+[node name="Bean" parent="." unique_id=1631304650 instance=ExtResource("3_4f75v")]
 position = Vector2(336, 232)
 
-[node name="Worm2" parent="." unique_id=409720799 instance=ExtResource("3_4f75v")]
+[node name="Bean2" parent="." unique_id=409720799 instance=ExtResource("3_4f75v")]
 position = Vector2(576, 240)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=932456956]

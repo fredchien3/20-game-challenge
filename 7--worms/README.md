@@ -1,4 +1,6 @@
-Worms
+Beans
+
+A tactical game inspired by Worms
 
 Learned
 

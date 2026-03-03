@@ -2,13 +2,13 @@ extends CharacterBody2D
 
 signal grenade_thrown(grenade)
 signal bazooka_shot(bazooka)
-signal died(worm)
+signal died(bean)
 signal exploded(pos, radius)
 
 # Movement
 const SPEED := 150.0
 const JUMP_VELOCITY := -300.0
-## How long the worm gets to move for after firing weapon
+## How long the bean gets to move for after firing weapon
 const MOVEMENT_ALLOWANCE_AFTER_FIRING := 1.0
 
 @export var explosion_radius: float
