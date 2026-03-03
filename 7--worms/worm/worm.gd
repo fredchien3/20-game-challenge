@@ -21,6 +21,7 @@ const MOVEMENT_ALLOWANCE_AFTER_FIRING := 1.0
 @export var Health: ProgressBar
 @export var PowerBar: ProgressBar
 @export var WeaponLabel: Label
+@export var Sprite: AnimatedSprite2D
 
 var can_move = false
 var can_shoot = false
@@ -88,17 +89,27 @@ func handle_labels():
 
 
 func handle_movement_input() -> void:
+	# TODO: add static typing
+	var animation_to_set = "idle"
+
 	if can_move:
-		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("move_left", "move_right")
 	if can_move and direction:
 		velocity.x = direction * SPEED
+		animation_to_set = "walk"
+		Sprite.flip_h = direction < 0
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * 0.5)
+		animation_to_set = "idle"
+
+	if velocity.y != 0:
+		animation_to_set = "jump"
+
+	Sprite.animation = animation_to_set
 
 
 func handle_weapon_input(delta: float) -> void:
