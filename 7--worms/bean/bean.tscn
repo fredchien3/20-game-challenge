@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://kykg8bjome8x" path="res://weapons/bazooka.tscn" id="3_324c8"]
 [ext_resource type="Texture2D" uid="uid://ckvvbgyd6fwgv" path="res://bean/pinto-idle.png" id="4_fsii2"]
 [ext_resource type="Texture2D" uid="uid://hnxodmg7uihx" path="res://bean/pinto-jump.png" id="5_m42jw"]
-[ext_resource type="Texture2D" uid="uid://csl8ps1ntfmcn" path="res://bean/pinto-walk.png" id="6_1l56a"]
+[ext_resource type="Texture2D" uid="uid://jo7ybkatufkk" path="res://bean/pinto-walk.png" id="6_1l56a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i34a6"]
 atlas = ExtResource("4_fsii2")
@@ -23,31 +23,31 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("5_m42jw")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bga72"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2qa3"]
 atlas = ExtResource("6_1l56a")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6wuwh"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nulo1"]
 atlas = ExtResource("6_1l56a")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7iu6d"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_324c8"]
 atlas = ExtResource("6_1l56a")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hq7r5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsii2"]
 atlas = ExtResource("6_1l56a")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qk618"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_m42jw"]
 atlas = ExtResource("6_1l56a")
 region = Rect2(128, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qkfxm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1l56a"]
 atlas = ExtResource("6_1l56a")
 region = Rect2(160, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rlcqx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehi3l"]
 atlas = ExtResource("6_1l56a")
 region = Rect2(192, 0, 32, 32)
 
@@ -77,25 +77,25 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bga72")
+"texture": SubResource("AtlasTexture_a2qa3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6wuwh")
+"texture": SubResource("AtlasTexture_nulo1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7iu6d")
+"texture": SubResource("AtlasTexture_324c8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hq7r5")
+"texture": SubResource("AtlasTexture_fsii2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qk618")
+"texture": SubResource("AtlasTexture_m42jw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qkfxm")
+"texture": SubResource("AtlasTexture_1l56a")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rlcqx")
+"texture": SubResource("AtlasTexture_ehi3l")
 }],
 "loop": true,
 "name": &"walk",
