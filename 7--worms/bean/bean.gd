@@ -21,7 +21,9 @@ const MOVEMENT_ALLOWANCE_AFTER_FIRING := 1.0
 @export var MissileScene: PackedScene
 @export var Health: ProgressBar
 @export var PowerBar: ProgressBar
-@export var WeaponLabel: Label
+@export var WeaponSprite: Sprite2D
+@export var GrenadeTexture: Resource
+@export var BazookaTexture: Resource
 @export var Sprite: AnimatedSprite2D
 
 var can_move = false
@@ -66,25 +68,30 @@ func _input(event: InputEvent) -> void:
 		can_move = false
 
 	if event.is_action_pressed("select_grenade"):
+		WeaponSprite.texture = GrenadeTexture
 		current_weapon = GrenadeScene
-		WeaponLabel.text = "G"
 	elif event.is_action_pressed("select_bazooka"):
+		WeaponSprite.texture = BazookaTexture
 		current_weapon = MissileScene
-		WeaponLabel.text = "B"
 
 
 func handle_labels():
-	if can_move:
-		if can_shoot and power > 0:
-			PowerBar.value = (power / max_power) * 100
-			var vec = (get_global_mouse_position() - global_position).normalized()
-			PowerBar.rotation = vec.angle()
-			PowerBar.visible = true
-		else:
-			PowerBar.visible = false
-		WeaponLabel.visible = true
+	if can_move and can_shoot and power > 0:
+		PowerBar.value = (power / max_power) * 100
+		var vec = (get_global_mouse_position() - global_position).normalized()
+		PowerBar.rotation = vec.angle()
+		PowerBar.visible = true
+
+		WeaponSprite.rotation = vec.angle()
+		WeaponSprite.flip_h = false
+		WeaponSprite.flip_v = vec.angle_to(Vector2.UP) > 0
 	else:
-		WeaponLabel.visible = false
+		PowerBar.visible = false
+
+	if can_shoot:
+		WeaponSprite.visible = true
+	else:
+		WeaponSprite.visible = false
 
 	Health.value = health
 
@@ -103,6 +110,7 @@ func handle_movement_input() -> void:
 		velocity.x = direction * SPEED
 		animation_to_set = "walk"
 		Sprite.flip_h = direction < 0
+		WeaponSprite.flip_h = direction < 0
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * 0.5)
 		animation_to_set = "idle"

@@ -3,9 +3,11 @@
 [ext_resource type="Script" uid="uid://dyfr84pc3vg3s" path="res://bean/bean.gd" id="1_a2qa3"]
 [ext_resource type="PackedScene" uid="uid://3lmayatxfj70" path="res://weapons/grenade.tscn" id="2_nulo1"]
 [ext_resource type="PackedScene" uid="uid://kykg8bjome8x" path="res://weapons/missile.tscn" id="3_a2qa3"]
+[ext_resource type="Texture2D" uid="uid://cmt7x03mm0tdj" path="res://weapons/grenade.png" id="4_324c8"]
 [ext_resource type="Texture2D" uid="uid://ckvvbgyd6fwgv" path="res://bean/pinto_idle.png" id="4_fsii2"]
 [ext_resource type="Texture2D" uid="uid://hnxodmg7uihx" path="res://bean/pinto_jump.png" id="5_m42jw"]
 [ext_resource type="Texture2D" uid="uid://jo7ybkatufkk" path="res://bean/pinto_walk.png" id="6_1l56a"]
+[ext_resource type="Texture2D" uid="uid://clcupjbeoe44q" path="res://weapons/bazooka.png" id="7_nulo1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i34a6"]
 atlas = ExtResource("4_fsii2")
@@ -105,7 +107,7 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wm2cs"]
 height = 32.0
 
-[node name="Bean" type="CharacterBody2D" unique_id=1631304650 node_paths=PackedStringArray("Health", "PowerBar", "WeaponLabel", "Sprite") groups=["beans"]]
+[node name="Bean" type="CharacterBody2D" unique_id=1631304650 node_paths=PackedStringArray("Health", "PowerBar", "WeaponSprite", "Sprite") groups=["beans"]]
 collision_layer = 2
 script = ExtResource("1_a2qa3")
 explosion_radius = 50.0
@@ -115,7 +117,9 @@ GrenadeScene = ExtResource("2_nulo1")
 MissileScene = ExtResource("3_a2qa3")
 Health = NodePath("UI/Health")
 PowerBar = NodePath("UI/PowerBar")
-WeaponLabel = NodePath("UI/Weapon")
+WeaponSprite = NodePath("UI/WeaponSprite")
+GrenadeTexture = ExtResource("4_324c8")
+BazookaTexture = ExtResource("7_nulo1")
 Sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=186977195]
@@ -156,12 +160,7 @@ pivot_offset = Vector2(-17, 3)
 value = 50.0
 show_percentage = false
 
-[node name="Weapon" type="Label" parent="UI" unique_id=399106915]
+[node name="WeaponSprite" type="Sprite2D" parent="UI" unique_id=2068245410]
 visible = false
-layout_mode = 0
-offset_left = 8.0
-offset_top = -12.0
-offset_right = 20.0
-offset_bottom = 11.0
-pivot_offset = Vector2(-8, 12)
-text = "G"
+position = Vector2(0, 3)
+texture = ExtResource("4_324c8")
