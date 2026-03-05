@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cawnxutqlt4sl"]
 
 [ext_resource type="Script" uid="uid://bxebaaph0o3g" path="res://main/level.gd" id="1_uhgg0"]
+[ext_resource type="PackedScene" uid="uid://cccowjler5w7q" path="res://weapons/explosion.tscn" id="2_4f75v"]
 [ext_resource type="Script" uid="uid://cjbbjcjx1u0w" path="res://main/terrain.gd" id="2_2226f"]
 [ext_resource type="PackedScene" uid="uid://doykh5xnsi8a0" path="res://bean/bean.tscn" id="3_4f75v"]
 
@@ -16,6 +17,7 @@ gradient = SubResource("Gradient_uhgg0")
 script = ExtResource("1_uhgg0")
 terrain = NodePath("Terrain")
 camera = NodePath("Camera2D")
+ExplosionScene = ExtResource("2_4f75v")
 
 [node name="ColorRect" type="TextureRect" parent="." unique_id=2040422406]
 texture_filter = 2

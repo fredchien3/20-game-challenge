@@ -7,6 +7,7 @@ const bean_CYCLE_DELAY := 1.0
 
 @export var terrain: StaticBody2D
 @export var camera: Camera2D
+@export var ExplosionScene: PackedScene
 
 var game_active = true
 var active_bean: CharacterBody2D
@@ -94,7 +95,7 @@ func _on_bean_bazooka_shot(bazooka: RigidBody2D) -> void:
 	bazooka.exploded.connect(_on_weapon_explosion)
 
 
-## Calls _on_explosion handler, and adds a delayed bean cycle
+## Calls _on_explosion handler, and initiates a delayed bean cycle
 func _on_weapon_explosion(pos, radius):
 	_on_explosion(pos, radius)
 	await get_tree().create_timer(bean_CYCLE_DELAY).timeout
@@ -102,6 +103,11 @@ func _on_weapon_explosion(pos, radius):
 
 
 func _on_explosion(pos, radius):
+	var explosion = ExplosionScene.instantiate()
+	explosion.global_position = pos
+	# Explosion will queue_free itself after animation completes
+	add_child(explosion)
+
 	terrain.cutout_hole(pos, radius)
 
 	# Apply damage and knockback to any beans in the area of the explosion
