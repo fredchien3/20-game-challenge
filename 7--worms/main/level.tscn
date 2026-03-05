@@ -26,6 +26,7 @@ offset_bottom = 4378.9414
 rotation = -1.5707941
 size_flags_horizontal = 0
 texture = SubResource("GradientTexture2D_2226f")
+metadata/_edit_lock_ = true
 
 [node name="Terrain" type="StaticBody2D" parent="." unique_id=1943988592 node_paths=PackedStringArray("collision", "terrain")]
 collision_mask = 0

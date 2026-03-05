@@ -50,7 +50,7 @@ func _input(event: InputEvent) -> void:
 	if not can_shoot:
 		return
 
-	if event is InputEventMouseButton and not event.is_pressed():
+	if event is InputEventMouseButton and event.is_action_released("shoot"):
 		# To find a vector pointing from A to B, use B - A.
 		var a = global_position
 		var b = get_global_mouse_position()
