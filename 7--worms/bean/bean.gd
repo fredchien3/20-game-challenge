@@ -18,6 +18,7 @@ const MOVEMENT_ALLOWANCE_AFTER_FIRING := 1.0
 # Weapon scenes
 @export var GrenadeScene: PackedScene
 @export var BazookaScene: PackedScene
+@export var MissileScene: PackedScene
 @export var Health: ProgressBar
 @export var PowerBar: ProgressBar
 @export var WeaponLabel: Label
@@ -54,7 +55,7 @@ func _input(event: InputEvent) -> void:
 		var vector = (b - a).normalized() * power
 		if current_weapon == GrenadeScene:
 			throw_grenade(vector)
-		elif current_weapon == BazookaScene:
+		elif current_weapon == MissileScene:
 			shoot_bazooka(vector)
 		else:
 			printerr("Weapon not implemented")
@@ -68,7 +69,7 @@ func _input(event: InputEvent) -> void:
 		current_weapon = GrenadeScene
 		WeaponLabel.text = "G"
 	elif event.is_action_pressed("select_bazooka"):
-		current_weapon = BazookaScene
+		current_weapon = MissileScene
 		WeaponLabel.text = "B"
 
 
@@ -137,7 +138,7 @@ func throw_grenade(vector: Vector2):
 
 
 func shoot_bazooka(vector: Vector2):
-	var bazooka = BazookaScene.instantiate()
+	var bazooka = MissileScene.instantiate()
 	bazooka.shooter = self
 	bazooka.rotation = vector.angle()
 	bazooka.position = position

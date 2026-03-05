@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://kykg8bjome8x"]
 
-[ext_resource type="Script" uid="uid://4ilivekyi88b" path="res://weapons/bazooka.gd" id="1_redko"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8hmnk"]
+[ext_resource type="Script" uid="uid://4ilivekyi88b" path="res://weapons/bazooka.gd" id="1_uclws"]
+[ext_resource type="Texture2D" uid="uid://smax08foixmx" path="res://weapons/missile.png" id="2_i17kx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_redko"]
 radius = 2.0
@@ -12,16 +11,14 @@ height = 12.0
 radius = 3.0
 height = 24.0
 
-[node name="Bazooka" type="RigidBody2D" unique_id=1754658141]
+[node name="Missile" type="RigidBody2D" unique_id=1754658141]
 collision_layer = 0
 collision_mask = 3
-script = ExtResource("1_redko")
+script = ExtResource("1_uclws")
 explosion_radius = 60.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=357294196]
-position = Vector2(-5.9604645e-08, 1.1920929e-07)
-scale = Vector2(23.999998, 6.000001)
-texture = SubResource("PlaceholderTexture2D_8hmnk")
+texture = ExtResource("2_i17kx")
 
 [node name="CollisionShapeDisabled" type="CollisionShape2D" parent="." unique_id=2104293576]
 rotation = 1.5707964

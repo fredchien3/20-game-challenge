@@ -4,12 +4,28 @@
 [ext_resource type="Script" uid="uid://cjbbjcjx1u0w" path="res://main/terrain.gd" id="2_2226f"]
 [ext_resource type="PackedScene" uid="uid://doykh5xnsi8a0" path="res://bean/bean.tscn" id="3_4f75v"]
 
+[sub_resource type="Gradient" id="Gradient_uhgg0"]
+colors = PackedColorArray(0.00012807593, 0.009648366, 0.1363981, 1, 1.92523e-05, 0.81618536, 0.9038528, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2226f"]
+gradient = SubResource("Gradient_uhgg0")
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uhgg0"]
 
 [node name="Level" type="Node2D" unique_id=1356992224 node_paths=PackedStringArray("terrain", "camera")]
 script = ExtResource("1_uhgg0")
 terrain = NodePath("Terrain")
 camera = NodePath("Camera2D")
+
+[node name="ColorRect" type="TextureRect" parent="." unique_id=2040422406]
+texture_filter = 2
+offset_left = -874.9993
+offset_top = 1329.227
+offset_right = 1066.7424
+offset_bottom = 4378.9414
+rotation = -1.5707941
+size_flags_horizontal = 0
+texture = SubResource("GradientTexture2D_2226f")
 
 [node name="Terrain" type="StaticBody2D" parent="." unique_id=1943988592 node_paths=PackedStringArray("collision", "terrain")]
 collision_mask = 0
@@ -34,9 +50,11 @@ position = Vector2(576, 720)
 shape = SubResource("WorldBoundaryShape2D_uhgg0")
 
 [node name="Bean" parent="." unique_id=1631304650 instance=ExtResource("3_4f75v")]
+texture_filter = 1
 position = Vector2(336, 232)
 
 [node name="Bean2" parent="." unique_id=409720799 instance=ExtResource("3_4f75v")]
+texture_filter = 1
 position = Vector2(576, 240)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=932456956]

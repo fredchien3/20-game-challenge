@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dyfr84pc3vg3s" path="res://bean/bean.gd" id="1_a2qa3"]
 [ext_resource type="PackedScene" uid="uid://3lmayatxfj70" path="res://weapons/grenade.tscn" id="2_nulo1"]
-[ext_resource type="PackedScene" uid="uid://kykg8bjome8x" path="res://weapons/bazooka.tscn" id="3_324c8"]
-[ext_resource type="Texture2D" uid="uid://ckvvbgyd6fwgv" path="res://bean/pinto-idle.png" id="4_fsii2"]
-[ext_resource type="Texture2D" uid="uid://hnxodmg7uihx" path="res://bean/pinto-jump.png" id="5_m42jw"]
-[ext_resource type="Texture2D" uid="uid://jo7ybkatufkk" path="res://bean/pinto-walk.png" id="6_1l56a"]
+[ext_resource type="PackedScene" uid="uid://kykg8bjome8x" path="res://weapons/missile.tscn" id="3_a2qa3"]
+[ext_resource type="Texture2D" uid="uid://ckvvbgyd6fwgv" path="res://bean/pinto_idle.png" id="4_fsii2"]
+[ext_resource type="Texture2D" uid="uid://hnxodmg7uihx" path="res://bean/pinto_jump.png" id="5_m42jw"]
+[ext_resource type="Texture2D" uid="uid://jo7ybkatufkk" path="res://bean/pinto_walk.png" id="6_1l56a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i34a6"]
 atlas = ExtResource("4_fsii2")
@@ -106,14 +106,13 @@ animations = [{
 height = 32.0
 
 [node name="Bean" type="CharacterBody2D" unique_id=1631304650 node_paths=PackedStringArray("Health", "PowerBar", "WeaponLabel", "Sprite") groups=["beans"]]
-texture_filter = 1
 collision_layer = 2
 script = ExtResource("1_a2qa3")
 explosion_radius = 50.0
 power_rate = 500.0
 max_power = 750.0
 GrenadeScene = ExtResource("2_nulo1")
-BazookaScene = ExtResource("3_324c8")
+MissileScene = ExtResource("3_a2qa3")
 Health = NodePath("UI/Health")
 PowerBar = NodePath("UI/PowerBar")
 WeaponLabel = NodePath("UI/Weapon")
