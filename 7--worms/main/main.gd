@@ -1,9 +1,9 @@
 extends Node2D
 
-@export var MainMenu: CanvasLayer
-@export var GameOverMenu: CanvasLayer
+@export var main_menu: CanvasLayer
+@export var game_over_menu: CanvasLayer
 @export var LevelScene: PackedScene
-@export var Winner: Label
+@export var winner_label: Label
 
 var level: Node2D
 
@@ -24,8 +24,8 @@ func _on_start_pressed() -> void:
 			nodes.remove_from_group("beans")
 		level.queue_free()
 
-	MainMenu.visible = false
-	GameOverMenu.visible = false
+	main_menu.visible = false
+	game_over_menu.visible = false
 
 	level = LevelScene.instantiate()
 	level.game_over.connect(_on_game_over)
@@ -34,7 +34,7 @@ func _on_start_pressed() -> void:
 
 func _on_game_over(winner: CharacterBody2D):
 	if winner:
-		Winner.text = "Winner: " + winner.to_string()
+		winner_label.text = "Winner: " + winner.to_string()
 	else:
-		Winner.text = "Stalemate!"
-	GameOverMenu.visible = true
+		winner_label.text = "Stalemate!"
+	game_over_menu.visible = true

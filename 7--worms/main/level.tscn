@@ -59,6 +59,7 @@ position = Vector2(336, 232)
 [node name="Bean2" parent="." unique_id=409720799 instance=ExtResource("3_4f75v")]
 texture_filter = 1
 position = Vector2(576, 240)
+type = "kidney"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=932456956]
 position = Vector2(640, 360)

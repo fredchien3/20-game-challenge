@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://c1gh8ng2ipfgj" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="PackedScene" uid="uid://cawnxutqlt4sl" path="res://main/level.tscn" id="2_pjrb6"]
 
-[node name="Main" type="Node2D" unique_id=422347337 node_paths=PackedStringArray("MainMenu", "GameOverMenu", "Winner")]
+[node name="Main" type="Node2D" unique_id=422347337 node_paths=PackedStringArray("main_menu", "game_over_menu", "winner_label")]
 script = ExtResource("1_53q0u")
-MainMenu = NodePath("MainMenu")
-GameOverMenu = NodePath("GameOverMenu")
+main_menu = NodePath("MainMenu")
+game_over_menu = NodePath("GameOverMenu")
 LevelScene = ExtResource("2_pjrb6")
-Winner = NodePath("GameOverMenu/Container/Winner")
+winner_label = NodePath("GameOverMenu/Container/Winner")
 
 [node name="MainMenu" type="CanvasLayer" parent="." unique_id=1764160728]
 

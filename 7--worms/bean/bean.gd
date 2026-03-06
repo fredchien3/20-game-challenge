@@ -11,20 +11,24 @@ const JUMP_VELOCITY := -300.0
 ## How long the bean gets to move for after firing weapon
 const MOVEMENT_ALLOWANCE_AFTER_FIRING := 1.0
 
+@export_enum("pinto", "kidney") var type: String
 @export var explosion_radius: float
-# Aiming/charging
+# Aiming/charging variables
 @export var power_rate: float
 @export var max_power: float
-# Weapon scenes
+# Weapon scenes/sprites
 @export var GrenadeScene: PackedScene
-@export var BazookaScene: PackedScene
 @export var MissileScene: PackedScene
-@export var Health: ProgressBar
-@export var PowerBar: ProgressBar
-@export var WeaponSprite: Sprite2D
-@export var GrenadeTexture: Resource
-@export var BazookaTexture: Resource
-@export var Sprite: AnimatedSprite2D
+@export var weapon_sprite: Sprite2D
+@export var grenade_texture: Resource
+@export var bazooka_texture: Resource
+# Main scenes
+@export var health_bar: ProgressBar
+@export var power_bar: ProgressBar
+@export var body_sprite: AnimatedSprite2D
+# Main sprites
+@export var pinto_sprite_frames: SpriteFrames
+@export var kidney_sprite_frames: SpriteFrames
 
 var can_move = false
 var can_shoot = false
@@ -32,6 +36,11 @@ var power := 0.0
 var health := 20.0
 
 @onready var current_weapon: PackedScene = GrenadeScene
+
+
+func _ready() -> void:
+	if type == "kidney":
+		body_sprite.sprite_frames = kidney_sprite_frames
 
 
 func _physics_process(delta: float) -> void:
@@ -68,32 +77,32 @@ func _input(event: InputEvent) -> void:
 		can_move = false
 
 	if event.is_action_pressed("select_grenade"):
-		WeaponSprite.texture = GrenadeTexture
+		weapon_sprite.texture = grenade_texture
 		current_weapon = GrenadeScene
 	elif event.is_action_pressed("select_bazooka"):
-		WeaponSprite.texture = BazookaTexture
+		weapon_sprite.texture = bazooka_texture
 		current_weapon = MissileScene
 
 
 func handle_labels():
 	if can_move and can_shoot and power > 0:
-		PowerBar.value = (power / max_power) * 100
+		power_bar.value = (power / max_power) * 100
 		var vec = (get_global_mouse_position() - global_position).normalized()
-		PowerBar.rotation = vec.angle()
-		PowerBar.visible = true
+		power_bar.rotation = vec.angle()
+		power_bar.visible = true
 
-		WeaponSprite.rotation = vec.angle()
-		WeaponSprite.flip_h = false
-		WeaponSprite.flip_v = vec.angle_to(Vector2.UP) > 0
+		weapon_sprite.rotation = vec.angle()
+		weapon_sprite.flip_h = false
+		weapon_sprite.flip_v = vec.angle_to(Vector2.UP) > 0
 	else:
-		PowerBar.visible = false
+		power_bar.visible = false
 
 	if can_shoot:
-		WeaponSprite.visible = true
+		weapon_sprite.visible = true
 	else:
-		WeaponSprite.visible = false
+		weapon_sprite.visible = false
 
-	Health.value = health
+	health_bar.value = health
 
 
 func handle_movement_input() -> void:
@@ -109,8 +118,8 @@ func handle_movement_input() -> void:
 	if can_move and direction:
 		velocity.x = direction * SPEED
 		animation_to_set = "walk"
-		Sprite.flip_h = direction < 0
-		WeaponSprite.flip_h = direction < 0
+		body_sprite.flip_h = direction < 0
+		weapon_sprite.flip_h = direction < 0
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * 0.5)
 		animation_to_set = "idle"
@@ -118,7 +127,7 @@ func handle_movement_input() -> void:
 	if velocity.y != 0:
 		animation_to_set = "jump"
 
-	Sprite.animation = animation_to_set
+	body_sprite.animation = animation_to_set
 
 
 func handle_weapon_input(delta: float) -> void:

@@ -4,128 +4,35 @@
 [ext_resource type="PackedScene" uid="uid://3lmayatxfj70" path="res://weapons/grenade.tscn" id="2_nulo1"]
 [ext_resource type="PackedScene" uid="uid://kykg8bjome8x" path="res://weapons/missile.tscn" id="3_a2qa3"]
 [ext_resource type="Texture2D" uid="uid://cmt7x03mm0tdj" path="res://weapons/grenade.png" id="4_324c8"]
-[ext_resource type="Texture2D" uid="uid://ckvvbgyd6fwgv" path="res://bean/pinto_idle.png" id="4_fsii2"]
-[ext_resource type="Texture2D" uid="uid://hnxodmg7uihx" path="res://bean/pinto_jump.png" id="5_m42jw"]
-[ext_resource type="Texture2D" uid="uid://jo7ybkatufkk" path="res://bean/pinto_walk.png" id="6_1l56a"]
+[ext_resource type="SpriteFrames" uid="uid://do0v7b5xjuika" path="res://bean/pinto_sprite_frames.tres" id="6_a2qa3"]
+[ext_resource type="SpriteFrames" uid="uid://bvdpq1284lkwd" path="res://bean/kidney_sprite_frames.tres" id="7_324c8"]
 [ext_resource type="Texture2D" uid="uid://clcupjbeoe44q" path="res://weapons/bazooka.png" id="7_nulo1"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i34a6"]
-atlas = ExtResource("4_fsii2")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ncaup"]
-atlas = ExtResource("4_fsii2")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xpncx"]
-atlas = ExtResource("5_m42jw")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_shk6a"]
-atlas = ExtResource("5_m42jw")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a2qa3"]
-atlas = ExtResource("6_1l56a")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nulo1"]
-atlas = ExtResource("6_1l56a")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_324c8"]
-atlas = ExtResource("6_1l56a")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fsii2"]
-atlas = ExtResource("6_1l56a")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m42jw"]
-atlas = ExtResource("6_1l56a")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1l56a"]
-atlas = ExtResource("6_1l56a")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ehi3l"]
-atlas = ExtResource("6_1l56a")
-region = Rect2(192, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_4bq68"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i34a6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ncaup")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 2.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xpncx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_shk6a")
-}],
-"loop": true,
-"name": &"jump",
-"speed": 2.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_a2qa3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nulo1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_324c8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fsii2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m42jw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1l56a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ehi3l")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 10.0
-}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wm2cs"]
 height = 32.0
 
-[node name="Bean" type="CharacterBody2D" unique_id=1631304650 node_paths=PackedStringArray("Health", "PowerBar", "WeaponSprite", "Sprite") groups=["beans"]]
+[node name="Bean" type="CharacterBody2D" unique_id=1631304650 node_paths=PackedStringArray("weapon_sprite", "health_bar", "power_bar", "body_sprite") groups=["beans"]]
 collision_layer = 2
 script = ExtResource("1_a2qa3")
+type = "pinto"
 explosion_radius = 50.0
 power_rate = 500.0
 max_power = 750.0
 GrenadeScene = ExtResource("2_nulo1")
 MissileScene = ExtResource("3_a2qa3")
-Health = NodePath("UI/Health")
-PowerBar = NodePath("UI/PowerBar")
-WeaponSprite = NodePath("UI/WeaponSprite")
-GrenadeTexture = ExtResource("4_324c8")
-BazookaTexture = ExtResource("7_nulo1")
-Sprite = NodePath("AnimatedSprite2D")
+weapon_sprite = NodePath("UI/WeaponSprite")
+grenade_texture = ExtResource("4_324c8")
+bazooka_texture = ExtResource("7_nulo1")
+health_bar = NodePath("UI/Health")
+power_bar = NodePath("UI/PowerBar")
+body_sprite = NodePath("AnimatedSprite2D")
+pinto_sprite_frames = ExtResource("6_a2qa3")
+kidney_sprite_frames = ExtResource("7_324c8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=186977195]
 position = Vector2(-4.76837e-07, -2.38419e-07)
-sprite_frames = SubResource("SpriteFrames_4bq68")
-animation = &"walk"
+sprite_frames = ExtResource("6_a2qa3")
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2094025430]

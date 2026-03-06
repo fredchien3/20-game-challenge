@@ -3,7 +3,7 @@ extends Node2D
 signal game_over(winning_bean)
 
 ## How long to wait after explosion before cycling active bean
-const bean_CYCLE_DELAY := 1.0
+const BEAN_CYCLE_DELAY := 1.0
 
 @export var terrain: StaticBody2D
 @export var camera: Camera2D
@@ -98,7 +98,7 @@ func _on_bean_bazooka_shot(bazooka: RigidBody2D) -> void:
 ## Calls _on_explosion handler, and initiates a delayed bean cycle
 func _on_weapon_explosion(pos, radius):
 	_on_explosion(pos, radius)
-	await get_tree().create_timer(bean_CYCLE_DELAY).timeout
+	await get_tree().create_timer(BEAN_CYCLE_DELAY).timeout
 	cycle_active_bean()
 
 
