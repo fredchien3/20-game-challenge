@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ckvvbgyd6fwgv" path="res://bean/pinto_idle.png" id="1_78y4h"]
 [ext_resource type="Texture2D" uid="uid://bgedmvovynpp3" path="res://bean/pinto_dead.png" id="1_rtkag"]
+[ext_resource type="Texture2D" uid="uid://b133vxt556iug" path="res://bean/pinto_dead_midair.png" id="2_m3u5l"]
 [ext_resource type="Texture2D" uid="uid://hnxodmg7uihx" path="res://bean/pinto_jump.png" id="2_rtkag"]
 [ext_resource type="Texture2D" uid="uid://jo7ybkatufkk" path="res://bean/pinto_walk.png" id="3_m3u5l"]
 
@@ -11,6 +12,14 @@ region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2liy6"]
 atlas = ExtResource("1_rtkag")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1khtf"]
+atlas = ExtResource("2_m3u5l")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b33i0"]
+atlas = ExtResource("2_m3u5l")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i34a6"]
@@ -68,7 +77,18 @@ animations = [{
 }],
 "loop": true,
 "name": &"dead",
-"speed": 1.0
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1khtf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b33i0")
+}],
+"loop": true,
+"name": &"dead_midair",
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,

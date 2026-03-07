@@ -194,15 +194,18 @@ func _handle_movement_input() -> void:
 
 
 func _handle_animations() -> void:
-	var animation_to_set = "idle"
-
-	if velocity.x != 0:
-		animation_to_set = "walk"
-
-	if velocity.y != 0:
-		animation_to_set = "jump"
-
 	if not alive:
-		animation_to_set = "dead"
+		if velocity.y != 0:
+			body_sprite.animation = "dead_midair"
+		else:
+			body_sprite.animation = "dead"
+		return
+	if velocity.y != 0:
+		body_sprite.animation = "jump"
+		return
+	if velocity.x != 0:
+		body_sprite.animation = "walk"
+		return
 
-	body_sprite.animation = animation_to_set
+	body_sprite.animation = "idle"
+	return

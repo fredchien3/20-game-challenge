@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cqt4a8pgies8p" path="res://bean/kidney_idle.png" id="1_7a33u"]
 [ext_resource type="Texture2D" uid="uid://be0egeekabffj" path="res://bean/kidney_dead.png" id="1_v1mg7"]
+[ext_resource type="Texture2D" uid="uid://4ltcn85xborw" path="res://bean/kidney_dead_midair.png" id="2_2omty"]
 [ext_resource type="Texture2D" uid="uid://qpu3y7e1ume" path="res://bean/kidney_jump.png" id="2_v1mg7"]
 [ext_resource type="Texture2D" uid="uid://278a1ykxl05y" path="res://bean/kidney_walk.png" id="3_2omty"]
 
@@ -11,6 +12,14 @@ region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_itsdb"]
 atlas = ExtResource("1_v1mg7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ye6nl"]
+atlas = ExtResource("2_2omty")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbsmd"]
+atlas = ExtResource("2_2omty")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_86u42"]
@@ -68,7 +77,18 @@ animations = [{
 }],
 "loop": true,
 "name": &"dead",
-"speed": 1.0
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ye6nl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbsmd")
+}],
+"loop": true,
+"name": &"dead_midair",
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
