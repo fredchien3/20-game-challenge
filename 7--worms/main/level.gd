@@ -8,8 +8,11 @@ const BEAN_CYCLE_DELAY := 1.0
 @export var terrain: StaticBody2D
 @export var camera: Camera2D
 @export var ExplosionScene: PackedScene
+@export var BeanScene: PackedScene
+@export var SpawnPoint: PathFollow2D
 
 var game_active = true
+var beans_per_team = 2
 var active_bean: CharacterBody2D
 var active_bean_index := 0
 var beans: Array[Node]
@@ -17,20 +20,7 @@ var beans: Array[Node]
 
 func _ready() -> void:
 	Engine.time_scale = 1.0
-	beans = get_tree().get_nodes_in_group("beans")
-
-	beans.sort_custom(func(a, b): return a.global_position.x < b.global_position.x)
-
-	active_bean = beans[active_bean_index]
-	active_bean.set_active(true)
-	camera.global_position = active_bean.global_position
-
-	# Bind weapon spawns
-	for bean in beans:
-		bean.grenade_thrown.connect(_on_bean_grenade_thrown)
-		bean.bazooka_shot.connect(_on_bean_bazooka_shot)
-		bean.died.connect(_on_bean_died)
-		bean.exploded.connect(_on_explosion)
+	initialize_beans()
 
 
 func _physics_process(_delta: float) -> void:
@@ -50,6 +40,31 @@ func _physics_process(_delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug_p"):
 		cycle_active_bean()
+
+
+func initialize_beans() -> void:
+	for type in BeanScene.instantiate().Type.values():
+		for i in range(0, beans_per_team):
+			var bean = BeanScene.instantiate()
+			bean.set_type(type)
+			SpawnPoint.progress_ratio = randf()
+			bean.global_position = SpawnPoint.global_position
+			add_child(bean)
+
+	beans = get_tree().get_nodes_in_group("beans")
+
+	beans.sort_custom(func(a, b): return a.global_position.x < b.global_position.x)
+
+	active_bean = beans[active_bean_index]
+	active_bean.set_active(true)
+	camera.global_position = active_bean.global_position
+
+	# Bind weapon spawns
+	for bean in beans:
+		bean.grenade_thrown.connect(_on_bean_grenade_thrown)
+		bean.bazooka_shot.connect(_on_bean_bazooka_shot)
+		bean.died.connect(_on_bean_died)
+		bean.exploded.connect(_on_explosion)
 
 
 func reload():

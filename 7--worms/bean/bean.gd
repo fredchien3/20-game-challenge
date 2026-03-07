@@ -5,13 +5,15 @@ signal bazooka_shot(bazooka)
 signal died(bean)
 signal exploded(pos, radius)
 
+enum Type { PINTO, KIDNEY }
+
 # Movement
 const SPEED := 150.0
 const JUMP_VELOCITY := -300.0
 ## How long the bean gets to move for after firing weapon
 const MOVEMENT_ALLOWANCE_AFTER_FIRING := 1.0
 
-@export_enum("pinto", "kidney") var type: String
+@export var type: Type
 @export var explosion_radius: float
 # Aiming/charging variables
 @export var power_rate: float
@@ -36,11 +38,6 @@ var power := 0.0
 var health := 20.0
 
 @onready var current_weapon: PackedScene = GrenadeScene
-
-
-func _ready() -> void:
-	if type == "kidney":
-		body_sprite.sprite_frames = kidney_sprite_frames
 
 
 func _physics_process(delta: float) -> void:
@@ -82,6 +79,12 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("select_bazooka"):
 		weapon_sprite.texture = bazooka_texture
 		current_weapon = MissileScene
+
+
+func set_type(_type: Type) -> void:
+	type = _type
+	if type == Type.KIDNEY:
+		body_sprite.sprite_frames = kidney_sprite_frames
 
 
 func handle_labels():

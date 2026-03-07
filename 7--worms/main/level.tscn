@@ -13,11 +13,19 @@ gradient = SubResource("Gradient_uhgg0")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uhgg0"]
 
-[node name="Level" type="Node2D" unique_id=1356992224 node_paths=PackedStringArray("terrain", "camera")]
+[sub_resource type="Curve2D" id="Curve2D_2226f"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 273, 253, 0, 0, 0, 0, 878, 253)
+}
+point_count = 2
+
+[node name="Level" type="Node2D" unique_id=1356992224 node_paths=PackedStringArray("terrain", "camera", "SpawnPoint")]
 script = ExtResource("1_uhgg0")
 terrain = NodePath("Terrain")
 camera = NodePath("Camera2D")
 ExplosionScene = ExtResource("2_4f75v")
+BeanScene = ExtResource("3_4f75v")
+SpawnPoint = NodePath("SpawnPath/SpawnPoint")
 
 [node name="ColorRect" type="TextureRect" parent="." unique_id=2040422406]
 texture_filter = 2
@@ -52,17 +60,14 @@ collision_mask = 2
 position = Vector2(576, 720)
 shape = SubResource("WorldBoundaryShape2D_uhgg0")
 
-[node name="Bean" parent="." unique_id=1631304650 instance=ExtResource("3_4f75v")]
-texture_filter = 1
-position = Vector2(336, 232)
-
-[node name="Bean2" parent="." unique_id=409720799 instance=ExtResource("3_4f75v")]
-texture_filter = 1
-position = Vector2(576, 240)
-type = "kidney"
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=932456956]
 position = Vector2(640, 360)
 position_smoothing_enabled = true
+
+[node name="SpawnPath" type="Path2D" parent="." unique_id=2081043409]
+curve = SubResource("Curve2D_2226f")
+
+[node name="SpawnPoint" type="PathFollow2D" parent="SpawnPath" unique_id=1674304486]
+position = Vector2(273, 253)
 
 [connection signal="body_entered" from="OutOfBounds" to="." method="_on_out_of_bounds_body_entered"]

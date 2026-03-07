@@ -14,7 +14,6 @@ height = 32.0
 [node name="Bean" type="CharacterBody2D" unique_id=1631304650 node_paths=PackedStringArray("weapon_sprite", "health_bar", "power_bar", "body_sprite") groups=["beans"]]
 collision_layer = 2
 script = ExtResource("1_a2qa3")
-type = "pinto"
 explosion_radius = 50.0
 power_rate = 500.0
 max_power = 750.0
@@ -32,8 +31,9 @@ kidney_sprite_frames = ExtResource("7_324c8")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=186977195]
 position = Vector2(-4.76837e-07, -2.38419e-07)
 sprite_frames = ExtResource("6_a2qa3")
-animation = &"idle"
+animation = &"walk"
 autoplay = "idle"
+frame_progress = 0.88736075
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2094025430]
 position = Vector2(2, 0)
