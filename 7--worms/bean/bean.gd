@@ -42,14 +42,22 @@ var health := 20.0
 
 
 func _physics_process(delta: float) -> void:
+	# Apply gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED * 0.1)
 
-	handle_movement_input()
-	handle_weapon_input(delta)
+	if can_move:
+		_handle_movement_input()
+
+	if can_shoot:
+		_handle_weapon_input(delta)
+
+	_handle_labels()
+	_handle_animations()
 
 	move_and_slide()
-	handle_labels()
 
 
 # Event-based input handling
@@ -86,62 +94,6 @@ func set_type(_type: Type) -> void:
 	type = _type
 	if type == Type.KIDNEY:
 		body_sprite.sprite_frames = kidney_sprite_frames
-
-
-func handle_labels():
-	if can_move and can_shoot and power > 0:
-		power_bar.value = (power / max_power) * 100
-		var vec = (get_global_mouse_position() - global_position).normalized()
-		power_bar.rotation = vec.angle()
-		power_bar.visible = true
-
-		weapon_sprite.rotation = vec.angle()
-		weapon_sprite.flip_h = false
-		weapon_sprite.flip_v = vec.angle_to(Vector2.UP) > 0
-	else:
-		power_bar.visible = false
-
-	if can_shoot:
-		weapon_sprite.visible = true
-	else:
-		weapon_sprite.visible = false
-
-	health_bar.value = health
-
-
-func handle_movement_input() -> void:
-	# TODO: add static typing
-	var animation_to_set = "idle"
-
-	if can_move:
-		if Input.is_action_just_pressed("jump") and is_on_floor():
-			velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	var direction := Input.get_axis("move_left", "move_right")
-	if can_move and direction:
-		velocity.x = direction * SPEED
-		animation_to_set = "walk"
-		body_sprite.flip_h = direction < 0
-		weapon_sprite.flip_h = direction < 0
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED * 0.5)
-		animation_to_set = "idle"
-
-	if velocity.y != 0:
-		animation_to_set = "jump"
-
-	body_sprite.animation = animation_to_set
-
-
-func handle_weapon_input(delta: float) -> void:
-	if not can_shoot:
-		return
-
-	# Charge up weapon power
-	if Input.is_action_pressed("shoot"):
-		if power < max_power:
-			power += power_rate * delta
 
 
 ## Controls whether it's this bean's turn
@@ -195,3 +147,62 @@ func die_from_oob():
 	set_active(false)
 	died.emit(self)
 	queue_free()
+
+
+func _handle_weapon_input(delta: float) -> void:
+	# Charge up weapon power
+	if Input.is_action_pressed("shoot"):
+		if power < max_power:
+			power += power_rate * delta
+
+
+func _handle_labels():
+	if can_move and can_shoot and power > 0:
+		power_bar.value = (power / max_power) * 100
+		var vec = (get_global_mouse_position() - global_position).normalized()
+		power_bar.rotation = vec.angle()
+		power_bar.visible = true
+
+		weapon_sprite.rotation = vec.angle()
+		weapon_sprite.flip_h = false
+		weapon_sprite.flip_v = vec.angle_to(Vector2.UP) > 0
+	else:
+		power_bar.visible = false
+
+	if can_shoot:
+		weapon_sprite.visible = true
+	else:
+		weapon_sprite.visible = false
+
+	health_bar.value = health
+
+
+func _handle_movement_input() -> void:
+	# TODO: add static typing
+
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	var direction := Input.get_axis("move_left", "move_right")
+	if direction:
+		velocity.x = direction * SPEED
+		body_sprite.flip_h = direction < 0
+		weapon_sprite.flip_h = direction < 0
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED * 0.5)
+
+
+func _handle_animations() -> void:
+	var animation_to_set = "idle"
+
+	if velocity.x != 0:
+		animation_to_set = "walk"
+
+	if velocity.y != 0:
+		animation_to_set = "jump"
+
+	if not alive:
+		animation_to_set = "dead"
+
+	body_sprite.animation = animation_to_set
