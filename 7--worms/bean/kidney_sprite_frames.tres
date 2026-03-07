@@ -1,8 +1,17 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://bvdpq1284lkwd"]
 
 [ext_resource type="Texture2D" uid="uid://cqt4a8pgies8p" path="res://bean/kidney_idle.png" id="1_7a33u"]
+[ext_resource type="Texture2D" uid="uid://be0egeekabffj" path="res://bean/kidney_dead.png" id="1_v1mg7"]
 [ext_resource type="Texture2D" uid="uid://qpu3y7e1ume" path="res://bean/kidney_jump.png" id="2_v1mg7"]
 [ext_resource type="Texture2D" uid="uid://278a1ykxl05y" path="res://bean/kidney_walk.png" id="3_2omty"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2omty"]
+atlas = ExtResource("1_v1mg7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itsdb"]
+atlas = ExtResource("1_v1mg7")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_86u42"]
 atlas = ExtResource("1_7a33u")
@@ -50,6 +59,17 @@ region = Rect2(192, 0, 32, 32)
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2omty")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itsdb")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 1.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_86u42")

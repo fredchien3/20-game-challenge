@@ -32,6 +32,7 @@ const MOVEMENT_ALLOWANCE_AFTER_FIRING := 1.0
 @export var pinto_sprite_frames: SpriteFrames
 @export var kidney_sprite_frames: SpriteFrames
 
+var alive = true
 var can_move = false
 var can_shoot = false
 var power := 0.0
@@ -143,6 +144,7 @@ func handle_weapon_input(delta: float) -> void:
 			power += power_rate * delta
 
 
+## Controls whether it's this bean's turn
 func set_active(status: bool):
 	can_move = status
 	can_shoot = status
@@ -180,8 +182,10 @@ func receive_damage_and_knockback(explosion_pos: Vector2, radius: float):
 
 
 func die_then_explode():
+	alive = false
 	set_active(false)
 	died.emit(self)
+	body_sprite.animation = "dead"
 	await get_tree().create_timer(2.5).timeout
 	exploded.emit(global_position, explosion_radius)
 	queue_free()

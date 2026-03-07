@@ -1,8 +1,17 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://do0v7b5xjuika"]
 
 [ext_resource type="Texture2D" uid="uid://ckvvbgyd6fwgv" path="res://bean/pinto_idle.png" id="1_78y4h"]
+[ext_resource type="Texture2D" uid="uid://bgedmvovynpp3" path="res://bean/pinto_dead.png" id="1_rtkag"]
 [ext_resource type="Texture2D" uid="uid://hnxodmg7uihx" path="res://bean/pinto_jump.png" id="2_rtkag"]
 [ext_resource type="Texture2D" uid="uid://jo7ybkatufkk" path="res://bean/pinto_walk.png" id="3_m3u5l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3u5l"]
+atlas = ExtResource("1_rtkag")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2liy6"]
+atlas = ExtResource("1_rtkag")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i34a6"]
 atlas = ExtResource("1_78y4h")
@@ -50,6 +59,17 @@ region = Rect2(192, 0, 32, 32)
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3u5l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2liy6")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 1.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i34a6")

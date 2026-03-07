@@ -53,6 +53,7 @@ func initialize_beans() -> void:
 
 	beans = get_tree().get_nodes_in_group("beans")
 
+	# Left to right
 	beans.sort_custom(func(a, b): return a.global_position.x < b.global_position.x)
 
 	active_bean = beans[active_bean_index]
