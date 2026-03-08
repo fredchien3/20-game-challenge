@@ -32,9 +32,9 @@ func _on_start_pressed() -> void:
 	add_child(level)
 
 
-func _on_game_over(winner: CharacterBody2D):
-	if winner:
-		winner_label.text = "Winner: " + winner.to_string()
+func _on_game_over(winner: String):
+	if winner != "stalemate":
+		winner_label.text = "Winner: " + winner.capitalize() + " Beans!"
 	else:
 		winner_label.text = "Stalemate!"
 	game_over_menu.visible = true

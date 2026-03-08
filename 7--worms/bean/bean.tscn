@@ -14,7 +14,8 @@ height = 32.0
 [node name="Bean" type="CharacterBody2D" unique_id=1631304650 node_paths=PackedStringArray("weapon_sprite", "health_bar", "power_bar", "body_sprite") groups=["beans"]]
 collision_layer = 2
 script = ExtResource("1_a2qa3")
-explosion_radius = 50.0
+type = null
+explosion_radius = 60.0
 power_rate = 500.0
 max_power = 750.0
 GrenadeScene = ExtResource("2_nulo1")

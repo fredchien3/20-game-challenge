@@ -28,14 +28,24 @@ func _physics_process(_delta: float) -> void:
 	if not game_active:
 		return
 
-	if len(beans) == 1:
-		game_over.emit(beans[0])
+	var num_pinto_beans = get_tree().get_node_count_in_group("PINTO")
+	var num_kidney_beans = get_tree().get_node_count_in_group("KIDNEY")
+
+	if num_pinto_beans == 0 and num_kidney_beans == 0:
+		game_over.emit("stalemate") # stalemate
 		Engine.time_scale = 0.25
 		game_active = false
-	if len(beans) == 0:
-		game_over.emit(null)
+		return
+	if num_pinto_beans == 0:
+		game_over.emit("kidney")
 		Engine.time_scale = 0.25
 		game_active = false
+		return
+	if num_kidney_beans == 0:
+		game_over.emit("pinto")
+		Engine.time_scale = 0.25
+		game_active = false
+		return
 
 
 func _input(event: InputEvent) -> void:
@@ -48,6 +58,7 @@ func initialize_beans() -> void:
 		for i in range(0, beans_per_team):
 			var bean = BeanScene.instantiate()
 			bean.set_type(type)
+			bean.add_to_group(BeanClass.Type.find_key(type))
 			SpawnPoint.progress_ratio = randf()
 			bean.global_position = SpawnPoint.global_position
 			add_child(bean)
@@ -74,6 +85,7 @@ func reload():
 
 
 ## Cycles through the beans array, skipping past any beans that have been freed
+# BUG: Fix bug that skips bean turn. E.g. 1 kills 2, 3 gets skipped, it's 4's turn
 func cycle_active_bean():
 	if len(beans) == 0:
 		return

@@ -135,6 +135,8 @@ func receive_damage_and_knockback(explosion_pos: Vector2, radius: float):
 
 
 func die_then_explode():
+	for group in get_groups():
+		remove_from_group(group)
 	alive = false
 	set_active(false)
 	died.emit(self)
