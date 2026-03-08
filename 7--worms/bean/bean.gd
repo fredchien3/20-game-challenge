@@ -1,3 +1,4 @@
+class_name Bean
 extends CharacterBody2D
 
 signal grenade_thrown(grenade)

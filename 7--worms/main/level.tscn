@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cccowjler5w7q" path="res://weapons/explosion.tscn" id="2_4f75v"]
 [ext_resource type="Script" uid="uid://cjbbjcjx1u0w" path="res://main/terrain.gd" id="2_2226f"]
 [ext_resource type="PackedScene" uid="uid://doykh5xnsi8a0" path="res://bean/bean.tscn" id="3_4f75v"]
+[ext_resource type="Script" uid="uid://dyfr84pc3vg3s" path="res://bean/bean.gd" id="3_cvlc1"]
 
 [sub_resource type="Gradient" id="Gradient_uhgg0"]
 colors = PackedColorArray(0.00012807593, 0.009648366, 0.1363981, 1, 1.92523e-05, 0.81618536, 0.9038528, 1)
@@ -24,6 +25,7 @@ script = ExtResource("1_uhgg0")
 terrain = NodePath("Terrain")
 camera = NodePath("Camera2D")
 ExplosionScene = ExtResource("2_4f75v")
+BeanClass = ExtResource("3_cvlc1")
 BeanScene = ExtResource("3_4f75v")
 SpawnPoint = NodePath("SpawnPath/SpawnPoint")
 

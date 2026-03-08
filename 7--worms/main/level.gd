@@ -8,6 +8,7 @@ const BEAN_CYCLE_DELAY := 1.0
 @export var terrain: StaticBody2D
 @export var camera: Camera2D
 @export var ExplosionScene: PackedScene
+@export var BeanClass: GDScript
 @export var BeanScene: PackedScene
 @export var SpawnPoint: PathFollow2D
 
@@ -43,7 +44,7 @@ func _input(event: InputEvent) -> void:
 
 
 func initialize_beans() -> void:
-	for type in BeanScene.instantiate().Type.values():
+	for type in BeanClass.Type.values():
 		for i in range(0, beans_per_team):
 			var bean = BeanScene.instantiate()
 			bean.set_type(type)
