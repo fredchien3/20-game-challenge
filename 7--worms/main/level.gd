@@ -70,7 +70,7 @@ func initialize_beans() -> void:
 
 	active_bean = beans[active_bean_index]
 	active_bean.set_active(true)
-	camera.global_position = active_bean.global_position
+	camera.follow_node = active_bean
 
 	# Bind weapon spawns
 	for bean in beans:
@@ -100,7 +100,7 @@ func cycle_active_bean():
 	if beans[active_bean_index]:
 		active_bean = beans[active_bean_index]
 		active_bean.set_active(true)
-		camera.global_position = active_bean.global_position
+		camera.follow_node = active_bean
 	else:
 		cycle_active_bean()
 
