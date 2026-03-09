@@ -198,12 +198,12 @@ func _handle_movement_input() -> void:
 
 func _handle_animations() -> void:
 	if not alive:
-		if velocity.y != 0:
-			body_sprite.animation = "dead_midair"
-		else:
+		if is_on_floor():
 			body_sprite.animation = "dead"
+		else:
+			body_sprite.animation = "dead_midair"
 		return
-	if velocity.y != 0:
+	if not is_on_floor():
 		body_sprite.animation = "jump"
 		return
 	if velocity.x != 0:
