@@ -4,13 +4,13 @@ const CRATER_SIDES = 24
 
 @export var collision: CollisionPolygon2D
 @export var terrain: Polygon2D
+@export var border: Line2D
 
 
 func _ready() -> void:
-	# Terrain's CollisionPolygon2D is initialized without a shape -
-	# we programmatically set its shape by copying over from the visual Polygon2D
-	collision.polygon = terrain.polygon
 	collision.global_transform = terrain.global_transform
+	border.global_transform = terrain.global_transform
+	update_terrain_polygon()
 
 
 func cutout_hole(pos, radius):
@@ -35,5 +35,10 @@ func cutout_hole(pos, radius):
 	call_deferred("update_terrain_polygon")
 
 
+## Terrain's CollisionPolygon2D is initialized without a shape -
+## we programmatically set its shape by copying over from the visual Polygon2D
 func update_terrain_polygon():
 	collision.polygon = terrain.polygon
+	border.points = terrain.polygon
+	# Close the gap
+	border.add_point(border.points[0])

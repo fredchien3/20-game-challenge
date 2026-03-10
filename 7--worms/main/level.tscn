@@ -43,18 +43,25 @@ size_flags_horizontal = 0
 texture = SubResource("GradientTexture2D_2226f")
 metadata/_edit_lock_ = true
 
-[node name="Terrain" type="StaticBody2D" parent="." unique_id=1943988592 node_paths=PackedStringArray("collision", "terrain")]
+[node name="Terrain" type="StaticBody2D" parent="." unique_id=1943988592 node_paths=PackedStringArray("collision", "terrain", "border")]
 collision_mask = 0
 script = ExtResource("2_2226f")
 collision = NodePath("CollisionPolygon2D")
 terrain = NodePath("Polygon2D")
+border = NodePath("Polygon2D/Line2D")
 
 [node name="Polygon2D" type="Polygon2D" parent="Terrain" unique_id=857618795]
+clip_children = 2
 texture_repeat = 2
 position = Vector2(544, 160)
 texture = ExtResource("6_tmqic")
 polygon = PackedVector2Array(-336, 512, -200, 328, -16, 328, 120, 384, 248, 368, 368, 240, 504, 184, 624, 176, 792, 336, 960, 472, 1136, 512, 1512, 432, 1744, 232, 1896, 200, 2208, 384, 2392, 376, 2640, 240, 2864, 240, 3080, 736, 3080, 1256, 2912, 1536, -192, 1544, -328, 1160)
-uv = PackedVector2Array(-1429.6829, -329.85757, -1293.6829, -513.85754, -1109.6829, -513.85754, -973.6828, -457.85757, -845.6828, -473.85757, -725.6828, -601.85754, -589.6828, -657.85754, -469.6828, -665.85754, -301.6828, -505.85757, -133.68283, -369.85757, 42.31717, -329.85757, 418.3172, -409.85757, 650.3172, -609.85754, 802.3172, -641.85754, 1114.3171, -457.85757, 1298.3171, -465.85757, 1546.3174, -601.85754, 1770.3171, -601.85754, 1986.3171, -105.857574, 1986.3171, 414.14243, 1818.3171, 694.14246, -1285.6829, 702.14246, -1421.6829, 318.14243)
+
+[node name="Line2D" type="Line2D" parent="Terrain/Polygon2D" unique_id=525219374]
+position = Vector2(960, 472)
+points = PackedVector2Array(176, 40, 552, -40)
+width = 8.0
+default_color = Color(0.38347143, 0.18913117, 0.15420052, 1)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain" unique_id=2098611230]
 polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)

@@ -24,6 +24,11 @@ config/icon="res://icon.svg"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 
+[editor]
+
+movie_writer/movie_file="C:/Ford Docs/GameDev/20 Game Challenge/7--worms/movie.avi"
+movie_writer/fps=30
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg")
