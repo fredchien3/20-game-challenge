@@ -33,6 +33,10 @@ movie_writer/fps=30
 
 enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg")
 
+[gui]
+
+theme/custom="uid://drngt71fn7ob6"
+
 [input]
 
 move_left={

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c1gh8ng2ipfgj" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="PackedScene" uid="uid://cawnxutqlt4sl" path="res://main/level.tscn" id="2_pjrb6"]
+[ext_resource type="Theme" uid="uid://drngt71fn7ob6" path="res://ui_theme.tres" id="3_xwkvk"]
 
 [node name="Main" type="Node2D" unique_id=422347337 node_paths=PackedStringArray("main_menu", "game_over_menu", "winner_label")]
 script = ExtResource("1_53q0u")
@@ -23,19 +24,25 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -29.0
-offset_right = 24.0
-offset_bottom = 29.0
+offset_left = -136.0
+offset_top = -88.0
+offset_right = 136.0
+offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Title" type="Label" parent="MainMenu/Container" unique_id=1661465765]
 layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_xwkvk")
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 36
 text = "Beans"
+horizontal_alignment = 1
 
 [node name="Start" type="Button" parent="MainMenu/Container" unique_id=2040872817]
 layout_mode = 2
+size_flags_vertical = 8
 text = "Start"
 
 [node name="GameOverMenu" type="CanvasLayer" parent="." unique_id=685846167]
@@ -52,19 +59,22 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -29.0
-offset_right = 24.0
-offset_bottom = 29.0
+offset_left = -176.0
+offset_top = -128.0
+offset_right = 176.0
+offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Title" type="Label" parent="GameOverMenu/Container" unique_id=705792072]
 layout_mode = 2
+theme_type_variation = &"HeaderLarge"
 text = "Game Over!"
+horizontal_alignment = 1
 
 [node name="Winner" type="Label" parent="GameOverMenu/Container" unique_id=899992650]
 layout_mode = 2
+horizontal_alignment = 1
 
 [node name="Restart" type="Button" parent="GameOverMenu/Container" unique_id=72066720]
 layout_mode = 2
