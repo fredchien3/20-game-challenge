@@ -10,7 +10,8 @@ const BEAN_CYCLE_DELAY := 1.0
 @export var ExplosionScene: PackedScene
 @export var BeanClass: GDScript
 @export var BeanScene: PackedScene
-@export var SpawnPoint: PathFollow2D
+@export var spawn_point: PathFollow2D
+@export var game_ui: CanvasLayer
 
 var game_active = true
 var beans_per_team = 2
@@ -59,8 +60,8 @@ func initialize_beans() -> void:
 			var bean = BeanScene.instantiate()
 			bean.set_type(type)
 			bean.add_to_group(BeanClass.Type.find_key(type))
-			SpawnPoint.progress_ratio = randf()
-			bean.global_position = SpawnPoint.global_position
+			spawn_point.progress_ratio = randf()
+			bean.global_position = spawn_point.global_position
 			add_child(bean)
 
 	beans = get_tree().get_nodes_in_group("beans")
@@ -72,12 +73,13 @@ func initialize_beans() -> void:
 	active_bean.set_active(true)
 	camera.follow_node = active_bean
 
-	# Bind weapon spawns
+	# Bind bean signals
 	for bean in beans:
 		bean.grenade_thrown.connect(_on_bean_grenade_thrown)
 		bean.bazooka_shot.connect(_on_bean_bazooka_shot)
 		bean.died.connect(_on_bean_died)
 		bean.exploded.connect(_on_explosion)
+		bean.weapon_selected.connect(game_ui._on_bean_weapon_selected)
 
 
 func reload():

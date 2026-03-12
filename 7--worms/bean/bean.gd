@@ -5,6 +5,7 @@ signal grenade_thrown(grenade)
 signal bazooka_shot(bazooka)
 signal died(bean)
 signal exploded(pos, radius)
+signal weapon_selected(number)
 
 enum Type { PINTO, KIDNEY }
 
@@ -83,12 +84,14 @@ func _input(event: InputEvent) -> void:
 		await get_tree().create_timer(MOVEMENT_ALLOWANCE_AFTER_FIRING).timeout
 		can_move = false
 
-	if event.is_action_pressed("select_grenade"):
+	if event.is_action_pressed("select_weapon_1"):
 		weapon_sprite.texture = grenade_texture
 		current_weapon = GrenadeScene
-	elif event.is_action_pressed("select_bazooka"):
+		_on_weapon_selected()
+	elif event.is_action_pressed("select_weapon_2"):
 		weapon_sprite.texture = bazooka_texture
 		current_weapon = MissileScene
+		_on_weapon_selected()
 
 
 func set_type(_type: Type) -> void:
@@ -101,6 +104,8 @@ func set_type(_type: Type) -> void:
 func set_active(status: bool):
 	can_move = status
 	can_shoot = status
+	if status:
+		_on_weapon_selected()
 
 
 ## Instantiates a grenade with the correct position and velocity, emits it
@@ -150,6 +155,13 @@ func die_from_oob():
 	set_active(false)
 	died.emit(self)
 	queue_free()
+
+
+func _on_weapon_selected():
+	if current_weapon == GrenadeScene:
+		weapon_selected.emit(1)
+	elif current_weapon == MissileScene:
+		weapon_selected.emit(2)
 
 
 func _handle_weapon_input(delta: float) -> void:

@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dyfr84pc3vg3s" path="res://bean/bean.gd" id="3_cvlc1"]
 [ext_resource type="Script" uid="uid://dybjypxymrp3f" path="res://main/camera_2d.gd" id="6_cvlc1"]
 [ext_resource type="Texture2D" uid="uid://d0vbnjn2jicxs" path="res://main/terrain.png" id="6_tmqic"]
+[ext_resource type="PackedScene" uid="uid://bu8j4togeq12j" path="res://main/game_ui.tscn" id="8_8rkro"]
 
 [sub_resource type="Gradient" id="Gradient_uhgg0"]
 offsets = PackedFloat32Array(0, 0.2920354, 0.5973451, 1)
@@ -23,14 +24,15 @@ _data = {
 }
 point_count = 5
 
-[node name="Level" type="Node2D" unique_id=1356992224 node_paths=PackedStringArray("terrain", "camera", "SpawnPoint")]
+[node name="Level" type="Node2D" unique_id=1356992224 node_paths=PackedStringArray("terrain", "camera", "spawn_point", "game_ui")]
 script = ExtResource("1_uhgg0")
 terrain = NodePath("Terrain")
 camera = NodePath("Camera2D")
 ExplosionScene = ExtResource("2_4f75v")
 BeanClass = ExtResource("3_cvlc1")
 BeanScene = ExtResource("3_4f75v")
-SpawnPoint = NodePath("SpawnPath/SpawnPoint")
+spawn_point = NodePath("SpawnPath/SpawnPoint")
+game_ui = NodePath("GameUI")
 
 [node name="ColorRect" type="TextureRect" parent="." unique_id=2040422406]
 texture_filter = 2
@@ -49,6 +51,7 @@ script = ExtResource("2_2226f")
 collision = NodePath("CollisionPolygon2D")
 terrain = NodePath("Polygon2D")
 border = NodePath("Polygon2D/Line2D")
+metadata/_edit_lock_ = true
 
 [node name="Polygon2D" type="Polygon2D" parent="Terrain" unique_id=857618795]
 clip_children = 2
@@ -70,6 +73,7 @@ polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
 position = Vector2(1960, 2120)
 collision_layer = 0
 collision_mask = 2
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBounds" unique_id=1977003610]
 shape = SubResource("WorldBoundaryShape2D_uhgg0")
@@ -79,13 +83,18 @@ position = Vector2(2112, 448)
 process_callback = 0
 position_smoothing_enabled = true
 script = ExtResource("6_cvlc1")
+metadata/_edit_lock_ = true
 
 [node name="SpawnPath" type="Path2D" parent="." unique_id=2081043409]
+visible = false
 position = Vector2(312, 40)
 curve = SubResource("Curve2D_2226f")
+metadata/_edit_lock_ = true
 
 [node name="SpawnPoint" type="PathFollow2D" parent="SpawnPath" unique_id=1674304486]
 position = Vector2(96, 384)
 rotation = -0.3105986
+
+[node name="GameUI" parent="." unique_id=1415630556 instance=ExtResource("8_8rkro")]
 
 [connection signal="body_entered" from="OutOfBounds" to="." method="_on_out_of_bounds_body_entered"]

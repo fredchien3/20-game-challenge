@@ -1,4 +1,15 @@
 [gd_resource type="Theme" format=3 uid="uid://drngt71fn7ob6"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmjyp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_touxu"]
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+
 [resource]
 Button/font_sizes/font_size = 24
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_dmjyp")
+PanelContainerOutlined/base_type = &"PanelContainer"
+PanelContainerOutlined/styles/panel = SubResource("StyleBoxFlat_touxu")

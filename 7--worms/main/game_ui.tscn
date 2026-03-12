@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://bu8j4togeq12j"]
+
+[ext_resource type="Texture2D" uid="uid://cmt7x03mm0tdj" path="res://weapons/grenade.png" id="1_ip8vi"]
+[ext_resource type="Script" uid="uid://bgdlufby0bvyx" path="res://main/game_ui.gd" id="1_n3dh4"]
+[ext_resource type="Texture2D" uid="uid://clcupjbeoe44q" path="res://weapons/bazooka.png" id="2_n3dh4"]
+
+[node name="GameUI" type="CanvasLayer" unique_id=1415630556 node_paths=PackedStringArray("grenade_display", "bazooka_display")]
+script = ExtResource("1_n3dh4")
+grenade_display = NodePath("WeaponDisplay/Grenade")
+bazooka_display = NodePath("WeaponDisplay/Bazooka")
+
+[node name="WeaponDisplay" type="GridContainer" parent="." unique_id=2124834122]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -88.0
+offset_top = -85.0
+offset_right = 88.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/v_separation = 0
+columns = 2
+
+[node name="Label" type="Label" parent="WeaponDisplay" unique_id=1222573742]
+layout_mode = 2
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Label2" type="Label" parent="WeaponDisplay" unique_id=840591539]
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Grenade" type="PanelContainer" parent="WeaponDisplay" unique_id=904046808]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_type_variation = &"PanelContainerOutlined"
+
+[node name="TextureRect" type="TextureRect" parent="WeaponDisplay/Grenade" unique_id=736007152]
+layout_mode = 2
+texture = ExtResource("1_ip8vi")
+expand_mode = 3
+metadata/_edit_lock_ = true
+
+[node name="Bazooka" type="PanelContainer" parent="WeaponDisplay" unique_id=817967258]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="WeaponDisplay/Bazooka" unique_id=631529975]
+layout_mode = 2
+texture = ExtResource("2_n3dh4")
+expand_mode = 3
+metadata/_edit_lock_ = true

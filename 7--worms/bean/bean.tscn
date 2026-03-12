@@ -15,6 +15,7 @@ height = 32.0
 collision_layer = 2
 floor_max_angle = 1.0471976
 script = ExtResource("1_a2qa3")
+type = null
 explosion_radius = 60.0
 power_rate = 500.0
 max_power = 750.0
