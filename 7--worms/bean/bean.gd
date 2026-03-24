@@ -14,6 +14,7 @@ const SPEED := 150.0
 const JUMP_VELOCITY := -300.0
 ## How long the bean gets to move for after firing weapon
 const MOVEMENT_ALLOWANCE_AFTER_FIRING := 1.0
+const MAX_HEALTH := 50.0
 
 @export var type: Type
 @export var explosion_radius: float
@@ -38,9 +39,13 @@ var alive = true
 var can_move = false
 var can_shoot = false
 var power := 0.0
-var health := 20.0
 
+@onready var health := MAX_HEALTH
 @onready var current_weapon: PackedScene = GrenadeScene
+
+
+func _ready() -> void:
+	health_bar.max_value = MAX_HEALTH
 
 
 func _physics_process(delta: float) -> void:
