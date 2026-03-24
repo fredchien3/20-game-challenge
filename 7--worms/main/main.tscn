@@ -3,6 +3,18 @@
 [ext_resource type="Script" uid="uid://c1gh8ng2ipfgj" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="PackedScene" uid="uid://cawnxutqlt4sl" path="res://main/level.tscn" id="2_pjrb6"]
 [ext_resource type="Theme" uid="uid://drngt71fn7ob6" path="res://ui_theme.tres" id="3_xwkvk"]
+[ext_resource type="Texture2D" uid="uid://cqt4a8pgies8p" path="res://bean/kidney_idle.png" id="4_4dugh"]
+[ext_resource type="Texture2D" uid="uid://ckvvbgyd6fwgv" path="res://bean/pinto_idle.png" id="5_67ri8"]
+[ext_resource type="Texture2D" uid="uid://cmt7x03mm0tdj" path="res://weapons/grenade.png" id="6_grrlh"]
+[ext_resource type="Texture2D" uid="uid://clcupjbeoe44q" path="res://weapons/bazooka.png" id="7_0i4oc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsumw"]
+atlas = ExtResource("4_4dugh")
+region = Rect2(8, 0, 22, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwcvl"]
+atlas = ExtResource("5_67ri8")
+region = Rect2(40, 3, 22, 29)
 
 [node name="Main" type="Node2D" unique_id=422347337 node_paths=PackedStringArray("main_menu", "game_over_menu", "paused_menu", "winner_label")]
 process_mode = 3
@@ -18,7 +30,7 @@ winner_label = NodePath("GameOverMenu/Container/Winner")
 [node name="ColorRect" type="ColorRect" parent="MainMenu" unique_id=1772086895]
 offset_right = 1280.0
 offset_bottom = 720.0
-color = Color(0.11372549, 0.1882353, 0.41960785, 1)
+color = Color(0.14900824, 0.42191356, 0.6872695, 1)
 
 [node name="Container" type="VBoxContainer" parent="MainMenu" unique_id=797792053]
 anchors_preset = 8
@@ -39,13 +51,43 @@ size_flags_vertical = 3
 theme = ExtResource("3_xwkvk")
 theme_type_variation = &"HeaderLarge"
 theme_override_font_sizes/font_size = 36
-text = "Beans"
+text = "BEANS"
+horizontal_alignment = 1
+
+[node name="Title2" type="Label" parent="MainMenu/Container" unique_id=1711349093]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_xwkvk")
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 24
+text = "Pinto vs. Kidney"
 horizontal_alignment = 1
 
 [node name="Start" type="Button" parent="MainMenu/Container" unique_id=2040872817]
 layout_mode = 2
 size_flags_vertical = 8
 text = "Start"
+
+[node name="Kidney" type="Sprite2D" parent="MainMenu" unique_id=315304731]
+position = Vector2(265.5, 384)
+scale = Vector2(8.477274, 8)
+texture = SubResource("AtlasTexture_bsumw")
+
+[node name="Pinto" type="Sprite2D" parent="MainMenu" unique_id=1549205793]
+position = Vector2(977.5, 392)
+rotation = -3.1415927
+scale = Vector2(8.477, -8)
+texture = SubResource("AtlasTexture_fwcvl")
+
+[node name="Grenade" type="Sprite2D" parent="MainMenu" unique_id=386789739]
+position = Vector2(1056, 407.99997)
+scale = Vector2(6.500001, 6.500001)
+texture = ExtResource("6_grrlh")
+
+[node name="Bazooka" type="Sprite2D" parent="MainMenu" unique_id=1039618694]
+position = Vector2(272.00003, 392)
+scale = Vector2(7.5, 7.5)
+texture = ExtResource("7_0i4oc")
 
 [node name="GameOverMenu" type="CanvasLayer" parent="." unique_id=685846167]
 visible = false

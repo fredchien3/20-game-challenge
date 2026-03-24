@@ -14,7 +14,7 @@ const BEAN_CYCLE_DELAY := 1.0
 @export var game_ui: CanvasLayer
 
 var game_active = true
-var beans_per_team = 2
+var beans_per_team = 3
 var active_bean: CharacterBody2D
 var active_bean_index := 0
 var beans: Array[Node]
