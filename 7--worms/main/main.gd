@@ -2,20 +2,23 @@ extends Node2D
 
 @export var main_menu: CanvasLayer
 @export var game_over_menu: CanvasLayer
+@export var paused_menu: CanvasLayer
 @export var LevelScene: PackedScene
 @export var winner_label: Label
 
 var level: Node2D
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	game_over_menu.visible = false
+	paused_menu.visible = false
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
+func _input(event: InputEvent) -> void:
+	if level and event.is_action_pressed("pause"):
+		var pause_state = !get_tree().paused
+		paused_menu.visible = pause_state
+		get_tree().paused = pause_state
 
 
 func _on_start_pressed() -> void:
@@ -38,3 +41,8 @@ func _on_game_over(winner: String):
 	else:
 		winner_label.text = "Stalemate!"
 	game_over_menu.visible = true
+
+
+func _on_continue_pressed() -> void:
+	get_tree().paused = false
+	paused_menu.visible = false

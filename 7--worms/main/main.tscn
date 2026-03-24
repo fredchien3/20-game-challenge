@@ -4,10 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://cawnxutqlt4sl" path="res://main/level.tscn" id="2_pjrb6"]
 [ext_resource type="Theme" uid="uid://drngt71fn7ob6" path="res://ui_theme.tres" id="3_xwkvk"]
 
-[node name="Main" type="Node2D" unique_id=422347337 node_paths=PackedStringArray("main_menu", "game_over_menu", "winner_label")]
+[node name="Main" type="Node2D" unique_id=422347337 node_paths=PackedStringArray("main_menu", "game_over_menu", "paused_menu", "winner_label")]
+process_mode = 3
 script = ExtResource("1_53q0u")
 main_menu = NodePath("MainMenu")
 game_over_menu = NodePath("GameOverMenu")
+paused_menu = NodePath("PauseMenu")
 LevelScene = ExtResource("2_pjrb6")
 winner_label = NodePath("GameOverMenu/Container/Winner")
 
@@ -60,9 +62,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -176.0
-offset_top = -128.0
+offset_top = -56.0
 offset_right = 176.0
-offset_bottom = 128.0
+offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -80,5 +82,40 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Restart"
 
+[node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1337426670]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu" unique_id=809379472]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.11372549, 0.1882353, 0.41960785, 0.5019608)
+
+[node name="Container" type="VBoxContainer" parent="PauseMenu" unique_id=373598600]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -42.5
+offset_right = 176.0
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Title" type="Label" parent="PauseMenu/Container" unique_id=558828354]
+layout_mode = 2
+size_flags_vertical = 1
+theme_type_variation = &"HeaderLarge"
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="PauseMenu/Container" unique_id=779694107]
+layout_mode = 2
+text = "Continue"
+
 [connection signal="pressed" from="MainMenu/Container/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="GameOverMenu/Container/Restart" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="PauseMenu/Container/Continue" to="." method="_on_continue_pressed"]

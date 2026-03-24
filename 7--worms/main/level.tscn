@@ -25,6 +25,7 @@ _data = {
 point_count = 5
 
 [node name="Level" type="Node2D" unique_id=1356992224 node_paths=PackedStringArray("terrain", "camera", "spawn_point", "game_ui")]
+process_mode = 1
 script = ExtResource("1_uhgg0")
 terrain = NodePath("Terrain")
 camera = NodePath("Camera2D")
