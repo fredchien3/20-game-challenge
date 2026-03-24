@@ -59,8 +59,9 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("3_xwkvk")
 theme_type_variation = &"HeaderLarge"
-theme_override_font_sizes/font_size = 24
-text = "Pinto vs. Kidney"
+theme_override_font_sizes/font_size = 20
+text = "\"War does not determine who is right;
+only who is beans.\""
 horizontal_alignment = 1
 
 [node name="Start" type="Button" parent="MainMenu/Container" unique_id=2040872817]
@@ -118,11 +119,16 @@ horizontal_alignment = 1
 
 [node name="Winner" type="Label" parent="GameOverMenu/Container" unique_id=899992650]
 layout_mode = 2
+text = "winner_text"
 horizontal_alignment = 1
 
 [node name="Restart" type="Button" parent="GameOverMenu/Container" unique_id=72066720]
 layout_mode = 2
 text = "Restart"
+
+[node name="MainMenu" type="Button" parent="GameOverMenu/Container" unique_id=2026402726]
+layout_mode = 2
+text = "Main Menu"
 
 [node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1337426670]
 visible = false
@@ -160,4 +166,5 @@ text = "Continue"
 
 [connection signal="pressed" from="MainMenu/Container/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="GameOverMenu/Container/Restart" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="GameOverMenu/Container/MainMenu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="PauseMenu/Container/Continue" to="." method="_on_continue_pressed"]

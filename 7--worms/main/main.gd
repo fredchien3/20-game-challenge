@@ -46,3 +46,7 @@ func _on_game_over(winner: String):
 func _on_continue_pressed() -> void:
 	get_tree().paused = false
 	paused_menu.visible = false
+
+
+func _on_main_menu_pressed() -> void:
+	get_tree().reload_current_scene()
