@@ -2,6 +2,13 @@ Beans
 
 A tactical game inspired by Worms
 
+Play it! https://fredchien3.itch.io/worms
+
+<img width="1276" height="706" alt="Screenshot 2026-03-24 101116" src="https://github.com/user-attachments/assets/37e44a8b-f178-4968-851e-91ff47bccecb" />
+<img width="1268" height="706" alt="Screenshot 2026-03-24 100916" src="https://github.com/user-attachments/assets/c9e3ab36-ed70-48bd-bfb0-490f53db290a" />
+<img width="1260" height="710" alt="Screenshot 2026-03-24 100837" src="https://github.com/user-attachments/assets/ad39f09b-844b-454e-a218-206954017d38" />
+
+
 Learned
 
 * Polygon2D + Geometry2D. Getting started working with these was tricky!
