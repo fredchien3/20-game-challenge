@@ -1,18 +1,30 @@
 [gd_scene format=3 uid="uid://dxylck3tmm3i5"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_4hihk"]
+[ext_resource type="PackedScene" uid="uid://b40uk1wtgumri" path="res://ship/ship.tscn" id="1_53q0u"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_4hihk"]
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4hihk"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4hihk"]
 
 [node name="Main" type="Node3D" unique_id=1789264023]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1699116768]
-mesh = SubResource("BoxMesh_4hihk")
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1872809218]
+collision_mask = 0
+metadata/_edit_lock_ = true
 
-[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=13208100]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=950083924]
+shape = SubResource("WorldBoundaryShape3D_4hihk")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=307956391]
-shape = SubResource("SphereShape3D_4hihk")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1943362619]
+transform = Transform3D(18.030201, 0, 0, 0, 1, 0, 0, 0, 18.030201, 0, 0, 0)
+mesh = SubResource("PlaneMesh_4hihk")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1009262164]
-transform = Transform3D(0.6857802, 0, -0.72780865, 0, 1, 0, 0.72780865, 0, 0.6857802, -1.1626565, 0.28033468, 1.1783938)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.02683115, 1.4803143, 5.128376)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1181589040]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.47375154, 4.4371715, 3.0044518)
+omni_range = 37.035
+
+[node name="RigidBody3D" parent="." unique_id=1793206369 instance=ExtResource("1_53q0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

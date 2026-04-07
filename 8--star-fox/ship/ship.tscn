@@ -1,3 +1,19 @@
 [gd_scene format=3 uid="uid://b40uk1wtgumri"]
 
-[node name="Ship" type="Node3D" unique_id=1910230636]
+[ext_resource type="Script" uid="uid://b3r05aatmqw68" path="res://ship/ship.gd" id="1_jgjpc"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_ojhhw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jgjpc"]
+
+[node name="RigidBody3D" type="CharacterBody3D" unique_id=1151312854]
+collision_layer = 0
+script = ExtResource("1_jgjpc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1654616544]
+transform = Transform3D(0.8836188, 0, 0, 0, -4.371139e-08, 0.20310672, 0, -1, -8.878076e-09, 0, 0, 0)
+mesh = SubResource("PrismMesh_ojhhw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=631609764]
+transform = Transform3D(1, 0, 0, 0, 0.16870824, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_jgjpc")
