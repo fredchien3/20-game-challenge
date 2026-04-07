@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 # How fast the player moves in meters per second.
-@export var speed = 14
-# The downward acceleration when in the air, in meters per second squared.
+@export var speed = 0.5
+var brake_speed = speed * 0.5
 
 var target_velocity = Vector3.ZERO
 
@@ -19,14 +19,11 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("move_down"):
 		direction.y -= 1
 
-	if direction != Vector3.ZERO:
-		direction = direction.normalized()
-		# Setting the basis property will affect the rotation of the node.
-		#$Pivot.basis = Basis.looking_at(direction)
-
-	target_velocity.x = direction.x * speed
-	target_velocity.z = direction.z * speed
-
-	# Moving the Character
+	target_velocity.x += direction.x * speed
+	target_velocity.y += direction.y * speed
+	
+	
+	target_velocity = target_velocity.move_toward(Vector3.ZERO, brake_speed)
+	
 	velocity = target_velocity
 	move_and_slide()

@@ -4,7 +4,9 @@
 
 [sub_resource type="PrismMesh" id="PrismMesh_ojhhw"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jgjpc"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jgjpc"]
+radius = 0.46923828
+height = 1.3017578
 
 [node name="RigidBody3D" type="CharacterBody3D" unique_id=1151312854]
 collision_layer = 0
@@ -15,5 +17,5 @@ transform = Transform3D(0.8836188, 0, 0, 0, -4.371139e-08, 0.20310672, 0, -1, -8
 mesh = SubResource("PrismMesh_ojhhw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=631609764]
-transform = Transform3D(1, 0, 0, 0, 0.16870824, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_jgjpc")
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.339005e-09, 0.14501953)
+shape = SubResource("CapsuleShape3D_jgjpc")
