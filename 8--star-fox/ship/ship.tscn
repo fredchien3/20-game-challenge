@@ -8,7 +8,7 @@
 radius = 0.46923828
 height = 1.3017578
 
-[node name="RigidBody3D" type="CharacterBody3D" unique_id=1151312854]
+[node name="Ship" type="CharacterBody3D" unique_id=1151312854]
 collision_layer = 0
 script = ExtResource("1_jgjpc")
 
