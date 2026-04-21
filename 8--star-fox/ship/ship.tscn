@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b40uk1wtgumri"]
 
 [ext_resource type="Script" uid="uid://b3r05aatmqw68" path="res://ship/ship.gd" id="1_jgjpc"]
+[ext_resource type="PackedScene" uid="uid://bw4i2ga2lvfsi" path="res://projectile/projectile.tscn" id="2_2jgil"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_ojhhw"]
 
@@ -8,9 +9,10 @@
 radius = 0.46923828
 height = 1.3017578
 
-[node name="Ship" type="CharacterBody3D" unique_id=1151312854]
+[node name="Ship" type="CharacterBody3D" unique_id=1151312854 groups=["ship"]]
 collision_layer = 0
 script = ExtResource("1_jgjpc")
+ProjectileScene = ExtResource("2_2jgil")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1654616544]
 transform = Transform3D(0.8836188, 0, 0, 0, -4.371139e-08, 0.20310672, 0, -1, -8.878076e-09, 0, 0, 0)

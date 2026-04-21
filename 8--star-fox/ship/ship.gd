@@ -2,10 +2,12 @@ extends CharacterBody3D
 
 # How fast the player moves in meters per second.
 @export var speed = 0.5
+@export var ProjectileScene: PackedScene
+
 var brake_speed = speed * 1.5
 
 var target_velocity = Vector3.ZERO
-
+signal projectile_shot(projectile: RigidBody3D)
 
 func _physics_process(_delta):
 	var direction = Vector3.ZERO
@@ -32,3 +34,10 @@ func _physics_process(_delta):
 
 	velocity = target_velocity
 	move_and_slide()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("shoot"):
+		var projectile: RigidBody3D = ProjectileScene.instantiate()
+		projectile.global_position = global_position
+		projectile_shot.emit(projectile)
+		

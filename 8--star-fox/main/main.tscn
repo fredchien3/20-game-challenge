@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dxylck3tmm3i5"]
 
 [ext_resource type="PackedScene" uid="uid://b40uk1wtgumri" path="res://ship/ship.tscn" id="1_53q0u"]
+[ext_resource type="Script" uid="uid://ckxj73l41p88t" path="res://main/world.gd" id="1_pjrb6"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4hihk"]
 
@@ -8,38 +9,42 @@
 
 [node name="Main" type="Node3D" unique_id=1789264023]
 
-[node name="Floor" type="StaticBody3D" parent="." unique_id=1872809218]
+[node name="World" type="Node3D" parent="." unique_id=957310307]
+script = ExtResource("1_pjrb6")
+
+[node name="Floor" type="StaticBody3D" parent="World" unique_id=1872809218]
 collision_mask = 0
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=950083924]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor" unique_id=950083924]
 shape = SubResource("WorldBoundaryShape3D_4hihk")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1943362619]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor" unique_id=1943362619]
 transform = Transform3D(18.030201, 0, 0, 0, 1, 0, 0, 0, 18.030201, 0, 0, 0)
 mesh = SubResource("PlaneMesh_4hihk")
 
-[node name="Box" type="StaticBody3D" parent="." unique_id=1912403150]
+[node name="Box" type="StaticBody3D" parent="World" unique_id=1912403150]
 visible = false
+collision_mask = 0
 
-[node name="RightWall" type="CollisionShape3D" parent="Box" unique_id=528188949]
+[node name="RightWall" type="CollisionShape3D" parent="World/Box" unique_id=528188949]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 7, 4.951956, 0)
 shape = SubResource("WorldBoundaryShape3D_4hihk")
 
-[node name="LeftWall" type="CollisionShape3D" parent="Box" unique_id=807460352]
+[node name="LeftWall" type="CollisionShape3D" parent="World/Box" unique_id=807460352]
 transform = Transform3D(1.3113416e-07, 1, 0, -1, 1.3113416e-07, 0, 0, 0, 1, -7.9519563, 5.951956, 0)
 shape = SubResource("WorldBoundaryShape3D_4hihk")
 
-[node name="Ceiling" type="CollisionShape3D" parent="Box" unique_id=2129914870]
+[node name="Ceiling" type="CollisionShape3D" parent="World/Box" unique_id=2129914870]
 transform = Transform3D(-1, 8.742277e-08, 0, -8.742277e-08, -1, 0, 0, 0, 1, 0.048043728, 6.7851048, 3)
 shape = SubResource("WorldBoundaryShape3D_4hihk")
 
-[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1439393046]
-transform = Transform3D(1, 0, 0, 0, 0.258819, 0.9659258, 0, -0.9659258, 0.258819, 0, 12, 4)
+[node name="Sun" type="DirectionalLight3D" parent="World" unique_id=1439393046]
+transform = Transform3D(1, 0, 0, 0, 0.25881904, 0.9659259, 0, -0.9659259, 0.25881904, 0, 12, 4)
 shadow_enabled = true
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1009262164]
+[node name="Camera3D" type="Camera3D" parent="World" unique_id=1009262164]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02683115, 2.621334, 5.6296954)
 
-[node name="Ship" parent="." unique_id=1793206369 instance=ExtResource("1_53q0u")]
+[node name="Ship" parent="World" unique_id=1793206369 instance=ExtResource("1_53q0u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
