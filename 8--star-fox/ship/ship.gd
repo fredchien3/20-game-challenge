@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 # How fast the player moves in meters per second.
 @export var speed = 0.5
-var brake_speed = speed * 0.5
+var brake_speed = speed * 1.5
 
 var target_velocity = Vector3.ZERO
 
@@ -22,8 +22,13 @@ func _physics_process(_delta):
 	target_velocity.x += direction.x * speed
 	target_velocity.y += direction.y * speed
 	
-	
-	target_velocity = target_velocity.move_toward(Vector3.ZERO, brake_speed)
-	
+	if (
+			not Input.is_action_pressed("move_right")\
+			and not Input.is_action_pressed("move_left")\
+			and not Input.is_action_pressed("move_up")\
+			and not Input.is_action_pressed("move_down")
+	):
+		target_velocity = target_velocity.move_toward(Vector3.ZERO, brake_speed)
+
 	velocity = target_velocity
 	move_and_slide()
