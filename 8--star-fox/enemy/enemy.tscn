@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://briewaowjfbeh"]
+
+[ext_resource type="Script" uid="uid://bakvlr6338xy8" path="res://enemy/enemy.gd" id="1_2mvqj"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_2jgil"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_scxef"]
+material = SubResource("ORMMaterial3D_2jgil")
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_2mvqj"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_ofsxj"]
+material = SubResource("ORMMaterial3D_2mvqj")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2mvqj"]
+radius = 0.46923828
+height = 1.3017578
+
+[node name="Enemy" type="AnimatableBody3D" unique_id=856923940]
+collision_layer = 4
+script = ExtResource("1_2mvqj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1763542043]
+transform = Transform3D(0.8836188, 0, 0, 0, -4.3711385e-08, 0.22435635, 0, -0.99999994, -9.806928e-09, 0, 0, 0)
+mesh = SubResource("PrismMesh_scxef")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1769365741]
+transform = Transform3D(-3.86242e-08, -4.371138e-08, 0.23507936, -0.88361883, 1.910685e-15, -1.0275646e-08, 0, -0.99999994, -1.02756434e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_ofsxj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=51572637]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.339005e-09, 0.14501953)
+shape = SubResource("CapsuleShape3D_2mvqj")

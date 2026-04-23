@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b40uk1wtgumri" path="res://ship/ship.tscn" id="1_53q0u"]
 [ext_resource type="Script" uid="uid://ckxj73l41p88t" path="res://main/world.gd" id="1_pjrb6"]
+[ext_resource type="PackedScene" uid="uid://briewaowjfbeh" path="res://enemy/enemy.tscn" id="3_xwkvk"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4hihk"]
 
@@ -51,3 +52,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02683115, 2.621334, 5.6296
 
 [node name="Ship" parent="World" unique_id=1793206369 instance=ExtResource("1_53q0u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Enemy" parent="World" unique_id=856923940 instance=ExtResource("3_xwkvk")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1, 4, -7)
+
+[node name="Enemy2" parent="World" unique_id=558775611 instance=ExtResource("3_xwkvk")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 2, 5, -7)
+
+[node name="Enemy3" parent="World" unique_id=558568464 instance=ExtResource("3_xwkvk")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1, 5, -7)
+
+[node name="Enemy4" parent="World" unique_id=1633734197 instance=ExtResource("3_xwkvk")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3, 2, -7)
+
+[node name="Enemy5" parent="World" unique_id=895759210 instance=ExtResource("3_xwkvk")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 4, 1, -7)

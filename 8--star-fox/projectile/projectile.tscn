@@ -2,15 +2,20 @@
 
 [ext_resource type="Script" uid="uid://xdrudxy2w4nu" path="res://projectile/projectile.gd" id="1_6aa83"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ml5en"]
+radius = 0.45751953
+height = 0.91503906
+
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_6aa83"]
 albedo_color = Color(0, 1, 1, 1)
+emission_enabled = true
+emission = Color(0.7162335, 0.81091446, 1, 1)
+emission_energy_multiplier = 8.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ml5en"]
 material = SubResource("ORMMaterial3D_6aa83")
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ml5en"]
-radius = 0.21923828
-height = 1.0986328
+radial_segments = 4
+rings = 4
 
 [node name="Projectile" type="RigidBody3D" unique_id=128289293]
 collision_layer = 0
@@ -18,10 +23,21 @@ gravity_scale = 0.0
 script = ExtResource("1_6aa83")
 speed = Vector3(0, 0, -50)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=214210270]
-transform = Transform3D(0.099999964, 0, 0, 0, -1.7484554e-08, 0.099999964, 0, -0.39999998, -4.3711372e-09, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_ml5en")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1890589161]
+[node name="BodyCollision" type="CollisionShape3D" parent="." unique_id=1528503393]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_ml5en")
+disabled = true
+
+[node name="MeshInstance" type="MeshInstance3D" parent="." unique_id=214210270]
+transform = Transform3D(0.17289563, 0, 0, 0, -1.7484552e-08, 0.17289563, 0, -0.39999995, -7.5575075e-09, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_ml5en")
+
+[node name="HitboxArea" type="Area3D" parent="." unique_id=1781348046]
+collision_layer = 0
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxArea" unique_id=1890589161]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_ml5en")
+
+[connection signal="body_entered" from="HitboxArea" to="." method="_on_hitbox_area_body_entered"]
