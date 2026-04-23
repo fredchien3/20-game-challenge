@@ -3,7 +3,11 @@
 [ext_resource type="Script" uid="uid://b3r05aatmqw68" path="res://ship/ship.gd" id="1_jgjpc"]
 [ext_resource type="PackedScene" uid="uid://bw4i2ga2lvfsi" path="res://projectile/projectile.tscn" id="2_2jgil"]
 
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_2jgil"]
+albedo_color = Color(0, 0, 1, 1)
+
 [sub_resource type="PrismMesh" id="PrismMesh_ojhhw"]
+material = SubResource("ORMMaterial3D_2jgil")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jgjpc"]
 radius = 0.46923828

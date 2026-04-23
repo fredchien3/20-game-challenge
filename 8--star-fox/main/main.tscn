@@ -5,7 +5,11 @@
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4hihk"]
 
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_pjrb6"]
+albedo_color = Color(0.048064657, 0.21893603, 0.14387342, 1)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_4hihk"]
+material = SubResource("ORMMaterial3D_pjrb6")
 
 [node name="Main" type="Node3D" unique_id=1789264023]
 
@@ -20,11 +24,10 @@ metadata/_edit_lock_ = true
 shape = SubResource("WorldBoundaryShape3D_4hihk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor" unique_id=1943362619]
-transform = Transform3D(18.030201, 0, 0, 0, 1, 0, 0, 0, 18.030201, 0, 0, 0)
+transform = Transform3D(18.030201, 0, 0, 0, 1, 0, 0, 0, 113.59027, 0, 0, 0)
 mesh = SubResource("PlaneMesh_4hihk")
 
 [node name="Box" type="StaticBody3D" parent="World" unique_id=1912403150]
-visible = false
 collision_mask = 0
 
 [node name="RightWall" type="CollisionShape3D" parent="World/Box" unique_id=528188949]

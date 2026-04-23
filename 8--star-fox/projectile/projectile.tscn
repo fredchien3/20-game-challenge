@@ -2,7 +2,11 @@
 
 [ext_resource type="Script" uid="uid://xdrudxy2w4nu" path="res://projectile/projectile.gd" id="1_6aa83"]
 
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_6aa83"]
+albedo_color = Color(0, 1, 1, 1)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ml5en"]
+material = SubResource("ORMMaterial3D_6aa83")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ml5en"]
 radius = 0.21923828
