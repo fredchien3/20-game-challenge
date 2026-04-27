@@ -19,6 +19,9 @@ height = 1.3017578
 radius = 0.1
 height = 0.2
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_r4tgf"]
+radius = 0.27271
+
 [node name="Ship" type="Node3D" unique_id=1787095866 node_paths=PackedStringArray("body") groups=["ship"]]
 script = ExtResource("1_jgjpc")
 ProjectileScene = ExtResource("2_2jgil")
@@ -26,9 +29,10 @@ body = NodePath("Body")
 
 [node name="Body" type="CharacterBody3D" parent="." unique_id=948510795 node_paths=PackedStringArray("aimer")]
 collision_layer = 2
+collision_mask = 9
 script = ExtResource("3_1vtf4")
-aimer = NodePath("../Aimer")
-speed = 1.5
+aimer = NodePath("../Aimer/MeshInstance3D")
+speed = 2.5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Body" unique_id=1654616544]
 transform = Transform3D(0.8836188, 0, 0, 0, -4.371139e-08, 0.20310672, 0, -1, -8.878077e-09, 0, 0, 0)
@@ -38,8 +42,19 @@ mesh = SubResource("PrismMesh_ojhhw")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.339005e-09, 0.14501953)
 shape = SubResource("CapsuleShape3D_jgjpc")
 
-[node name="Aimer" type="MeshInstance3D" parent="." unique_id=1707650795]
+[node name="Aimer" type="RigidBody3D" parent="." unique_id=555276665]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.209224)
-mesh = SubResource("SphereMesh_2jgil")
+collision_layer = 0
+collision_mask = 9
+gravity_scale = 0.0
+linear_damp = 16.0
 script = ExtResource("4_r4tgf")
-speed = 0.2
+speed = 2.5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Aimer" unique_id=1707650795]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+mesh = SubResource("SphereMesh_2jgil")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Aimer" unique_id=217130139]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+shape = SubResource("SphereShape3D_r4tgf")

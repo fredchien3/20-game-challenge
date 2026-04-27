@@ -30,6 +30,7 @@ transform = Transform3D(18.030201, 0, 0, 0, 1, 0, 0, 0, 113.59027, 0, 0, 1)
 mesh = SubResource("PlaneMesh_4hihk")
 
 [node name="Box" type="StaticBody3D" parent="World" unique_id=1912403150]
+collision_layer = 8
 collision_mask = 0
 
 [node name="RightWall" type="CollisionShape3D" parent="World/Box" unique_id=528188949]
