@@ -1,9 +1,9 @@
 extends RigidBody3D
 
-@export var speed: Vector3
+@export var speed: float
 
 func _ready() -> void:
-	linear_velocity = speed
+	linear_velocity = -global_transform.basis.z * speed
 	await get_tree().create_timer(10).timeout
 	queue_free()
 
