@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://b3r05aatmqw68" path="res://ship/ship.gd" id="1_jgjpc"]
 [ext_resource type="PackedScene" uid="uid://bw4i2ga2lvfsi" path="res://projectile/projectile.tscn" id="2_2jgil"]
+[ext_resource type="Script" uid="uid://b2ot07oefk06m" path="res://ship/body.gd" id="3_1vtf4"]
+[ext_resource type="Script" uid="uid://pvdrcm5b2d60" path="res://ship/aimer.gd" id="4_r4tgf"]
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_2jgil"]
 albedo_color = Color(0, 0, 1, 1)
@@ -13,15 +15,31 @@ material = SubResource("ORMMaterial3D_2jgil")
 radius = 0.46923828
 height = 1.3017578
 
-[node name="Ship" type="CharacterBody3D" unique_id=1151312854 groups=["ship"]]
-collision_layer = 2
+[sub_resource type="SphereMesh" id="SphereMesh_2jgil"]
+radius = 0.05
+height = 0.1
+radial_segments = 4
+rings = 4
+
+[node name="Ship" type="Node3D" unique_id=1787095866 node_paths=PackedStringArray("body") groups=["ship"]]
 script = ExtResource("1_jgjpc")
 ProjectileScene = ExtResource("2_2jgil")
+body = NodePath("Body")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1654616544]
-transform = Transform3D(0.8836188, 0, 0, 0, -4.371139e-08, 0.20310672, 0, -1, -8.878076e-09, 0, 0, 0)
+[node name="Body" type="CharacterBody3D" parent="." unique_id=948510795 node_paths=PackedStringArray("aimer")]
+collision_layer = 2
+script = ExtResource("3_1vtf4")
+aimer = NodePath("../Aimer")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Body" unique_id=1654616544]
+transform = Transform3D(0.8836188, 0, 0, 0, -4.371139e-08, 0.20310672, 0, -1, -8.878077e-09, 0, 0, 0)
 mesh = SubResource("PrismMesh_ojhhw")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=631609764]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body" unique_id=631609764]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.339005e-09, 0.14501953)
 shape = SubResource("CapsuleShape3D_jgjpc")
+
+[node name="Aimer" type="MeshInstance3D" parent="." unique_id=1707650795]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.2092237)
+mesh = SubResource("SphereMesh_2jgil")
+script = ExtResource("4_r4tgf")

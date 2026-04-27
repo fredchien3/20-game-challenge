@@ -22,10 +22,11 @@ collision_mask = 0
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor" unique_id=950083924]
+visible = false
 shape = SubResource("WorldBoundaryShape3D_4hihk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor" unique_id=1943362619]
-transform = Transform3D(18.030201, 0, 0, 0, 1, 0, 0, 0, 113.59027, 0, 0, 0)
+transform = Transform3D(18.030201, 0, 0, 0, 1, 0, 0, 0, 113.59027, 0, 0, 1)
 mesh = SubResource("PlaneMesh_4hihk")
 
 [node name="Box" type="StaticBody3D" parent="World" unique_id=1912403150]
