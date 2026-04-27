@@ -16,10 +16,8 @@ radius = 0.46923828
 height = 1.3017578
 
 [sub_resource type="SphereMesh" id="SphereMesh_2jgil"]
-radius = 0.05
-height = 0.1
-radial_segments = 4
-rings = 4
+radius = 0.1
+height = 0.2
 
 [node name="Ship" type="Node3D" unique_id=1787095866 node_paths=PackedStringArray("body") groups=["ship"]]
 script = ExtResource("1_jgjpc")
@@ -30,6 +28,7 @@ body = NodePath("Body")
 collision_layer = 2
 script = ExtResource("3_1vtf4")
 aimer = NodePath("../Aimer")
+speed = 1.5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Body" unique_id=1654616544]
 transform = Transform3D(0.8836188, 0, 0, 0, -4.371139e-08, 0.20310672, 0, -1, -8.878077e-09, 0, 0, 0)
@@ -40,6 +39,7 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6
 shape = SubResource("CapsuleShape3D_jgjpc")
 
 [node name="Aimer" type="MeshInstance3D" parent="." unique_id=1707650795]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.2092237)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.209224)
 mesh = SubResource("SphereMesh_2jgil")
 script = ExtResource("4_r4tgf")
+speed = 0.2
