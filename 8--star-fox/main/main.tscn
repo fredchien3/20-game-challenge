@@ -6,11 +6,25 @@
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4hihk"]
 
+[sub_resource type="Gradient" id="Gradient_xwkvk"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c651c"]
+gradient = SubResource("Gradient_xwkvk")
+fill_from = Vector2(1, 1)
+
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_pjrb6"]
-albedo_color = Color(0.048064657, 0.21893603, 0.14387342, 1)
+albedo_color = Color(0.1820158, 0.5981615, 0.41965407, 1)
+albedo_texture = SubResource("GradientTexture2D_c651c")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4hihk"]
 material = SubResource("ORMMaterial3D_pjrb6")
+
+[sub_resource type="Curve3D" id="Curve3D_xwkvk"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1000),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
 
 [node name="Main" type="Node3D" unique_id=1789264023]
 
@@ -26,46 +40,53 @@ visible = false
 shape = SubResource("WorldBoundaryShape3D_4hihk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor" unique_id=1943362619]
-transform = Transform3D(18.030201, 0, 0, 0, 1, 0, 0, 0, 113.59027, 0, 0, 1)
+transform = Transform3D(18.030201, 0, 0, 0, 1, 0, 0, 0, 511.15622, 0, 0, 1)
 mesh = SubResource("PlaneMesh_4hihk")
-
-[node name="Box" type="StaticBody3D" parent="World" unique_id=1912403150]
-collision_layer = 8
-collision_mask = 0
-
-[node name="RightWall" type="CollisionShape3D" parent="World/Box" unique_id=528188949]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 7, 4.951956, 0)
-shape = SubResource("WorldBoundaryShape3D_4hihk")
-
-[node name="LeftWall" type="CollisionShape3D" parent="World/Box" unique_id=807460352]
-transform = Transform3D(1.3113416e-07, 1, 0, -1, 1.3113416e-07, 0, 0, 0, 1, -7.9519563, 5.951956, 0)
-shape = SubResource("WorldBoundaryShape3D_4hihk")
-
-[node name="Ceiling" type="CollisionShape3D" parent="World/Box" unique_id=2129914870]
-transform = Transform3D(-1, 8.742277e-08, 0, -8.742277e-08, -1, 0, 0, 0, 1, 0.048043728, 6.7851048, 3)
-shape = SubResource("WorldBoundaryShape3D_4hihk")
 
 [node name="Sun" type="DirectionalLight3D" parent="World" unique_id=1439393046]
 transform = Transform3D(1, 0, 0, 0, 0.25881904, 0.9659259, 0, -0.9659259, 0.25881904, 0, 12, 4)
 shadow_enabled = true
 
-[node name="Camera3D" type="Camera3D" parent="World" unique_id=1009262164]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02683115, 2.621334, 5.6296954)
+[node name="Rail" type="Path3D" parent="World" unique_id=1283260638]
+curve = SubResource("Curve3D_xwkvk")
 
-[node name="Ship" parent="World" unique_id=1793206369 instance=ExtResource("1_53q0u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="RailFollow" type="PathFollow3D" parent="World/Rail" unique_id=1953025613]
+transform = Transform3D(0.99999535, 0, 0, 0, 0.9999936, 0, 0, 0, 0.9999917, 0, 0, 0)
 
-[node name="Enemy" parent="World" unique_id=856923940 instance=ExtResource("3_xwkvk")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1, 4, -7)
+[node name="Camera3D" type="Camera3D" parent="World/Rail/RailFollow" unique_id=1009262164]
+transform = Transform3D(1.0000046, 0, 0, 0, 1.0000063, 0, 0, 0, 1.0000082, -0.026831275, 2.6213505, 5.6297417)
 
-[node name="Enemy2" parent="World" unique_id=558775611 instance=ExtResource("3_xwkvk")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 2, 5, -7)
+[node name="Box" type="StaticBody3D" parent="World/Rail/RailFollow" unique_id=1912403150]
+transform = Transform3D(1.0000046, 0, 0, 0, 1.0000063, 0, 0, 0, 1.0000082, 0, 0, 0)
+collision_layer = 8
+collision_mask = 0
 
-[node name="Enemy3" parent="World" unique_id=558568464 instance=ExtResource("3_xwkvk")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1, 5, -7)
+[node name="RightWall" type="CollisionShape3D" parent="World/Rail/RailFollow/Box" unique_id=528188949]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 7, 4.951956, 0)
+shape = SubResource("WorldBoundaryShape3D_4hihk")
 
-[node name="Enemy4" parent="World" unique_id=1633734197 instance=ExtResource("3_xwkvk")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3, 2, -7)
+[node name="LeftWall" type="CollisionShape3D" parent="World/Rail/RailFollow/Box" unique_id=807460352]
+transform = Transform3D(1.3113416e-07, 1, 0, -1, 1.3113416e-07, 0, 0, 0, 1, -7.9519563, 5.951956, 0)
+shape = SubResource("WorldBoundaryShape3D_4hihk")
 
-[node name="Enemy5" parent="World" unique_id=895759210 instance=ExtResource("3_xwkvk")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 4, 1, -7)
+[node name="Ceiling" type="CollisionShape3D" parent="World/Rail/RailFollow/Box" unique_id=2129914870]
+transform = Transform3D(-1, 8.742277e-08, 0, -8.742277e-08, -1, 0, 0, 0, 1, 0.048043728, 6.7851048, 3)
+shape = SubResource("WorldBoundaryShape3D_4hihk")
+
+[node name="Ship" parent="World/Rail/RailFollow" unique_id=1793206369 instance=ExtResource("1_53q0u")]
+transform = Transform3D(1.0000046, 0, 0, 0, 1.0000063, 0, 0, 0, 1.0000082, 0, 1.0000063, 0)
+
+[node name="Enemy" parent="World/Rail/RailFollow" unique_id=856923940 instance=ExtResource("3_xwkvk")]
+transform = Transform3D(-1.0000046, 0, 8.742318e-08, 0, 1.0000063, 0, -8.7423494e-08, 0, -1.0000082, 1.0000046, 4.0000253, -7.0000577)
+
+[node name="Enemy2" parent="World/Rail/RailFollow" unique_id=558775611 instance=ExtResource("3_xwkvk")]
+transform = Transform3D(-1.0000046, 0, 8.742318e-08, 0, 1.0000063, 0, -8.7423494e-08, 0, -1.0000082, 2.0000093, 5.0000315, -7.0000577)
+
+[node name="Enemy3" parent="World/Rail/RailFollow" unique_id=558568464 instance=ExtResource("3_xwkvk")]
+transform = Transform3D(-1.0000046, 0, 8.742318e-08, 0, 1.0000063, 0, -8.7423494e-08, 0, -1.0000082, -1.0000046, 5.0000315, -7.0000577)
+
+[node name="Enemy4" parent="World/Rail/RailFollow" unique_id=1633734197 instance=ExtResource("3_xwkvk")]
+transform = Transform3D(-1.0000046, 0, 8.742318e-08, 0, 1.0000063, 0, -8.7423494e-08, 0, -1.0000082, -3.0000138, 2.0000126, -7.0000577)
+
+[node name="Enemy5" parent="World/Rail/RailFollow" unique_id=895759210 instance=ExtResource("3_xwkvk")]
+transform = Transform3D(-1.0000046, 0, 8.742318e-08, 0, 1.0000063, 0, -8.7423494e-08, 0, -1.0000082, 4.0000186, 1.0000063, -7.0000577)
