@@ -7,6 +7,7 @@
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4hihk"]
 
 [sub_resource type="Gradient" id="Gradient_xwkvk"]
+colors = PackedColorArray(0.8872139, 0, 0.15501064, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_c651c"]
 gradient = SubResource("Gradient_xwkvk")
@@ -21,15 +22,16 @@ material = SubResource("ORMMaterial3D_pjrb6")
 
 [sub_resource type="Curve3D" id="Curve3D_xwkvk"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1000),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -509),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
 [node name="Main" type="Node3D" unique_id=1789264023]
 
-[node name="World" type="Node3D" parent="." unique_id=957310307]
+[node name="World" type="Node3D" parent="." unique_id=957310307 node_paths=PackedStringArray("rail_follow")]
 script = ExtResource("1_pjrb6")
+rail_follow = NodePath("Rail/RailFollow")
 
 [node name="Floor" type="StaticBody3D" parent="World" unique_id=1872809218]
 collision_mask = 0
@@ -40,7 +42,7 @@ visible = false
 shape = SubResource("WorldBoundaryShape3D_4hihk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor" unique_id=1943362619]
-transform = Transform3D(18.030201, 0, 0, 0, 1, 0, 0, 0, 511.15622, 0, 0, 1)
+transform = Transform3D(18.030201, 0, 0, 0, 1, 0, 0, 0, 306.69376, 0, 0, -268)
 mesh = SubResource("PlaneMesh_4hihk")
 
 [node name="Sun" type="DirectionalLight3D" parent="World" unique_id=1439393046]
