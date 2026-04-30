@@ -22,9 +22,10 @@ height = 0.2
 [sub_resource type="SphereShape3D" id="SphereShape3D_r4tgf"]
 radius = 0.27271
 
-[node name="Ship" type="Node3D" unique_id=1787095866 node_paths=PackedStringArray("body") groups=["ship"]]
+[node name="Ship" type="Node3D" unique_id=1787095866 node_paths=PackedStringArray("aimer", "body") groups=["ship"]]
 script = ExtResource("1_jgjpc")
 ProjectileScene = ExtResource("2_2jgil")
+aimer = NodePath("Aimer")
 body = NodePath("Body")
 
 [node name="Body" type="CharacterBody3D" parent="." unique_id=948510795 node_paths=PackedStringArray("aimer")]
